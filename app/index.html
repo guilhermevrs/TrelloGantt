@@ -39,6 +39,10 @@
       <!-- Add your site or application content here -->
       <div class="container" ng-view=""></div>
 
+      <footer>
+        <p>♥ from the WING team</p>
+      </footer>
+
       <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
       <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -66,6 +70,8 @@
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!-- endbower -->
     <script src="https://api.trello.com/1/client.js?key=4c1e45a79e9f167d2565897fd7970674"></script>
+    <script src="scripts/vendor/date.js"></script>
+    <script src="scripts/vendor/jquery.ganttView.js"></script>
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -73,6 +79,7 @@
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/services/TrelloService.js"></script>
     <script src="scripts/controllers/Chart.js"></script>
+    <script src="scripts/directives/gantt.js"></script>
     <!-- endbuild -->
   </body>
   </html>
