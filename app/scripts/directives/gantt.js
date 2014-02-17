@@ -3,7 +3,7 @@
 var obj = angular.module('trelloGanttApp')
 .directive('gantt', function (Trelloservice) {
 	return {
-		template: '<div></div>',
+		template: '<div id="ganttChart"></div>',
 		restrict: 'E',
 		scope: {
 			board: '=',
@@ -11,7 +11,8 @@ var obj = angular.module('trelloGanttApp')
 		link: function (scope, element, attrs) {
 			var updateGantt = function (boardID){
 				Trelloservice.getCardsFromBoard(boardID).then(function(data){
-					console.log(buildGanttData(data));
+					var ganttData = buildGanttData(data);
+					renderChart(ganttData);
 				})
 			}
 
@@ -50,6 +51,28 @@ var obj = angular.module('trelloGanttApp')
 					});
 				};
 				return ganttData;
+			}
+
+			var renderChart = function(data){
+				var chart = jQuery("#ganttChart");
+				chart.empty();
+				chart.ganttView({ 
+					data: data,
+					behavior: {
+						clickable: true,
+						draggable: false,
+						resizable: false,
+						onClick: function (data) { 
+
+						},
+						onResize: function (data) { 
+
+						},
+						onDrag: function (data) { 
+
+						}
+					}
+				});
 			}
 
 			scope.$watch('board', function(oldVal, newVal) {

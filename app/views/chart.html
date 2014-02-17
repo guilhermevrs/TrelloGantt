@@ -1,11 +1,9 @@
 <div id="control" class="row">
 	<div class="col-md-6">
-		<label>Board:</label> <select class="form-control" ng-model="board" ng-options="b.name for b in boards"><option></option></select>
+		<label>Board:</label> <select class="form-control" ng-model="board" ng-options="b.name for b in boards"></select>
 	</div>
 </div>
 
 <div id="ganttChart" class="row">
 	<gantt board="board.id"></gantt>
 </div>
-
-{{board}}
