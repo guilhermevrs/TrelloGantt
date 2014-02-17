@@ -1,1 +1,7 @@
-<p>This is the chart view.</p>
+<div id="control" class="row">
+	<div class="col-md-6">
+		<label>Board:</label> <select class="form-control" ng-model="board" ng-options="b.name for b in boards"><option></option></select>
+	</div>
+</div>
+
+{{board}}
