@@ -1,9 +1,38 @@
-<div id="control" class="row">
+<section id="control" class="row">
+	<header>
+		<h1>Controls</h1>
+	</header>
 	<div class="col-md-6">
 		<label>Board:</label> <select class="form-control" ng-model="board" ng-options="b.name for b in boards"></select>
 	</div>
-</div>
+</section>
 
 <div id="ganttChart" class="row">
 	<gantt board="board.id"></gantt>
 </div>
+
+<section id="board-info" class="row">
+	<header>
+		<h1>Board info: {{board.name}}</h1>
+	</header>
+	<ul class="labels">
+		<li>
+			<label>Red</label> {{board.labelNames.red}}
+		</li>
+		<li>
+			<label>Orange</label> {{board.labelNames.organge}}
+		</li>
+		<li>
+			<label>Yellow</label> {{board.labelNames.yellow}}
+		</li>
+		<li>
+			<label>Green</label> {{board.labelNames.green}}
+		</li>
+		<li>
+			<label>Blue</label> {{board.labelNames.blue}}
+		</li>
+		<li>
+			<label>Purple</label> {{board.labelNames.purple}}
+		</li>
+	</ul>
+</section>
