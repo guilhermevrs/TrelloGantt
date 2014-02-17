@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('trelloGanttApp')
-  .controller('ChartCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+var obj = angular.module('trelloGanttApp')
+  .controller('ChartCtrl', function ($scope, Trelloservice) {
+    Trelloservice.getBoards().then(function(data){
+    	$scope.boards = data;
+    });
   });
+
+  obj[ '$inject' ] = ['$scope', 'Trelloservice'];

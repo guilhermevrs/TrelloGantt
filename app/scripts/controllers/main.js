@@ -9,6 +9,7 @@ var obj = angular.module('trelloGanttApp')
 	}
 	$rootScope.logout = function(){
 		Trelloservice.deauthorize();
+		$location.path("/");
 	}
 });
 
