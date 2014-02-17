@@ -11,6 +11,10 @@ angular.module('trelloGanttApp', [
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/chart', {
+        templateUrl: 'views/chart.html',
+        controller: 'ChartCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
