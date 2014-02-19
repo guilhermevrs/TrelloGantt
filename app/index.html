@@ -17,7 +17,7 @@
   <!-- endbuild -->
   <!-- build:css({.tmp,app}) styles/main.css -->
   <link rel="stylesheet" href="styles/main.css">
-  <link rel="stylesheet" type="text/css" href="styles/vendor/jquery.ganttView.css" />
+  <link rel="stylesheet" href="styles/gantt.css">
   <!-- endbuild -->
 </head>
 <body ng-app="trelloGanttApp">
@@ -71,8 +71,6 @@
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!-- endbower -->
     <script src="https://api.trello.com/1/client.js?key=4c1e45a79e9f167d2565897fd7970674"></script>
-    <script src="scripts/vendor/date.js"></script>
-    <script src="scripts/vendor/jquery.ganttView.js"></script>
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -80,7 +78,7 @@
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/services/TrelloService.js"></script>
     <script src="scripts/controllers/Chart.js"></script>
-    <script src="scripts/directives/gantt.js"></script>
+    <script src="scripts/directives/angular-gantt.min.js"></script>
     <!-- endbuild -->
   </body>
   </html>

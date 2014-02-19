@@ -3,13 +3,16 @@
 		<h1>Controls</h1>
 	</header>
 	<div class="col-md-6">
-		<label>Board:</label> <select class="form-control" ng-model="board" ng-options="b.name for b in boards"></select>
+		<label>Board:</label> 
+		<select class="form-control" ng-model="board" ng-options="b.name for b in boards">
+		</select>
 	</div>
 </section>
 
-<div id="ganttChart" class="row">
-	<gantt board="board.id"></gantt>
-</div>
+<gantt
+load-data="loadData = fn"
+on-gantt-ready="addSamples()"
+></gantt>
 
 <section id="board-info" class="row">
 	<header>
@@ -20,7 +23,7 @@
 			<label>Red</label> {{board.labelNames.red}}
 		</li>
 		<li>
-			<label>Orange</label> {{board.labelNames.organge}}
+			<label>Orange</label> {{board.labelNames.orange}}
 		</li>
 		<li>
 			<label>Yellow</label> {{board.labelNames.yellow}}

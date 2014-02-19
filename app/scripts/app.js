@@ -4,7 +4,8 @@ angular.module('trelloGanttApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'gantt'
 ])
   .config(function ($routeProvider) {
     $routeProvider
