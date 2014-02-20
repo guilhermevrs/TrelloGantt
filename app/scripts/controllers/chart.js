@@ -3,7 +3,9 @@
 var obj = angular.module('trelloGanttApp')
 .controller('ChartCtrl', function ($scope, Trelloservice) {
 	var buildGanttData = function (lists){
-		var ganttData = [];
+		var ganttData = [],
+		minStart = null,
+		maxEnd = null;
 		var len = lists.length;
 		for (var i = 0; i < len; i++) {
 			var l = lists[i];
@@ -22,6 +24,11 @@ var obj = angular.module('trelloGanttApp')
 				else{
 					end.setDate(start.getDate() + 2);
 				}
+				if(minStart == null || minStart > start)
+					minStart = new Date(start);
+				if(maxEnd == null || maxEnd < end)
+					maxEnd = new Date(end);
+
 				tempSeries.push({
 					id: c.id,
 					subject: c.name,
@@ -40,16 +47,30 @@ var obj = angular.module('trelloGanttApp')
 				});
 			}
 		};
-		return ganttData;
+		minStart.setDate(minStart.getDate()-10);
+		maxEnd.setDate(maxEnd.getDate()+10);
+		return {
+			data: ganttData,
+			startChartt: minStart,
+			endChartt: maxEnd
+		};
 	}
 
 	$scope.updateGantt = function (boardID){
 		Trelloservice.getCardsFromBoard(boardID).then(function(data){
 			$scope.clearData();
 			var ganttData = buildGanttData(data);
-			$scope.loadData(ganttData);
+			$scope.gantt.fromDate = ganttData.startChartt;
+			$scope.gantt.toDate = ganttData.endChartt;
+			
+			console.log(ganttData.data);
+
+
+			$scope.loadData(ganttData.data);
 		})
 	}
+
+	$scope.gantt = {};
 
 	$scope.addSamples = function () {
 		Trelloservice.getBoards().then(function(data){
