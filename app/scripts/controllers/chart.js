@@ -8,8 +8,6 @@ var obj = angular.module('trelloGanttApp')
 		maxEnd = null;
 		var len = lists.length;
 
-		console.log(lists);
-
 		for (var i = 0; i < len; i++) {
 			var l = lists[i];
 
