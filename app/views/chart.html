@@ -4,13 +4,14 @@
 	</header>
 	<div class="col-md-6">
 		<label>Board:</label> 
-		<select class="form-control" ng-model="board" ng-options="b.name for b in boards">
+		<select class="form-control" ng-model="board" ng-change="updateGantt(board.id)" ng-options="b.name for b in boards">
 		</select>
 	</div>
 </section>
 
 <gantt
 load-data="loadData = fn"
+clear-data="clearData = fn"
 on-gantt-ready="addSamples()"
 ></gantt>
 
