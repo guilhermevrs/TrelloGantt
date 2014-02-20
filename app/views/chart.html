@@ -13,8 +13,8 @@
 load-data="loadData = fn"
 clear-data="clearData = fn"
 
-column-width="scale === 'month' && 20 || (scale === 'week' && 10 || 2)"
-column-sub-scale="scale === 'week' && 7 || 4"
+column-width="gantt.scale === 'month' && 20 || (gantt.scale === 'week' && 10 || 4)"
+column-sub-scale="gantt.scale === 'week' && 7 || 4"
 show-weekend="false"
 from-date="gantt.fromDate"
 to-date="gantt.toDate"

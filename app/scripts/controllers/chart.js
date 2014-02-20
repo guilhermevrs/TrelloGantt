@@ -7,6 +7,9 @@ var obj = angular.module('trelloGanttApp')
 		minStart = null,
 		maxEnd = null;
 		var len = lists.length;
+
+		console.log(lists);
+
 		for (var i = 0; i < len; i++) {
 			var l = lists[i];
 
@@ -29,12 +32,17 @@ var obj = angular.module('trelloGanttApp')
 				if(maxEnd == null || maxEnd < end)
 					maxEnd = new Date(end);
 
+				var color = "#95a5a6";
+				if(c.labels.length > 0){
+					color = $scope.getLabelColor(c.labels[0].color);
+				}
+
 				tempSeries.push({
 					id: c.id,
 					subject: c.name,
 					from: start,
 					to: end,
-					color: "#93C47D"
+					color: color
 				});
 			};
 
@@ -59,18 +67,29 @@ var obj = angular.module('trelloGanttApp')
 	$scope.updateGantt = function (boardID){
 		Trelloservice.getCardsFromBoard(boardID).then(function(data){
 			$scope.clearData();
+
 			var ganttData = buildGanttData(data);
 			$scope.gantt.fromDate = ganttData.startChartt;
 			$scope.gantt.toDate = ganttData.endChartt;
-			
-			console.log(ganttData.data);
-
-
 			$scope.loadData(ganttData.data);
 		})
 	}
 
 	$scope.gantt = {};
+	$scope.gantt.scale = "day";
+
+	$scope.getLabelColor = function(label){
+		var color;
+		switch(label){
+			case 'red': color="#e74c3c"; break;
+			case 'orange': color="#e67e22"; break;
+			case 'yellow': color="#f1c40f"; break;
+			case 'green': color="#1abc9c"; break;
+			case 'blue': color="#3498db"; break;
+			case 'purple': color="#9b59b6"; break;
+		}
+		return color;
+	};
 
 	$scope.addSamples = function () {
 		Trelloservice.getBoards().then(function(data){
