@@ -1,7 +1,21 @@
 'use strict';
 
 var obj = angular.module('trelloGanttApp')
-.controller('ChartCtrl', function ($scope, Trelloservice) {
+.controller('ChartCtrl', function ($scope, Trelloservice, generalSettings, $location) {
+
+	$scope.gantt = {};
+	$scope.gantt.scale = "day";
+
+	var boardID = generalSettings.getBoardID();
+	if(boardID == null)
+		$location.path('/');
+	else{
+		Trelloservice.getBoardInfo(boardID).then(function(board){
+			$scope.board = board;
+		});
+	}
+
+	/*Auxilary functions*/
 	var buildGanttData = function (lists){
 		var ganttData = [],
 		minStart = null,
@@ -67,6 +81,8 @@ var obj = angular.module('trelloGanttApp')
 		};
 	}
 
+	/*SCOPE functions*/
+
 	$scope.updateGantt = function (boardID){
 		Trelloservice.getCardsFromBoard(boardID).then(function(data){
 			$scope.clearData();
@@ -78,9 +94,6 @@ var obj = angular.module('trelloGanttApp')
 			$scope.loadData(ganttData.data);
 		})
 	}
-
-	$scope.gantt = {};
-	$scope.gantt.scale = "day";
 
 	$scope.getLabelColor = function(label){
 		var color;
@@ -96,9 +109,7 @@ var obj = angular.module('trelloGanttApp')
 	};
 
 	$scope.addSamples = function () {
-		Trelloservice.getBoards().then(function(data){
-			$scope.boards = data;
-		});
+		$scope.updateGantt(boardID);
 	};
 
 	$scope.taskEvent = function(event) {
@@ -119,4 +130,4 @@ var obj = angular.module('trelloGanttApp')
 
 });
 
-obj[ '$inject' ] = ['$scope', 'Trelloservice'];
+obj[ '$inject' ] = ['$scope', 'Trelloservice', 'generalSettings', '$location'];

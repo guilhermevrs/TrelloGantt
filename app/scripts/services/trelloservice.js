@@ -59,6 +59,18 @@ var trelloObj = angular.module('trelloGanttApp')
 				});
 				return defered.promise;
 			},
+			getBoardInfo: function(boardID){
+				var defered = $q.defer();
+				var token = this.getLocalToken();
+				Trello.get('boards/'+boardID, {
+					token: token
+				}, function(data){
+					defered.resolve(data);
+				}, function(error){
+					console.error(error);
+				});
+				return defered.promise;
+			},
 		/*
 			END OF MEMBER FUNCTIONS
 			*/

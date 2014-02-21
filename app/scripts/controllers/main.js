@@ -1,10 +1,12 @@
 'use strict';
 
 var obj = angular.module('trelloGanttApp')
-.controller('MainCtrl', function ($scope, Trelloservice, $rootScope, $location) {
+.controller('MainCtrl', function ($scope, Trelloservice, $rootScope, $location, generalSettings) {
+	generalSettings.setBoardID(null);
+	/*SCOPE Functions*/
 	$scope.logme = function(){
 		Trelloservice.authorize().then(function(data){
-			$location.path("/chart");
+			$location.path("/boards");
 		});
 	}
 	$rootScope.logout = function(){
@@ -13,4 +15,4 @@ var obj = angular.module('trelloGanttApp')
 	}
 });
 
-obj[ '$inject' ] = ['$scope', 'Trelloservice', '$rootScope', '$location'];
+obj[ '$inject' ] = ['$scope', 'Trelloservice', '$rootScope', '$location', 'generalSettings'];
