@@ -18,13 +18,18 @@ var obj = angular.module('trelloGanttApp')
 				if(c.due != null){
 					start = new Date(c.due);
 				}
-				var end = new Date();
-				if(/\[[1-9](0-9)*d\]/.test(c.name)){
 
+				var end = new Date(start);
+				var regObj = /\[[1-9](0-9)*d\]/;
+				if(regObj.test(c.name)){
+					var matches = regObj.exec(c.name);
+					var duration = matches[0].replace('[','').replace('d]','');
+					end.setDate(start.getDate() + parseInt(duration));
 				}
 				else{
 					end.setDate(start.getDate() + 2);
 				}
+
 				if(minStart == null || minStart > start)
 					minStart = new Date(start);
 				if(maxEnd == null || maxEnd < end)
@@ -38,8 +43,8 @@ var obj = angular.module('trelloGanttApp')
 				tempSeries.push({
 					id: c.id,
 					subject: c.name,
-					from: start,
-					to: end,
+					from: new Date(start),
+					to: new Date(end),
 					color: color
 				});
 			};
@@ -69,6 +74,7 @@ var obj = angular.module('trelloGanttApp')
 			var ganttData = buildGanttData(data);
 			$scope.gantt.fromDate = ganttData.startChartt;
 			$scope.gantt.toDate = ganttData.endChartt;
+
 			$scope.loadData(ganttData.data);
 		})
 	}
