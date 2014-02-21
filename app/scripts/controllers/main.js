@@ -13,6 +13,9 @@ var obj = angular.module('trelloGanttApp')
 		Trelloservice.deauthorize();
 		$location.path("/");
 	}
+	$rootScope.getMenuClass = function(path){
+		return ($location.path() === path);
+	}
 });
 
 obj[ '$inject' ] = ['$scope', 'Trelloservice', '$rootScope', '$location', 'generalSettings'];
