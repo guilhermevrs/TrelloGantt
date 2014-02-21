@@ -6,6 +6,9 @@ var obj = angular.module('trelloGanttApp')
     /*On load*/
     generalSettings.setBoardID(null);
 
+    if(!Trelloservice.isUserLogged())
+      $location.path('/');
+
     Trelloservice.getBoards().then(function(boards){
     	$scope.boards = boards;
     });

@@ -15,6 +15,9 @@ var obj = angular.module('trelloGanttApp')
 		});
 	}
 
+	if(!Trelloservice.isUserLogged())
+		$location.path('/');
+
 	/*Auxilary functions*/
 	var buildGanttData = function (lists){
 		var ganttData = [],
@@ -72,6 +75,10 @@ var obj = angular.module('trelloGanttApp')
 				});
 			}
 		};
+		if(minStart == null)
+			minStart = new Date();
+		if(maxEnd == null)
+			maxEnd = new Date();
 		minStart.setDate(minStart.getDate()-10);
 		maxEnd.setDate(maxEnd.getDate()+10);
 		return {

@@ -25,6 +25,9 @@ var trelloObj = angular.module('trelloGanttApp')
 			getLocalToken: function(){
 				return localStorage.getItem('trello_token');
 			},
+			isUserLogged: function(){
+				return this.getLocalToken() !== null;
+			},
 			deauthorize: function(){
 				Trello.deauthorize();
 			},
