@@ -30,17 +30,18 @@
           <ul class="nav nav-pills pull-right">
             <li ng-class="{active: getMenuClass('/')}"><a ng-href="#">Home</a></li>
             <li ng-class="{active: (getMenuClass('/boards') || getMenuClass('/chart'))}"><a ng-href="#/boards">Boards</a></li>
+            <li ng-class="{active: getMenuClass('/about')}"><a ng-href="#/about">About</a></li>
             <li><a ng-click="logout()" ng-href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
           </ul>
         </nav>
-        <h3 class="text-muted">TrelloGantt</h3>
+        <h3 class="text-muted"><a ng-href="#">Trello GANTT</a></h3>
       </header>
 
       <!-- Add your site or application content here -->
       <div class="container" ng-view=""></div>
 
       <footer>
-        <p>♥ from the WING team</p>
+        <p><a href="http://www.trello.com" target="_blank">Trello</a> is trademark of <a href="https://www.fogcreek.com/‎" target="_blank">Fog Creek Software, Inc.</a> - Trello GANTT is an open source initiative of <a href="http://www.wing.inf.br" target="_blank">WING</a>.</p>
       </footer>
 
       <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
