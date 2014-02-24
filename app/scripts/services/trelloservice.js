@@ -105,6 +105,14 @@ var trelloObj = angular.module('trelloGanttApp')
 			 */
 			updateCard: function(card){
 				var defered = $q.defer();
+				Trello.put('cards/'+card.name, {
+					name: "NOME",
+					due: new Date()
+				}, function(data){
+					defered.resolve(data);
+				}, function(error){
+					console.error(error);
+				});
 				return defered.promise;
 			}
 			/*
