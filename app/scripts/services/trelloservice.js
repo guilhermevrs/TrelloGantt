@@ -96,10 +96,20 @@ var trelloObj = angular.module('trelloGanttApp')
 					console.error(error);
 				});
 				return defered.promise;
-			}
+			},
 		/*
 			END BOARDS FUNCTIONS
 			*/
+			/*
+			CARD FUNCTIONS
+			 */
+			updateCard: function(card){
+				var defered = $q.defer();
+				return defered.promise;
+			}
+			/*
+			END CARD FUNCTIONS
+			 */
 		};
 		return TrelloserviceClient;
 	});
