@@ -124,7 +124,7 @@ var obj = angular.module('trelloGanttApp')
 	};
 
 	$scope.rowEvent = function(event) {
-		console.log('Row event: ' + event.date + ' '  + event.row.description + ' (Custom data: ' + event.row.data + ')');
+		$scope.scrollToToday(event.date);
 	};
 
 	$scope.scrollEvent = function(event) {

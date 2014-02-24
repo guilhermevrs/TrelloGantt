@@ -32,6 +32,7 @@
                             <div class="card"
                                 ng-class-odd="'gantt-background-row'"
                                 ng-class-even="'gantt-background-row-alt'"
+                                ng-click="raiseDOMRowClickedEvent($event, task)"
                                 ng-repeat="task in row.tasks">
 
                                 <span>{{task.subject}}</span>
@@ -127,9 +128,15 @@
             <!-- VERTICAL LINES -->
             <div class="gantt-body-foreground">
 
-                <div ng-class="(viewScale === 'hour' && !c.isWorkHour && 'gantt-foreground-col-nonworkhour' || (c.isWeekend && 'gantt-foreground-col-weekend' || 'gantt-foreground-col'))"
+                <div ng-class="{
+                    'gantt-column-today':c.isToday,
+                    'gantt-foreground-col-nonworkhour': (viewScale === 'hour' && !c.isWorkHour),
+                    'gantt-foreground-col-weekend':c.isWeekend,
+                    'gantt-foreground-col': !c.isWeekend
+                    }"
                      ng-style="{'width': c.width+'em', 'left': c.left+'em'}"
                      ng-repeat="c in gantt.columns | ganttColumnLimit:scroll_start:scroll_width">
+                     {{c.isToday}}
                 </div>
 
             </div>
