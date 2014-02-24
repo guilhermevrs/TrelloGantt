@@ -13,6 +13,7 @@ var trelloObj = angular.module('trelloGanttApp')
 				Trello.authorize({
 					type : "popup",
 					name : "TrelloGantt",
+					scope: { read: true, write: true, account: false },
 					success : function(data){
 						defered.resolve(me.getLocalToken());
 					},
