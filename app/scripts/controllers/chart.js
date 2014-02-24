@@ -99,6 +99,9 @@ var obj = angular.module('trelloGanttApp')
 			$scope.gantt.toDate = ganttData.endChartt;
 
 			$scope.loadData(ganttData.data);
+			setTimeout(function(){
+				$scope.scrollToDate(new Date());
+			},500);
 		})
 	}
 
@@ -124,7 +127,7 @@ var obj = angular.module('trelloGanttApp')
 	};
 
 	$scope.rowEvent = function(event) {
-		$scope.scrollToToday(event.date);
+		$scope.scrollToDate(event.date);
 	};
 
 	$scope.scrollEvent = function(event) {
