@@ -41,11 +41,14 @@ var obj = angular.module('trelloGanttApp')
 				if(regObj.test(c.name)){
 					var matches = regObj.exec(c.name);
 					var duration = matches[0].replace('[','').replace('d]','');
-					end.setDate(start.getDate() + parseInt(duration));
+					end.setDate(start.getDate() + c.duration);
 				}
 				else{
-					end.setDate(start.getDate() + 2);
+					end.setDate(start.getDate() + 1);
 				}
+
+				c.from = new Date(start);
+				c.to = new Date(end);
 
 				if(minStart == null || minStart > start)
 					minStart = new Date(start);
@@ -60,9 +63,10 @@ var obj = angular.module('trelloGanttApp')
 				tempSeries.push({
 					id: c.id,
 					subject: c.name,
-					from: new Date(start),
-					to: new Date(end),
-					color: color
+					from: c.from,
+					to: c.to,
+					color: color,
+					data: c
 				});
 			};
 
@@ -123,7 +127,34 @@ var obj = angular.module('trelloGanttApp')
 	};
 
 	$scope.taskEvent = function(event) {
-		console.log('Task event: ' + event.task.subject + ' (Custom data: ' + event.task.data + ')');
+		console.log('Disparou');
+		var dirty = false;
+		var current = event.task;
+		var previous = event.task.data;
+		if(current.from != previous.from){
+			dirty = true;
+		}
+		else if(current.to != current.to){
+			dirty = true;
+		}
+
+		if(dirty){
+			previous.from = current.from;
+			previous.to = current.to;
+			previous.subject = current.subject;
+			var second=1000, minute=second*60, hour=minute*60, day=hour*24;
+			var difference = (previous.to-previous.from)/day;
+			difference = Math.ceil(difference);
+			var regObj = /\[[1-9](0-9)*d\]/;
+			if(regObj.test(current.subject)){
+				current.subject = current.subject.replace(regObj, '['+difference+'d]');
+			}
+			else{
+				current.subject = current.subject + ' ['+difference+'d]';
+			}
+
+			console.log(current);
+		}
 	};
 
 	$scope.rowEvent = function(event) {
