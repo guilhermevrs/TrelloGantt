@@ -4,10 +4,10 @@ var obj = angular.module('trelloGanttApp')
 .controller('ChartCtrl', function ($scope, Trelloservice, generalSettings, $location) {
 
 	$scope.gantt = {};
-	$scope.gantt.scale = "day";
+	$scope.gantt.scale = 'day';
 
 	var boardID = generalSettings.getBoardID();
-	if(boardID == null)
+	if(boardID === null)
 		$location.path('/');
 	else{
 		Trelloservice.getBoardInfo(boardID).then(function(board){
@@ -32,7 +32,7 @@ var obj = angular.module('trelloGanttApp')
 			for (var j = l.cards.length - 1; j >= 0; j--) {
 				var c = l.cards[j];
 				var start = new Date();
-				if(c.due != null){
+				if(c.due !== null){
 					start = new Date(c.due);
 				}
 
@@ -41,18 +41,22 @@ var obj = angular.module('trelloGanttApp')
 				if(regObj.test(c.name)){
 					var matches = regObj.exec(c.name);
 					var duration = matches[0].replace('[','').replace('d]','');
-					end.setDate(start.getDate() + parseInt(duration));
+					duration = parseInt(duration);
+					end.setDate(start.getDate() + duration);
 				}
 				else{
-					end.setDate(start.getDate() + 2);
+					end.setDate(start.getDate() + 1);
 				}
 
-				if(minStart == null || minStart > start)
+				c.from = new Date(start);
+				c.to = new Date(end);
+
+				if(minStart === null || minStart > start)
 					minStart = new Date(start);
-				if(maxEnd == null || maxEnd < end)
+				if(maxEnd === null || maxEnd < end)
 					maxEnd = new Date(end);
 
-				var color = "#95a5a6";
+				var color = '#95a5a6';
 				if(c.labels.length > 0){
 					color = $scope.getLabelColor(c.labels[0].color);
 				}
@@ -60,11 +64,12 @@ var obj = angular.module('trelloGanttApp')
 				tempSeries.push({
 					id: c.id,
 					subject: c.name,
-					from: new Date(start),
-					to: new Date(end),
-					color: color
+					from: c.from,
+					to: c.to,
+					color: color,
+					data: c
 				});
-			};
+			}
 
 			if(tempSeries.length > 0){
 				ganttData.push({
@@ -74,10 +79,11 @@ var obj = angular.module('trelloGanttApp')
 					tasks: tempSeries
 				});
 			}
-		};
-		if(minStart == null)
+		}
+
+		if(minStart === null)
 			minStart = new Date();
-		if(maxEnd == null)
+		if(maxEnd === null)
 			maxEnd = new Date();
 		minStart.setDate(minStart.getDate()-10);
 		maxEnd.setDate(maxEnd.getDate()+10);
@@ -108,12 +114,12 @@ var obj = angular.module('trelloGanttApp')
 	$scope.getLabelColor = function(label){
 		var color;
 		switch(label){
-			case 'red': color="#e74c3c"; break;
-			case 'orange': color="#e67e22"; break;
-			case 'yellow': color="#f1c40f"; break;
-			case 'green': color="#1abc9c"; break;
-			case 'blue': color="#3498db"; break;
-			case 'purple': color="#9b59b6"; break;
+			case 'red': color='#e74c3c'; break;
+			case 'orange': color='#e67e22'; break;
+			case 'yellow': color='#f1c40f'; break;
+			case 'green': color='#1abc9c'; break;
+			case 'blue': color='#3498db'; break;
+			case 'purple': color='#9b59b6'; break;
 		}
 		return color;
 	};
@@ -123,7 +129,35 @@ var obj = angular.module('trelloGanttApp')
 	};
 
 	$scope.taskEvent = function(event) {
-		console.log('Task event: ' + event.task.subject + ' (Custom data: ' + event.task.data + ')');
+		var dirty = false;
+		var current = event.task;
+		var previous = event.task.data;
+		if(current.from !== previous.from){
+			dirty = true;
+		}
+		else if(current.to !== current.to){
+			dirty = true;
+		}
+
+		if(dirty){
+			var second=1000, minute=second*60, hour=minute*60, day=hour*24;
+			var difference = (current.to-current.from)/day;
+			difference = Math.ceil(difference);
+			var regObj = /\[[1-9](0-9)*d\]/;
+			if(regObj.test(current.subject)){
+				current.subject = current.subject.replace(regObj, '['+difference+'d]');
+			}
+			else{
+				current.subject = current.subject + ' ['+difference+'d]';
+			}
+			Trelloservice.updateCard({
+				id: current.id,
+				name: current.subject,
+				due: current.from
+			}).then(function(data){
+				console.log(data);
+			})
+		}
 	};
 
 	$scope.rowEvent = function(event) {
@@ -131,9 +165,9 @@ var obj = angular.module('trelloGanttApp')
 	};
 
 	$scope.scrollEvent = function(event) {
-		if (angular.equals(event.direction, "left")) {
+		if (angular.equals(event.direction, 'left')) {
 			console.log('Scroll event: Left');
-		} else if (angular.equals(event.direction, "right")) {
+		} else if (angular.equals(event.direction, 'right')) {
 			console.log('Scroll event: Right');
 		}
 	};

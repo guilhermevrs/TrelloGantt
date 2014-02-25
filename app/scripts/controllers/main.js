@@ -5,13 +5,13 @@ var obj = angular.module('trelloGanttApp')
 	generalSettings.setBoardID(null);
 	/*SCOPE Functions*/
 	$scope.logme = function(){
-		Trelloservice.authorize().then(function(data){
-			$location.path("/boards");
+		Trelloservice.authorize().then(function(){
+			$location.path('/boards');
 		});
 	}
 	$rootScope.logout = function(){
 		Trelloservice.deauthorize();
-		$location.path("/");
+		$location.path('/');
 	}
 	$rootScope.getMenuClass = function(path){
 		return ($location.path() === path);
