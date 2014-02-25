@@ -4,10 +4,10 @@ var obj = angular.module('trelloGanttApp')
 .controller('ChartCtrl', function ($scope, Trelloservice, generalSettings, $location) {
 
 	$scope.gantt = {};
-	$scope.gantt.scale = "day";
+	$scope.gantt.scale = 'day';
 
 	var boardID = generalSettings.getBoardID();
-	if(boardID == null)
+	if(boardID === null)
 		$location.path('/');
 	else{
 		Trelloservice.getBoardInfo(boardID).then(function(board){
@@ -32,7 +32,7 @@ var obj = angular.module('trelloGanttApp')
 			for (var j = l.cards.length - 1; j >= 0; j--) {
 				var c = l.cards[j];
 				var start = new Date();
-				if(c.due != null){
+				if(c.due !== null){
 					start = new Date(c.due);
 				}
 
@@ -41,7 +41,8 @@ var obj = angular.module('trelloGanttApp')
 				if(regObj.test(c.name)){
 					var matches = regObj.exec(c.name);
 					var duration = matches[0].replace('[','').replace('d]','');
-					end.setDate(start.getDate() + c.duration);
+					duration = parseInt(duration);
+					end.setDate(start.getDate() + duration);
 				}
 				else{
 					end.setDate(start.getDate() + 1);
@@ -50,12 +51,12 @@ var obj = angular.module('trelloGanttApp')
 				c.from = new Date(start);
 				c.to = new Date(end);
 
-				if(minStart == null || minStart > start)
+				if(minStart === null || minStart > start)
 					minStart = new Date(start);
-				if(maxEnd == null || maxEnd < end)
+				if(maxEnd === null || maxEnd < end)
 					maxEnd = new Date(end);
 
-				var color = "#95a5a6";
+				var color = '#95a5a6';
 				if(c.labels.length > 0){
 					color = $scope.getLabelColor(c.labels[0].color);
 				}
@@ -68,7 +69,7 @@ var obj = angular.module('trelloGanttApp')
 					color: color,
 					data: c
 				});
-			};
+			}
 
 			if(tempSeries.length > 0){
 				ganttData.push({
@@ -78,10 +79,11 @@ var obj = angular.module('trelloGanttApp')
 					tasks: tempSeries
 				});
 			}
-		};
-		if(minStart == null)
+		}
+
+		if(minStart === null)
 			minStart = new Date();
-		if(maxEnd == null)
+		if(maxEnd === null)
 			maxEnd = new Date();
 		minStart.setDate(minStart.getDate()-10);
 		maxEnd.setDate(maxEnd.getDate()+10);
@@ -112,12 +114,12 @@ var obj = angular.module('trelloGanttApp')
 	$scope.getLabelColor = function(label){
 		var color;
 		switch(label){
-			case 'red': color="#e74c3c"; break;
-			case 'orange': color="#e67e22"; break;
-			case 'yellow': color="#f1c40f"; break;
-			case 'green': color="#1abc9c"; break;
-			case 'blue': color="#3498db"; break;
-			case 'purple': color="#9b59b6"; break;
+			case 'red': color='#e74c3c'; break;
+			case 'orange': color='#e67e22'; break;
+			case 'yellow': color='#f1c40f'; break;
+			case 'green': color='#1abc9c'; break;
+			case 'blue': color='#3498db'; break;
+			case 'purple': color='#9b59b6'; break;
 		}
 		return color;
 	};
@@ -131,10 +133,10 @@ var obj = angular.module('trelloGanttApp')
 		var dirty = false;
 		var current = event.task;
 		var previous = event.task.data;
-		if(current.from != previous.from){
+		if(current.from !== previous.from){
 			dirty = true;
 		}
-		else if(current.to != current.to){
+		else if(current.to !== current.to){
 			dirty = true;
 		}
 
@@ -162,9 +164,9 @@ var obj = angular.module('trelloGanttApp')
 	};
 
 	$scope.scrollEvent = function(event) {
-		if (angular.equals(event.direction, "left")) {
+		if (angular.equals(event.direction, 'left')) {
 			console.log('Scroll event: Left');
-		} else if (angular.equals(event.direction, "right")) {
+		} else if (angular.equals(event.direction, 'right')) {
 			console.log('Scroll event: Right');
 		}
 	};
