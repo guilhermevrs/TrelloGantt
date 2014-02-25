@@ -129,7 +129,6 @@ var obj = angular.module('trelloGanttApp')
 	};
 
 	$scope.taskEvent = function(event) {
-		console.log('Disparou');
 		var dirty = false;
 		var current = event.task;
 		var previous = event.task.data;
@@ -141,11 +140,8 @@ var obj = angular.module('trelloGanttApp')
 		}
 
 		if(dirty){
-			previous.from = current.from;
-			previous.to = current.to;
-			previous.subject = current.subject;
 			var second=1000, minute=second*60, hour=minute*60, day=hour*24;
-			var difference = (previous.to-previous.from)/day;
+			var difference = (current.to-current.from)/day;
 			difference = Math.ceil(difference);
 			var regObj = /\[[1-9](0-9)*d\]/;
 			if(regObj.test(current.subject)){
@@ -154,8 +150,13 @@ var obj = angular.module('trelloGanttApp')
 			else{
 				current.subject = current.subject + ' ['+difference+'d]';
 			}
-
-			console.log(current);
+			Trelloservice.updateCard({
+				id: current.id,
+				name: current.subject,
+				due: current.from
+			}).then(function(data){
+				console.log(data);
+			})
 		}
 	};
 
