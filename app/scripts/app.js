@@ -13,7 +13,7 @@ angular.module('trelloGanttApp', [
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/chart', {
+      .when('/chart/:boardID', {
         templateUrl: 'views/chart.html',
         controller: 'ChartCtrl'
       })

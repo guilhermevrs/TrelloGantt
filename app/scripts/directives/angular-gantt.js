@@ -277,6 +277,11 @@
                 $scope.gantt.removeRows();
             };
 
+            //Raises Tooltip link event
+            $scope.raiseOnTooltipLinkClick = function(task){
+                $scope.onTooltipLinkClick({card: task.data});
+            }
+
             // Bind scroll event
             $scope.ganttScroll.bind('scroll', $scope.raiseScrollEvent);
 
@@ -1810,7 +1815,7 @@
         "<small class=\"last-activity-date\" >"+
         " Last activity: {{task.data.dateLastActivity | date: 'MMM d, HH:mm'}} "+
         "</small>" +
-        "<a ng-click=\"tooltipLinkEvent($event)\"><span class=\"glyphicon glyphicon-info-sign\" ></span> More</a>  "+
+        "<button type=\"button\" class=\"btn btn-link\" ng-click=\"tooltipLinkEvent($event)\"><span class=\"glyphicon glyphicon-info-sign\" ></span> More</button>  "+
         "</div>" +
         "</div>" +
         "<div ng-transclude></div>" +

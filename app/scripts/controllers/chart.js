@@ -1,15 +1,16 @@
 'use strict';
 
 var obj = angular.module('trelloGanttApp')
-.controller('ChartCtrl', function ($scope, Trelloservice, generalSettings, $location, $modal) {
+.controller('ChartCtrl', function ($scope, Trelloservice, generalSettings, $location, $modal, $routeParams) {
 
 	$scope.gantt = {};
 	$scope.gantt.scale = 'day';
 
-	var boardID = generalSettings.getBoardID();
+	var boardID = $routeParams.boardID;
 	if(boardID === null)
 		$location.path('/');
 	else{
+		generalSettings.setBoardID = boardID;
 		Trelloservice.getBoardInfo(boardID).then(function(board){
 			$scope.board = board;
 		});
@@ -172,10 +173,15 @@ var obj = angular.module('trelloGanttApp')
 		}
 	};
 
-	$scope.loadCardDetail = function(){
+	$scope.loadCardDetail = function(card){
 		var modalInstance = $modal.open({
 			templateUrl: 'views/carddetail.html',
 			controller: 'CarddetailsCtrl',
+			resolve: {
+				card: function () {
+					return card;
+				}
+			}
 		});
 
 		modalInstance.result.then(function (selectedItem) {
@@ -187,4 +193,4 @@ var obj = angular.module('trelloGanttApp')
 
 });
 
-obj[ '$inject' ] = ['$scope', 'Trelloservice', 'generalSettings', '$location', '$modal'];
+obj[ '$inject' ] = ['$scope', 'Trelloservice', 'generalSettings', '$location', '$modal', '$routeParams'];
