@@ -1,7 +1,7 @@
 'use strict';
 
 var obj = angular.module('trelloGanttApp')
-.controller('ChartCtrl', function ($scope, Trelloservice, generalSettings, $location) {
+.controller('ChartCtrl', function ($scope, Trelloservice, generalSettings, $location, $modal) {
 
 	$scope.gantt = {};
 	$scope.gantt.scale = 'day';
@@ -172,6 +172,19 @@ var obj = angular.module('trelloGanttApp')
 		}
 	};
 
+	$scope.loadCardDetail = function(){
+		var modalInstance = $modal.open({
+			templateUrl: 'views/carddetail.html',
+			controller: 'CarddetailsCtrl',
+		});
+
+		modalInstance.result.then(function (selectedItem) {
+			console.log(selectedItem);
+		}, function () {
+			console.info('Modal dismissed at: ' + new Date());
+		});
+	}
+
 });
 
-obj[ '$inject' ] = ['$scope', 'Trelloservice', 'generalSettings', '$location'];
+obj[ '$inject' ] = ['$scope', 'Trelloservice', 'generalSettings', '$location', '$modal'];
