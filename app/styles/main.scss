@@ -60,6 +60,14 @@ footer {
 /*Custom gantt*/
 @import 'custom-gantt';
 
+/*Label colors (used in card detail modal)*/
+.label-red {background-color:#e74c3c}
+.label-orange {background-color:#e67e22}
+.label-yellow {background-color:#f1c40f}
+.label-green {background-color:#1abc9c}
+.label-blue {background-color:#3498db}
+.label-purple {background-color:#9b59b6}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .container {

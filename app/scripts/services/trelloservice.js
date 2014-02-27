@@ -90,7 +90,6 @@ var trelloObj = angular.module('trelloGanttApp')
 					fields: 'name',
 					token: token
 				},function(data){
-					console.log(data);
 					defered.resolve(data);
 				},function(error){
 					console.error(error);
