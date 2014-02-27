@@ -156,8 +156,10 @@
                          ng-click="raiseDOMTaskClickedEvent($event, task)"
                          gantt-task-moveable>
                          
-                         <gantt-tooltip ng-model="task">
-                            <div class="gantt-task-content"><span>{{ (task.isMilestone === true && '&nbsp;' || task.subject) }}</span></div>
+                         <gantt-tooltip tooltip-link-event="raiseOnTooltipLinkClick(task)" ng-model="task">
+                            <div class="gantt-task-content">
+                                <span>{{ (task.isMilestone === true && '&nbsp;' || task.subject) }}</span>
+                            </div>
                         </gantt-tooltip>
                         
                     </div>

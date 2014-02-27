@@ -67,7 +67,8 @@ var trelloObj = angular.module('trelloGanttApp')
 				var defered = $q.defer();
 				var token = this.getLocalToken();
 				Trello.get('boards/'+boardID, {
-					token: token
+					token: token,
+					members  : 'all'
 				}, function(data){
 					defered.resolve(data);
 				}, function(error){
@@ -86,9 +87,20 @@ var trelloObj = angular.module('trelloGanttApp')
 				var token = this.getLocalToken();
 				Trello.get('boards/'+boardID+'/lists/', {
 					cards:'open',
-					card_fields: 'due,idList,idMembers,labels,name',
 					filter:'open',
 					fields: 'name',
+					token: token
+				},function(data){
+					defered.resolve(data);
+				},function(error){
+					console.error(error);
+				});
+				return defered.promise;
+			},
+			getBoardMembers: function(boardID){
+				var defered = $q.defer();
+				var token = this.getLocalToken();
+				Trello.get('boards/'+boardID+'/members/', {
 					token: token
 				},function(data){
 					defered.resolve(data);
@@ -102,13 +114,28 @@ var trelloObj = angular.module('trelloGanttApp')
 			*/
 			/*
 			CARD FUNCTIONS
-			 */
+			*/
 			updateCard: function(card){
 				var defered = $q.defer();
+				var token = this.getLocalToken();
 				Trello.put('cards/'+card.id, {
 					name: card.name,
-					due: card.due
+					due: card.due,
+					token: token
 				}, function(data){
+					defered.resolve(data);
+				}, function(error){
+					console.error(error);
+				});
+				return defered.promise;
+			},
+			getCardData: function(card){
+				var defered = $q.defer();
+				var token = this.getLocalToken();
+				Trello.get('cards/'+card.id + '/actions',{
+					token: token
+				},
+				function(data){
 					defered.resolve(data);
 				}, function(error){
 					console.error(error);
@@ -117,7 +144,7 @@ var trelloObj = angular.module('trelloGanttApp')
 			}
 			/*
 			END CARD FUNCTIONS
-			 */
+			*/
 		};
 		return TrelloserviceClient;
 	});

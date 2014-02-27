@@ -17,7 +17,7 @@ var obj = angular.module('trelloGanttApp')
   /*Scope functions*/
   $scope.seeBoardChart = function(boardID){
    generalSettings.setBoardID(boardID);
-   $location.path('/chart');
+   $location.path('/chart/'+boardID);
  }
 
 });
