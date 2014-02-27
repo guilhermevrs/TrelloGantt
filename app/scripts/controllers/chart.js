@@ -13,6 +13,7 @@ var obj = angular.module('trelloGanttApp')
 		generalSettings.setBoardID = boardID;
 		Trelloservice.getBoardInfo(boardID).then(function(board){
 			$scope.board = board;
+			generalSettings.setMemberCache(board.members);
 		});
 	}
 
@@ -174,7 +175,7 @@ var obj = angular.module('trelloGanttApp')
 	};
 
 	$scope.loadCardDetail = function(card){
-		var modalInstance = $modal.open({
+		$modal.open({
 			templateUrl: 'views/carddetail.html',
 			controller: 'CarddetailsCtrl',
 			resolve: {
@@ -182,12 +183,6 @@ var obj = angular.module('trelloGanttApp')
 					return card;
 				}
 			}
-		});
-
-		modalInstance.result.then(function (selectedItem) {
-			console.log(selectedItem);
-		}, function () {
-			console.info('Modal dismissed at: ' + new Date());
 		});
 	}
 
