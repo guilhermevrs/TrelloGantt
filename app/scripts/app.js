@@ -21,6 +21,10 @@ angular.module('trelloGanttApp', [
     templateUrl: 'views/boards.html',
     controller: 'BoardsCtrl'
   })
+  .when('/about', {
+    templateUrl: 'views/about.html',
+    controller: 'AboutCtrl'
+  })
   .otherwise({
     redirectTo: '/'
   });
