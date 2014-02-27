@@ -103,6 +103,9 @@ var obj = angular.module('trelloGanttApp')
 			$scope.clearData();
 
 			var ganttData = buildGanttData(data);
+
+			console.log(ganttData);
+
 			$scope.gantt.fromDate = ganttData.startChartt;
 			$scope.gantt.toDate = ganttData.endChartt;
 

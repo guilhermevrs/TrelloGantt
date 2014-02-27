@@ -214,6 +214,10 @@
                 }
             }, 5);
 
+            $scope.console = function(data){
+                console.log(data);
+            }
+
             $scope.raiseDOMTaskClickedEvent = function(e, task) {
                 $scope.raiseTaskClickedEvent(task);
 
