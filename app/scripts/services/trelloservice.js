@@ -86,11 +86,11 @@ var trelloObj = angular.module('trelloGanttApp')
 				var token = this.getLocalToken();
 				Trello.get('boards/'+boardID+'/lists/', {
 					cards:'open',
-					card_fields: 'due,idList,idMembers,labels,name',
 					filter:'open',
 					fields: 'name',
 					token: token
 				},function(data){
+					console.log(data);
 					defered.resolve(data);
 				},function(error){
 					console.error(error);

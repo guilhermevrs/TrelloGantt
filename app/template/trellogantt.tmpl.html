@@ -157,7 +157,9 @@
                          gantt-task-moveable>
                          
                          <gantt-tooltip ng-model="task">
-                            <div class="gantt-task-content"><span>{{ (task.isMilestone === true && '&nbsp;' || task.subject) }}</span></div>
+                            <div class="gantt-task-content">
+                                <span>{{ (task.isMilestone === true && '&nbsp;' || task.subject) }}</span>
+                            </div>
                         </gantt-tooltip>
                         
                     </div>

@@ -1806,6 +1806,9 @@ gantt.directive('gantt', ['Gantt', 'dateFunctions', 'mouseOffset', 'debounce', '
             " (task.from | date:'MMM d, HH:mm') ||" +
             " (task.from | date:'MMM d, HH:mm') + ' - ' + (task.to | date:'MMM d, HH:mm') }}" +
             "</small>" +
+            "<small class=\"last-activity-date\" >"+
+            " Last activity: {{task.data.dateLastActivity | date: 'MMM d, HH:mm'}} "+
+            "</small>" +
             "</div>" +
             "</div>" +
             "<div ng-transclude></div>" +
