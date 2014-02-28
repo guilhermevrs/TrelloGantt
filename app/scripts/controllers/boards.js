@@ -3,9 +3,6 @@
 var obj = angular.module('trelloGanttApp')
 .controller('BoardsCtrl', function ($scope, Trelloservice, generalSettings, $location) {
 
-  /*On load*/
-  generalSettings.setBoardID(null);
-
   if(!Trelloservice.isUserLogged()){
     $location.path('/');
   }

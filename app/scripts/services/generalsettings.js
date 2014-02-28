@@ -2,18 +2,9 @@
 
 angular.module('trelloGanttApp')
 .factory('generalSettings', function () {
-	var _boardID = null;
 	var _members = null;
 
 	return {
-		/*BOARD SETTINGS*/
-		getBoardID: function () {
-			return _boardID;
-		},
-		setBoardID: function (boardID) {
-			_boardID = boardID;
-		},
-
 		/*MEMBER SETTINGS*/
 		setMemberCache: function(members){
 			_members = members;

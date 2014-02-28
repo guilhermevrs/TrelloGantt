@@ -3,7 +3,6 @@
 var obj = angular.module('trelloGanttApp')
 .controller('CarddetailsCtrl', function ($scope, Trelloservice, generalSettings, $modalInstance, card) {
 
-	console.log(card);
 	$scope.card = card;
 
 	Trelloservice.getCardData(card).then(function(data){

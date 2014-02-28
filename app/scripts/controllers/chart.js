@@ -10,7 +10,6 @@ var obj = angular.module('trelloGanttApp')
 	if(boardID === null)
 		$location.path('/');
 	else{
-		generalSettings.setBoardID = boardID;
 		Trelloservice.getBoardInfo(boardID).then(function(board){
 			$scope.board = board;
 			generalSettings.setMemberCache(board.members);
