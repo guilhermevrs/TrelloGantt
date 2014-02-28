@@ -20,8 +20,11 @@
                  ng-style="{'position': 'relative'}">
 
                 <div class="gantt-labels-row gantt-row-height"
-                     ng-class-odd="'gantt-background-row'"
-                     ng-class-even="'gantt-background-row-alt'"
+                     ng-class="
+                     {
+                        'gantt-background-row' : ($index % 2) > 0,
+                        'gantt-background-row-alt' : ($index % 2) == 0
+                    }"
                      ng-repeat="row in gantt.rows">
 
                     <gantt-sortable swap="swapRows(a,b)" class="list-name list-row" active="allowRowSorting" ng-model="row">
@@ -30,8 +33,12 @@
 
                     <div class="list-cards">
                             <div class="card"
-                                ng-class-odd="'gantt-background-row'"
-                                ng-class-even="'gantt-background-row-alt'"
+                                ng-class="
+                                 {
+                                    'gantt-background-row' : (($parent.$index + $index) % 2) > 0,
+                                    'gantt-background-row-alt' : (($parent.$index + $index) % 2) == 0
+                                }"
+                                ng-click="raiseDOMRowClickedEvent($event, task)"
                                 ng-repeat="task in row.tasks">
 
                                 <span>{{task.subject}}</span>
@@ -115,9 +122,13 @@
             <!-- HORIZONTAL LINES -->
             <div class="gantt-body-background">
                 <div ng-repeat="row in gantt.rows">
+                        <div class="gantt-row-height"></div>
                         <div class="gantt-row-height"
-                             ng-class-odd="'gantt-background-row'"
-                             ng-class-even="'gantt-background-row-alt'"
+                             ng-class="
+                                 {
+                                    'gantt-background-row' : (($parent.$index + $index) % 2) > 0,
+                                    'gantt-background-row-alt' : (($parent.$index + $index) % 2) == 0
+                                }"
                              ng-repeat="task in row.tasks">
                         </div>
                 </div>
@@ -127,7 +138,12 @@
             <!-- VERTICAL LINES -->
             <div class="gantt-body-foreground">
 
-                <div ng-class="(viewScale === 'hour' && !c.isWorkHour && 'gantt-foreground-col-nonworkhour' || (c.isWeekend && 'gantt-foreground-col-weekend' || 'gantt-foreground-col'))"
+                <div ng-class="{
+                    'gantt-column-today':c.isToday,
+                    'gantt-foreground-col-nonworkhour': (viewScale === 'hour' && !c.isWorkHour),
+                    'gantt-foreground-col-weekend':c.isWeekend,
+                    'gantt-foreground-col': !c.isWeekend
+                    }"
                      ng-style="{'width': c.width+'em', 'left': c.left+'em'}"
                      ng-repeat="c in gantt.columns | ganttColumnLimit:scroll_start:scroll_width">
                 </div>
@@ -150,8 +166,10 @@
                          ng-click="raiseDOMTaskClickedEvent($event, task)"
                          gantt-task-moveable>
                          
-                         <gantt-tooltip ng-model="task">
-                            <div class="gantt-task-content"><span>{{ (task.isMilestone === true && '&nbsp;' || task.subject) }}</span></div>
+                         <gantt-tooltip tooltip-link-event="raiseOnTooltipLinkClick(task)" ng-model="task">
+                            <div class="gantt-task-content">
+                                <span>{{ (task.isMilestone === true && '&nbsp;' || task.subject) }}</span>
+                            </div>
                         </gantt-tooltip>
                         
                     </div>
