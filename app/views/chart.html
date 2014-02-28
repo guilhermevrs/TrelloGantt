@@ -15,7 +15,8 @@ template-url="template/trellogantt.tmpl.html"
 
 on-gantt-ready="addSamples()"
 on-row-clicked="rowEvent(event)"
-on-task-clicked="taskEvent(event)"
+on-task-updated="taskEvent(event)"
+on-tooltip-link-click="loadCardDetail(card)"
 ></gantt>
 
 <section id="board-info" class="row">
