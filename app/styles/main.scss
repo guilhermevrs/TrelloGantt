@@ -40,6 +40,11 @@ footer {
     padding-top: 19px;
     color: #777;
     border-top: 1px solid #e5e5e5;
+    .like-facebook,
+    #___plus_0,
+    #twitter-widget-0 {
+        width: 88px !important;
+    }
 }
 
 .container-narrow > hr {
@@ -77,15 +82,80 @@ footer {
     /* Remove the padding we set earlier */
     header,
     footer {
-        padding-left: 0;
-        padding-right: 0;
+        padding-left: 20px;
+        padding-right: 20px;
     }
     /* Space out the masthead */
     header {
         margin-bottom: 30px;
+        h3 {
+            a {
+                text-decoration: none !important;
+            }
+        }
+    }
+    footer {
+        text-align: center;
+        margin-top: 30px;
     }
     /* Remove the bottom border on the jumbotron for visual effect */
     .jumbotron {
         border-bottom: 0;
+        figure {
+            figcaption {
+                margin-top: 30px;
+                margin-bottom: 30px;
+            }
+        }
+    }
+    .how-it-works {
+        text-align: center;
+        overflow:hidden;
+        margin: 0 auto;
+        width:1024px;
+        margin-bottom: 80px;
+        h1 {
+            margin-bottom: 40px;
+        }
+        .detail {
+            width: 260px;
+            float: left;
+            margin-right: 122px;
+            img {
+                width: 240px;
+                height: 240px;
+                border-radius: 120px;
+                -webkit-border-radius: 120px;
+                -moz-border-radius: 120px;
+                border: solid 4px #176797;
+                margin-bottom: 30px;
+            }
+            figcaption {
+                font-size: 18px;
+                color: #999999;
+            }
+        }
+        .detail:nth-child(4){
+            margin-right: 0px;
+        }
+    }
+    .see-in-action {
+        text-align: center;
+        overflow:hidden;
+        margin: 0 auto;
+        h1 {
+            margin-bottom: 40px;
+        }
+    }
+    .section-title {
+        color: #428bca;
+    }
+    blockquote {
+        background-color: #ccc;
+        h1 {
+            color: #428bca;
+            font-size: 24px;
+            font-style: italic;
+        }
     }
 }
