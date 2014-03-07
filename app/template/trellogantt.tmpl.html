@@ -26,7 +26,6 @@
                         'gantt-background-row-alt' : ($index % 2) == 0
                     }"
                      ng-repeat="row in gantt.rows">
-
                     <gantt-sortable swap="swapRows(a,b)" class="list-name list-row" active="allowRowSorting" ng-model="row">
                         <span class="list-name-text">{{ row.description }}</span>
                     </gantt-sortable>

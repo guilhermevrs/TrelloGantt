@@ -6,8 +6,8 @@ center-date="scrollToDate = fn"
 auto-expand="false"
 allow-row-sorting="false"
 allow-task-moving="false"
-column-width="gantt.scale === 'month' && 20 || (gantt.scale === 'week' && 10 || 4)"
-column-sub-scale="gantt.scale === 'week' && 7 || 4"
+column-width="gantt.scale === 'month' && 20 || (gantt.scale === 'week' && 10 || 2)"
+column-sub-scale="gantt.scale === 'week' && 7 || 2"
 show-weekend="false"
 from-date="gantt.fromDate"
 to-date="gantt.toDate"
@@ -25,22 +25,22 @@ on-tooltip-link-click="loadCardDetail(card)"
 	</header>
 	<ul class="labels">
 		<li>
-			<label>Red</label> {{board.labelNames.red}}
+			<label>Red:</label> {{board.labelNames.red}}
 		</li>
 		<li>
-			<label>Orange</label> {{board.labelNames.orange}}
+			<label>Orange:</label> {{board.labelNames.orange}}
 		</li>
 		<li>
-			<label>Yellow</label> {{board.labelNames.yellow}}
+			<label>Yellow:</label> {{board.labelNames.yellow}}
 		</li>
 		<li>
-			<label>Green</label> {{board.labelNames.green}}
+			<label>Green:</label> {{board.labelNames.green}}
 		</li>
 		<li>
-			<label>Blue</label> {{board.labelNames.blue}}
+			<label>Blue:</label> {{board.labelNames.blue}}
 		</li>
 		<li>
-			<label>Purple</label> {{board.labelNames.purple}}
+			<label>Purple:</label> {{board.labelNames.purple}}
 		</li>
 	</ul>
 </section>
