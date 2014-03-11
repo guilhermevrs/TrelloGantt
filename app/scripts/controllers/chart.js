@@ -77,7 +77,8 @@ var obj = angular.module('trelloGanttApp')
 					id: l.id,
 					description: l.name,
 					name: l.name,
-					tasks: tempSeries
+					tasks: tempSeries,
+					order: i
 				});
 			}
 		}
@@ -102,8 +103,6 @@ var obj = angular.module('trelloGanttApp')
 			$scope.clearData();
 
 			var ganttData = buildGanttData(data);
-
-			console.log(ganttData);
 
 			$scope.gantt.fromDate = ganttData.startChartt;
 			$scope.gantt.toDate = ganttData.endChartt;

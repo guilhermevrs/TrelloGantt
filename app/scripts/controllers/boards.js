@@ -3,19 +3,22 @@
 var obj = angular.module('trelloGanttApp')
 .controller('BoardsCtrl', function ($scope, Trelloservice, generalSettings, $location) {
 
-  if(!Trelloservice.isUserLogged()){
-    $location.path('/');
-  }
+	if(!Trelloservice.isUserLogged()){
+		$location.path('/');
+	}
 
-  Trelloservice.getBoards().then(function(boards){
-   $scope.boards = boards;
- });
+	Trelloservice.getOrganizations().then(function(organizations){
+		//generalSettings.setOrganizationCache(organizations);
+			$scope.organizations = organizations;
+		Trelloservice.getBoards().then(function(boards){
+			$scope.boards = boards;
+		});
+	});
 
-  /*Scope functions*/
-  $scope.seeBoardChart = function(boardID){
-   generalSettings.setBoardID(boardID);
-   $location.path('/chart/'+boardID);
- }
+	/*Scope functions*/
+	$scope.seeBoardChart = function(boardID){
+		$location.path('/chart/'+boardID);
+	}
 
 });
 

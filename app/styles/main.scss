@@ -57,6 +57,13 @@ footer {
     padding: 14px 24px;
 }
 
+.separator-row, .separator-row td{
+    background-color: #1abc9c !important;
+    &:hover{
+        background-color: #1abc9c !important;
+    }
+}
+
 /*Custom gantt*/
 @import 'custom-gantt';
 

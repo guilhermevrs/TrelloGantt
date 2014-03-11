@@ -51,7 +51,7 @@ var trelloObj = angular.module('trelloGanttApp')
 				});
 				return defered.promise;
 			},
-			getOrganization: function(){
+			getOrganizations: function(){
 				var defered = $q.defer();
 				var token = this.getLocalToken();
 				Trello.get('members/me/organizations', {
