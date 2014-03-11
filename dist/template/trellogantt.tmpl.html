@@ -165,18 +165,18 @@
                         ng-style="{'left': ((task.isMilestone === true || task.width === 0) && (task.left-0.3) || task.left)+'em', 'width': task.width +'em', 'z-index': (task.isMoving === true && 1 || ''), 'background-color': task.color}"
                          ng-click="raiseDOMTaskClickedEvent($event, task)"
                          gantt-task-moveable>
-                         
+
                          <gantt-tooltip tooltip-link-event="raiseOnTooltipLinkClick(task)" ng-model="task">
                             <div class="gantt-task-content">
                                 <span>{{ (task.isMilestone === true && '&nbsp;' || task.subject) }}</span>
                             </div>
                         </gantt-tooltip>
-                        
+
                     </div>
                         <div style="clear:both;"></div>
                     </div>
                 </div>
-                
+
                 <!-- END TASKS -->
 
 
