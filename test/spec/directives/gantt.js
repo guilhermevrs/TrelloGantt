@@ -3,7 +3,7 @@
 describe('Directive: gantt', function () {
 
   // load the directive's module
-  beforeEach(module('trelloGanttApp'));
+  beforeEach(module('gantt'));
 
   var element,
     scope;
@@ -15,6 +15,6 @@ describe('Directive: gantt', function () {
   it('should make hidden element visible', inject(function ($compile) {
     element = angular.element('<gantt></gantt>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the gantt directive');
+    expect(element.text()).toBe('');
   }));
 });

@@ -3,7 +3,7 @@
 describe('Service: generalSettings', function () {
 
   // load the service's module
-  beforeEach(module('trelloGanttApp'));
+  beforeEach(module('trelloGanttApp.common'));
 
   // instantiate service
   var generalSettings;

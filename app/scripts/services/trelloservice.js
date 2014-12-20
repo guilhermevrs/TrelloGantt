@@ -1,6 +1,6 @@
 'use strict';
 
-var trelloObj = angular.module('trelloGanttApp')
+var trelloObj = angular.module('trelloGanttApp.trello', [])
 .factory('Trelloservice', function Trelloservice($http, $q) {
 	var TrelloserviceClient = {
 		apiKey : '4c1e45a79e9f167d2565897fd7970674',

@@ -1,6 +1,10 @@
 'use strict';
 
 angular.module('trelloGanttApp', [
+  'trelloGanntApp.common',
+  'trelloGanntApp.trello',
+  'trelloGanntApp.board',
+  'trelloGanntApp.card',
   'ngResource',
   'ngSanitize',
   'ngRoute',

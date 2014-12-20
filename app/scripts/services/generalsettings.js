@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('trelloGanttApp')
+angular.module('trelloGanttApp.common', [])
 .factory('generalSettings', function () {
 	var _members = null;
 	var _organizations = null;

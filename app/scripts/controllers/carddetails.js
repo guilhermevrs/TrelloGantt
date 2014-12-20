@@ -1,6 +1,10 @@
 'use strict';
 
-var obj = angular.module('trelloGanttApp')
+var obj = angular.module('trelloGanttApp.card', [
+    'trelloGanttApp.trello',
+    'trelloGanttApp.common',
+    'ui.bootstrap.modal'
+])
 .controller('CarddetailsCtrl', function ($scope, Trelloservice, generalSettings, $modalInstance, card) {
 
 	$scope.card = card;

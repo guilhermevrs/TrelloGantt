@@ -1,6 +1,9 @@
 'use strict';
 
-var obj = angular.module('trelloGanttApp')
+var obj = angular.module('trelloGanttApp.board', [
+    'trelloGanttApp.trello',
+    'trelloGanttApp.common'
+])
 .controller('BoardsCtrl', function ($scope, Trelloservice, generalSettings, $location) {
 
 	if(!Trelloservice.isUserLogged()){
