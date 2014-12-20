@@ -246,7 +246,7 @@
                     }
                 }
 
-                $scope.sortRows();
+                //$scope.sortRows();
             });
 
             // Remove data handler.
@@ -1826,9 +1826,9 @@
         "</div>",
         replace: true,
         transclude: true,
-        scope: { 
+        scope: {
             task: "=ngModel",
-            tooltipLinkEvent: "&" 
+            tooltipLinkEvent: "&"
         },
         controller: ['$scope', '$element', function ($scope, $element) {
             var bodyElement = angular.element($document[0].body);

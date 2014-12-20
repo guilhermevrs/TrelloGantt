@@ -10,7 +10,6 @@ var obj = angular.module('trelloGanttApp')
 	if(boardID === null)
 		$location.path('/');
 	else{
-		generalSettings.setBoardID = boardID;
 		Trelloservice.getBoardInfo(boardID).then(function(board){
 			$scope.board = board;
 			generalSettings.setMemberCache(board.members);
@@ -78,7 +77,8 @@ var obj = angular.module('trelloGanttApp')
 					id: l.id,
 					description: l.name,
 					name: l.name,
-					tasks: tempSeries
+					tasks: tempSeries,
+					order: i
 				});
 			}
 		}
@@ -103,8 +103,6 @@ var obj = angular.module('trelloGanttApp')
 			$scope.clearData();
 
 			var ganttData = buildGanttData(data);
-
-			console.log(ganttData);
 
 			$scope.gantt.fromDate = ganttData.startChartt;
 			$scope.gantt.toDate = ganttData.endChartt;

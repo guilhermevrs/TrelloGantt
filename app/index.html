@@ -44,16 +44,16 @@
         <p><a href="http://www.trello.com" target="_blank">Trello</a> is trademark of <a href="https://www.fogcreek.com/‎" target="_blank">Fog Creek Software, Inc.</a> - Trello GANTT is an open source initiative of <a href="http://www.wing.inf.br" target="_blank">WING</a>.</p>
       </footer>
 
-      <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
       <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-     ga('create', 'UA-XXXXX-X');
-     ga('send', 'pageview');
-     </script>
+      ga('create', 'UA-48667305-1', 'guilhermevrs.github.io');
+      ga('send', 'pageview');
+
+      </script>
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -76,12 +76,12 @@
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/main.js"></script>
-    <script src="scripts/services/TrelloService.js"></script>
-    <script src="scripts/controllers/Chart.js"></script>
+    <script src="scripts/services/trelloservice.js"></script>
+    <script src="scripts/controllers/chart.js"></script>
     <script src="scripts/directives/angular-gantt.js"></script>
     <script src="scripts/controllers/boards.js"></script>
-    <script src="scripts/services/generalSettings.js"></script>
-    <script src="scripts/controllers/CardDetails.js"></script>
+    <script src="scripts/services/generalsettings.js"></script>
+    <script src="scripts/controllers/carddetails.js"></script>
     <!-- endbuild -->
   </body>
   </html>
