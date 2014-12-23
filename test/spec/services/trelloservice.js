@@ -6,39 +6,93 @@ describe('Service: Trelloservice', function () {
   beforeEach(module('trelloGanttApp.trello'));
 
   // instantiate service
-  var Trelloservice;
+  var Trelloservice,
+    token,
+    q,
+    rootScope;
 
-  beforeEach(inject(function (_Trelloservice_) {
+  beforeEach(inject(function (_Trelloservice_, $q, $rootScope) {
+    q = $q;
+    rootScope = $rootScope;
     Trelloservice = _Trelloservice_;
+    token = '' + Math.random();
   }));
 
-  it('should get auth token from correct local storage key', function(){
-      var test_value = 'test_value';
-      localStorage.setItem('trello_token', test_value);
-      expect(Trelloservice.getLocalToken()).toEqual(test_value);
+  describe('In security functions', function(){
+
+      it('should get auth token from correct local storage key', function(){
+          var test_value = 'test_value';
+          localStorage.setItem('trello_token', test_value);
+          expect(Trelloservice.getLocalToken()).toEqual(test_value);
+      });
+
+      it('should say user is not logged when there is no trello token', function(){
+          localStorage.setItem('trello_token', null);
+          expect(Trelloservice.isUserLogged()).toBe(false);
+      });
+
+      it('should say user is logged when there is trello token', function(){
+          localStorage.setItem('trello_token', 'whatever');
+          expect(Trelloservice.isUserLogged()).toBe(true);
+      });
+
+      it('should call correctly the Trello authorize function', function(){
+          spyOn(Trello, 'authorize');
+
+          Trelloservice.authorize();
+          expect(Trello.authorize.calls.length).toEqual(1);
+
+          var args = Trello.authorize.calls[0].args[0];
+          expect(args.type).toEqual('popup');
+          expect(args.name).toEqual('TrelloGantt');
+          expect(args.scope).toEqual({read:true, write:true, account:false});
+
+      });
+
+      it('should call the Trello deauthorize function', function(){
+          spyOn(Trello, 'deauthorize');
+          Trelloservice.deauthorize();
+          expect(Trello.deauthorize).toHaveBeenCalled();
+      });
   });
 
-  it('should say user is not logged when there is no trello token', function(){
-      localStorage.setItem('trello_token', null);
-      expect(Trelloservice.isUserLogged()).toBe(false);
-  });
+  describe('In get boards', function(){
 
-  it('should say user is logged when there is trello token', function(){
-      localStorage.setItem('trello_token', 'whatever');
-      expect(Trelloservice.isUserLogged()).toBe(true);
-  });
+      it('should call correctly the Trello get boards', function(){
+          spyOn(Trello, 'get');
+          localStorage.setItem('trello_token', token);
 
-  it('should call correctly the authorize function', function(){
-      spyOn(Trello, 'authorize');
+          Trelloservice.getBoards();
+          expect(Trello.get.calls.length).toEqual(1);
 
-      Trelloservice.authorize();
-      expect(Trello.authorize.calls.length).toEqual(1);
+          var args = Trello.get.calls[0].args;
+          expect(args[0]).toEqual('members/me/boards');
+          expect(args[1]).toEqual({filter:'open', token: token});
+      });
 
-      var args = Trello.authorize.calls[0].args[0];
-      expect(args.type).toEqual('popup');
-      expect(args.name).toEqual('TrelloGantt');
-      expect(args.scope).toEqual({read:true, write:true, account:false});
+      it('should return promise value', function(){
+          var randomData = 'data:' + Math.random();
+          spyOn(Trello, 'get').andCallFake(function(url, params, successFunc){
+              successFunc(randomData);
+          });
+          Trelloservice.getBoards().then(function(data){
+              expect(data).toEqual(randomData);
+          });
+          rootScope.$digest();
+      });
 
+      it('should log error', function(){
+          var randomData = 'data:' + Math.random();
+          spyOn(console, 'error');
+          spyOn(Trello, 'get').andCallFake(function(url, params, successFunc, errorFunc){
+              errorFunc(randomData);
+          });
+          Trelloservice.getBoards();
+          rootScope.$digest();
+
+          expect(console.error.calls.length).toEqual(1);
+          expect(console.error.calls[0].args[0]).toEqual(randomData);
+      });
   });
 
 });
