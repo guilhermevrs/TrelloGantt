@@ -3,11 +3,11 @@
 1 verbose cli   '/usr/local/bin/npm',
 1 verbose cli   'install',
 1 verbose cli   '-g',
-1 verbose cli   'karma-cli' ]
+1 verbose cli   'phantomjs' ]
 2 info using npm@1.4.28
 3 info using node@v0.10.33
-4 verbose cache add [ 'karma-cli', null ]
-5 verbose cache add name=undefined spec="karma-cli" args=["karma-cli",null]
+4 verbose cache add [ 'phantomjs', null ]
+5 verbose cache add name=undefined spec="phantomjs" args=["phantomjs",null]
 6 verbose parsed url { protocol: null,
 6 verbose parsed url   slashes: null,
 6 verbose parsed url   auth: null,
@@ -17,145 +17,203 @@
 6 verbose parsed url   hash: null,
 6 verbose parsed url   search: null,
 6 verbose parsed url   query: null,
-6 verbose parsed url   pathname: 'karma-cli',
-6 verbose parsed url   path: 'karma-cli',
-6 verbose parsed url   href: 'karma-cli' }
-7 silly lockFile aa100f68-karma-cli karma-cli
-8 verbose lock karma-cli /home/guilhermevrs/.npm/aa100f68-karma-cli.lock
-9 silly lockFile aa100f68-karma-cli karma-cli
-10 silly lockFile aa100f68-karma-cli karma-cli
-11 verbose addNamed [ 'karma-cli', '' ]
+6 verbose parsed url   pathname: 'phantomjs',
+6 verbose parsed url   path: 'phantomjs',
+6 verbose parsed url   href: 'phantomjs' }
+7 silly lockFile 30d7cd7d-phantomjs phantomjs
+8 verbose lock phantomjs /home/guilhermevrs/.npm/30d7cd7d-phantomjs.lock
+9 silly lockFile 30d7cd7d-phantomjs phantomjs
+10 silly lockFile 30d7cd7d-phantomjs phantomjs
+11 verbose addNamed [ 'phantomjs', '' ]
 12 verbose addNamed [ null, '*' ]
-13 silly lockFile 8f6f2c72-karma-cli karma-cli@
-14 verbose lock karma-cli@ /home/guilhermevrs/.npm/8f6f2c72-karma-cli.lock
-15 silly addNameRange { name: 'karma-cli', range: '*', hasData: false }
-16 verbose request where is /karma-cli
+13 silly lockFile 29cf7fd6-phantomjs phantomjs@
+14 verbose lock phantomjs@ /home/guilhermevrs/.npm/29cf7fd6-phantomjs.lock
+15 silly addNameRange { name: 'phantomjs', range: '*', hasData: false }
+16 verbose request where is /phantomjs
 17 verbose request registry https://registry.npmjs.org/
-18 verbose request id 0360b80ceffc5cd0
-19 verbose url raw /karma-cli
-20 verbose url resolving [ 'https://registry.npmjs.org/', './karma-cli' ]
-21 verbose url resolved https://registry.npmjs.org/karma-cli
-22 verbose request where is https://registry.npmjs.org/karma-cli
-23 info trying registry request attempt 1 at 16:45:36
-24 http GET https://registry.npmjs.org/karma-cli
-25 http 200 https://registry.npmjs.org/karma-cli
-26 silly registry.get cb [ 200,
-26 silly registry.get   { date: 'Sat, 20 Dec 2014 15:44:07 GMT',
-26 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
-26 silly registry.get     etag: '"CUAQHF54OJH3Z192AK7RRNONT"',
-26 silly registry.get     'content-type': 'application/json',
-26 silly registry.get     'cache-control': 'max-age=60',
-26 silly registry.get     'content-length': '5915',
-26 silly registry.get     'accept-ranges': 'bytes',
-26 silly registry.get     via: '1.1 varnish',
-26 silly registry.get     age: '7',
-26 silly registry.get     'x-served-by': 'cache-fra1221-FRA',
-26 silly registry.get     'x-cache': 'HIT',
-26 silly registry.get     'x-cache-hits': '1',
-26 silly registry.get     'x-timer': 'S1419090247.966407,VS0,VE0',
-26 silly registry.get     vary: 'Accept',
-26 silly registry.get     'keep-alive': 'timeout=10, max=50',
-26 silly registry.get     connection: 'Keep-Alive' } ]
-27 silly addNameRange number 2 { name: 'karma-cli', range: '*', hasData: true }
-28 silly addNameRange versions [ 'karma-cli', [ '0.0.1', '0.0.2', '0.0.3', '0.0.4' ] ]
-29 verbose addNamed [ 'karma-cli', '0.0.4' ]
-30 verbose addNamed [ '0.0.4', '0.0.4' ]
-31 silly lockFile 0ef08b95-karma-cli-0-0-4 karma-cli@0.0.4
-32 verbose lock karma-cli@0.0.4 /home/guilhermevrs/.npm/0ef08b95-karma-cli-0-0-4.lock
-33 silly lockFile ad31c554-rg-karma-cli-karma-cli-0-0-4-tgz https://registry.npmjs.org/karma-cli/-/karma-cli-0.0.4.tgz
-34 verbose lock https://registry.npmjs.org/karma-cli/-/karma-cli-0.0.4.tgz /home/guilhermevrs/.npm/ad31c554-rg-karma-cli-karma-cli-0-0-4-tgz.lock
-35 verbose addRemoteTarball [ 'https://registry.npmjs.org/karma-cli/-/karma-cli-0.0.4.tgz',
-35 verbose addRemoteTarball   '1840a6a2545754bb02100f09229cdd9963a6cf68' ]
-36 info retry fetch attempt 1 at 16:45:36
-37 verbose fetch to= /tmp/npm-5427-4Say5HfV/registry.npmjs.org/karma-cli/-/karma-cli-0.0.4.tgz
-38 http GET https://registry.npmjs.org/karma-cli/-/karma-cli-0.0.4.tgz
-39 http 200 https://registry.npmjs.org/karma-cli/-/karma-cli-0.0.4.tgz
-40 silly lockFile ad31c554-rg-karma-cli-karma-cli-0-0-4-tgz https://registry.npmjs.org/karma-cli/-/karma-cli-0.0.4.tgz
-41 silly lockFile ad31c554-rg-karma-cli-karma-cli-0-0-4-tgz https://registry.npmjs.org/karma-cli/-/karma-cli-0.0.4.tgz
-42 silly lockFile 0ef08b95-karma-cli-0-0-4 karma-cli@0.0.4
-43 silly lockFile 0ef08b95-karma-cli-0-0-4 karma-cli@0.0.4
-44 silly lockFile 8f6f2c72-karma-cli karma-cli@
-45 silly lockFile 8f6f2c72-karma-cli karma-cli@
-46 silly resolved [ { name: 'karma-cli',
-46 silly resolved     description: 'The Karma command line interface.',
-46 silly resolved     homepage: 'http://karma-runner.github.io/',
-46 silly resolved     repository:
-46 silly resolved      { type: 'git',
-46 silly resolved        url: 'git://github.com/karma-runner/karma-cli.git' },
-46 silly resolved     bugs: { url: 'https://github.com/karma-runner/karma-cli/issues' },
-46 silly resolved     keywords:
-46 silly resolved      [ 'karma',
-46 silly resolved        'spectacular',
-46 silly resolved        'runner',
-46 silly resolved        'karma',
-46 silly resolved        'js',
-46 silly resolved        'javascript',
-46 silly resolved        'testing',
-46 silly resolved        'test',
-46 silly resolved        'remote',
-46 silly resolved        'execution' ],
-46 silly resolved     author: { name: 'Vojta Jína', email: 'vojta.jina@gmail.com' },
-46 silly resolved     contributors: [ [Object] ],
-46 silly resolved     dependencies: { resolve: '~0.5.1' },
-46 silly resolved     peerDependencies: {},
-46 silly resolved     devDependencies:
-46 silly resolved      { grunt: '~0.4.1',
-46 silly resolved        'grunt-contrib-jshint': '~0.7.2',
-46 silly resolved        'grunt-coffeelint': '0.0.7',
-46 silly resolved        'grunt-bump': '0.0.11',
-46 silly resolved        'grunt-npm': '0.0.2',
-46 silly resolved        'grunt-auto-release': '0.0.4',
-46 silly resolved        'grunt-conventional-changelog': '~1.0.0' },
-46 silly resolved     preferGlobal: true,
-46 silly resolved     bin: { karma: './bin/karma' },
-46 silly resolved     engines: { node: '~0.8 || ~0.10' },
-46 silly resolved     version: '0.0.4',
-46 silly resolved     _id: 'karma-cli@0.0.4',
-46 silly resolved     dist:
-46 silly resolved      { shasum: '1840a6a2545754bb02100f09229cdd9963a6cf68',
-46 silly resolved        tarball: 'http://registry.npmjs.org/karma-cli/-/karma-cli-0.0.4.tgz' },
-46 silly resolved     _from: 'karma-cli@',
-46 silly resolved     _npmVersion: '1.3.21',
-46 silly resolved     _npmUser: { name: 'vojtajina', email: 'vojta.jina@gmail.com' },
-46 silly resolved     maintainers: [ [Object] ],
-46 silly resolved     directories: {},
-46 silly resolved     _shasum: '1840a6a2545754bb02100f09229cdd9963a6cf68',
-46 silly resolved     _resolved: 'https://registry.npmjs.org/karma-cli/-/karma-cli-0.0.4.tgz' } ]
-47 info install karma-cli@0.0.4 into /usr/local/lib
-48 info installOne karma-cli@0.0.4
-49 verbose lib/node_modules/karma-cli unbuild
-50 verbose tar unpack /home/guilhermevrs/.npm/karma-cli/0.0.4/package.tgz
-51 silly lockFile f15a2687-local-lib-node-modules-karma-cli tar:///usr/local/lib/node_modules/karma-cli
-52 verbose lock tar:///usr/local/lib/node_modules/karma-cli /home/guilhermevrs/.npm/f15a2687-local-lib-node-modules-karma-cli.lock
-53 silly lockFile ba927cae--npm-karma-cli-0-0-4-package-tgz tar:///home/guilhermevrs/.npm/karma-cli/0.0.4/package.tgz
-54 verbose lock tar:///home/guilhermevrs/.npm/karma-cli/0.0.4/package.tgz /home/guilhermevrs/.npm/ba927cae--npm-karma-cli-0-0-4-package-tgz.lock
-55 silly gunzTarPerm modes [ '775', '664' ]
-56 error Error: EACCES, mkdir '/usr/local/lib/node_modules/karma-cli'
-56 error  { [Error: EACCES, mkdir '/usr/local/lib/node_modules/karma-cli']
-56 error   errno: 3,
-56 error   code: 'EACCES',
-56 error   path: '/usr/local/lib/node_modules/karma-cli',
-56 error   fstream_type: 'Directory',
-56 error   fstream_path: '/usr/local/lib/node_modules/karma-cli',
-56 error   fstream_class: 'DirWriter',
-56 error   fstream_stack:
-56 error    [ '/usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23',
-56 error      '/usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53',
-56 error      'Object.oncomplete (fs.js:107:15)' ] }
-57 error Please try running this command again as root/Administrator.
-58 error System Linux 3.13.0-43-generic
-59 error command "/usr/local/bin/node" "/usr/local/bin/npm" "install" "-g" "karma-cli"
-60 error cwd /media/guilhermevrs/Data/Fontes/trello-gantt
-61 error node -v v0.10.33
-62 error npm -v 1.4.28
-63 error path /usr/local/lib/node_modules/karma-cli
-64 error fstream_path /usr/local/lib/node_modules/karma-cli
-65 error fstream_type Directory
-66 error fstream_class DirWriter
-67 error code EACCES
-68 error errno 3
-69 error stack Error: EACCES, mkdir '/usr/local/lib/node_modules/karma-cli'
-70 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23
-70 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53
-70 error fstream_stack Object.oncomplete (fs.js:107:15)
-71 verbose exit [ 3, true ]
+18 verbose request id 60c6720b6a2d7a0e
+19 verbose url raw /phantomjs
+20 verbose url resolving [ 'https://registry.npmjs.org/', './phantomjs' ]
+21 verbose url resolved https://registry.npmjs.org/phantomjs
+22 verbose request where is https://registry.npmjs.org/phantomjs
+23 info trying registry request attempt 1 at 20:22:48
+24 verbose etag "BP25I2XDD7HG8FO3MYS5P6JT2"
+25 http GET https://registry.npmjs.org/phantomjs
+26 http 304 https://registry.npmjs.org/phantomjs
+27 silly registry.get cb [ 304,
+27 silly registry.get   { date: 'Sat, 20 Dec 2014 19:21:22 GMT',
+27 silly registry.get     server: 'Apache',
+27 silly registry.get     via: '1.1 varnish',
+27 silly registry.get     'last-modified': 'Sat, 20 Dec 2014 19:21:22 GMT',
+27 silly registry.get     'cache-control': 'max-age=60',
+27 silly registry.get     etag: '"BP25I2XDD7HG8FO3MYS5P6JT2"',
+27 silly registry.get     age: '7',
+27 silly registry.get     'x-served-by': 'cache-fra1232-FRA',
+27 silly registry.get     'x-cache': 'HIT',
+27 silly registry.get     'x-cache-hits': '1',
+27 silly registry.get     'x-timer': 'S1419103282.217636,VS0,VE0',
+27 silly registry.get     vary: 'Accept',
+27 silly registry.get     'content-length': '0',
+27 silly registry.get     'keep-alive': 'timeout=10, max=50',
+27 silly registry.get     connection: 'Keep-Alive' } ]
+28 verbose etag https://registry.npmjs.org/phantomjs from cache
+29 silly addNameRange number 2 { name: 'phantomjs', range: '*', hasData: true }
+30 silly addNameRange versions [ 'phantomjs',
+30 silly addNameRange   [ '0.0.1',
+30 silly addNameRange     '0.0.2',
+30 silly addNameRange     '0.0.3',
+30 silly addNameRange     '0.0.4',
+30 silly addNameRange     '0.0.5',
+30 silly addNameRange     '0.0.6',
+30 silly addNameRange     '0.0.7',
+30 silly addNameRange     '0.0.8',
+30 silly addNameRange     '0.0.9',
+30 silly addNameRange     '0.1.0',
+30 silly addNameRange     '0.1.1',
+30 silly addNameRange     '0.2.0',
+30 silly addNameRange     '0.2.1',
+30 silly addNameRange     '0.2.2',
+30 silly addNameRange     '0.2.3',
+30 silly addNameRange     '0.2.4',
+30 silly addNameRange     '0.2.5',
+30 silly addNameRange     '0.2.6',
+30 silly addNameRange     '1.8.0-1',
+30 silly addNameRange     '1.8.1-1',
+30 silly addNameRange     '1.8.1-2',
+30 silly addNameRange     '1.8.1-3',
+30 silly addNameRange     '1.8.2-0',
+30 silly addNameRange     '1.8.2-1',
+30 silly addNameRange     '1.8.2-2',
+30 silly addNameRange     '1.9.0-0',
+30 silly addNameRange     '1.9.0-1',
+30 silly addNameRange     '1.9.0-2',
+30 silly addNameRange     '1.9.0-3',
+30 silly addNameRange     '1.9.0-4',
+30 silly addNameRange     '1.9.0-5',
+30 silly addNameRange     '1.9.0-6',
+30 silly addNameRange     '1.9.1-0',
+30 silly addNameRange     '1.9.1-2',
+30 silly addNameRange     '1.9.1-3',
+30 silly addNameRange     '1.9.1-4',
+30 silly addNameRange     '1.9.1-5',
+30 silly addNameRange     '1.9.1-6',
+30 silly addNameRange     '1.9.1-7',
+30 silly addNameRange     '1.9.1-8',
+30 silly addNameRange     '1.9.1-9',
+30 silly addNameRange     '1.9.2-0',
+30 silly addNameRange     '1.9.2-1',
+30 silly addNameRange     '1.9.2-2',
+30 silly addNameRange     '1.9.2-3',
+30 silly addNameRange     '1.9.2-4',
+30 silly addNameRange     '1.9.2-5',
+30 silly addNameRange     '1.9.2-6',
+30 silly addNameRange     '1.9.6-0',
+30 silly addNameRange     '1.9.7-1',
+30 silly addNameRange     '1.9.7-3',
+30 silly addNameRange     '1.9.7-4',
+30 silly addNameRange     '1.9.7-5',
+30 silly addNameRange     '1.9.7-6',
+30 silly addNameRange     '1.9.7-7',
+30 silly addNameRange     '1.9.7-8',
+30 silly addNameRange     '1.9.7-9',
+30 silly addNameRange     '1.9.7-10',
+30 silly addNameRange     '1.9.7-11',
+30 silly addNameRange     '1.9.7-12',
+30 silly addNameRange     '1.9.7-13',
+30 silly addNameRange     '1.9.7-14',
+30 silly addNameRange     '1.9.7-15',
+30 silly addNameRange     '1.8.2-3',
+30 silly addNameRange     '1.9.8',
+30 silly addNameRange     '1.9.9',
+30 silly addNameRange     '1.9.10',
+30 silly addNameRange     '1.9.11',
+30 silly addNameRange     '1.9.12',
+30 silly addNameRange     '1.9.13' ] ]
+31 verbose addNamed [ 'phantomjs', '1.9.13' ]
+32 verbose addNamed [ '1.9.13', '1.9.13' ]
+33 silly lockFile b0139109-phantomjs-1-9-13 phantomjs@1.9.13
+34 verbose lock phantomjs@1.9.13 /home/guilhermevrs/.npm/b0139109-phantomjs-1-9-13.lock
+35 silly lockFile b0139109-phantomjs-1-9-13 phantomjs@1.9.13
+36 silly lockFile b0139109-phantomjs-1-9-13 phantomjs@1.9.13
+37 silly lockFile 29cf7fd6-phantomjs phantomjs@
+38 silly lockFile 29cf7fd6-phantomjs phantomjs@
+39 silly resolved [ { name: 'phantomjs',
+39 silly resolved     version: '1.9.13',
+39 silly resolved     keywords: [ 'phantomjs', 'headless', 'webkit' ],
+39 silly resolved     description: 'Headless WebKit with JS API',
+39 silly resolved     homepage: 'https://github.com/Obvious/phantomjs',
+39 silly resolved     repository: { type: 'git', url: 'git://github.com/Obvious/phantomjs.git' },
+39 silly resolved     licenses: [ [Object] ],
+39 silly resolved     author:
+39 silly resolved      { name: 'Dan Pupius',
+39 silly resolved        email: 'dan@obvious.com',
+39 silly resolved        url: 'http://pupius.co.uk' },
+39 silly resolved     maintainers: [ [Object], [Object], [Object] ],
+39 silly resolved     main: 'lib/phantomjs',
+39 silly resolved     bin: { phantomjs: './bin/phantomjs' },
+39 silly resolved     scripts:
+39 silly resolved      { install: 'node install.js',
+39 silly resolved        test: 'nodeunit --reporter=minimal test/tests.js' },
+39 silly resolved     dependencies:
+39 silly resolved      { 'adm-zip': '0.4.4',
+39 silly resolved        kew: '0.4.0',
+39 silly resolved        ncp: '~1.0.1',
+39 silly resolved        npmconf: '2.0.9',
+39 silly resolved        mkdirp: '0.5.0',
+39 silly resolved        progress: '1.1.8',
+39 silly resolved        request: '2.42.0',
+39 silly resolved        'request-progress': '0.3.1',
+39 silly resolved        rimraf: '~2.2.8',
+39 silly resolved        which: '~1.0.5' },
+39 silly resolved     devDependencies: { nodeunit: '0.9.0' },
+39 silly resolved     gitHead: 'e4bb0d659dfe7e91a9658d5d28e4d5350099629d',
+39 silly resolved     bugs: { url: 'https://github.com/Obvious/phantomjs/issues' },
+39 silly resolved     _id: 'phantomjs@1.9.13',
+39 silly resolved     _shasum: '2f9afca241eaf17cad5a137bf9eade948a4d7ef5',
+39 silly resolved     _from: 'phantomjs@',
+39 silly resolved     _npmVersion: '1.4.28',
+39 silly resolved     _npmUser: { name: 'nicks', email: 'nicholas.j.santos@gmail.com' },
+39 silly resolved     dist:
+39 silly resolved      { shasum: '2f9afca241eaf17cad5a137bf9eade948a4d7ef5',
+39 silly resolved        tarball: 'http://registry.npmjs.org/phantomjs/-/phantomjs-1.9.13.tgz' },
+39 silly resolved     directories: {},
+39 silly resolved     _resolved: 'https://registry.npmjs.org/phantomjs/-/phantomjs-1.9.13.tgz',
+39 silly resolved     readme: 'ERROR: No README data found!' } ]
+40 info install phantomjs@1.9.13 into /usr/local/lib
+41 info installOne phantomjs@1.9.13
+42 verbose lib/node_modules/phantomjs unbuild
+43 verbose tar unpack /home/guilhermevrs/.npm/phantomjs/1.9.13/package.tgz
+44 silly lockFile 4d5acaea-local-lib-node-modules-phantomjs tar:///usr/local/lib/node_modules/phantomjs
+45 verbose lock tar:///usr/local/lib/node_modules/phantomjs /home/guilhermevrs/.npm/4d5acaea-local-lib-node-modules-phantomjs.lock
+46 silly lockFile 0fa03554-npm-phantomjs-1-9-13-package-tgz tar:///home/guilhermevrs/.npm/phantomjs/1.9.13/package.tgz
+47 verbose lock tar:///home/guilhermevrs/.npm/phantomjs/1.9.13/package.tgz /home/guilhermevrs/.npm/0fa03554-npm-phantomjs-1-9-13-package-tgz.lock
+48 silly gunzTarPerm modes [ '775', '664' ]
+49 error Error: EACCES, mkdir '/usr/local/lib/node_modules/phantomjs'
+49 error  { [Error: EACCES, mkdir '/usr/local/lib/node_modules/phantomjs']
+49 error   errno: 3,
+49 error   code: 'EACCES',
+49 error   path: '/usr/local/lib/node_modules/phantomjs',
+49 error   fstream_type: 'Directory',
+49 error   fstream_path: '/usr/local/lib/node_modules/phantomjs',
+49 error   fstream_class: 'DirWriter',
+49 error   fstream_stack:
+49 error    [ '/usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23',
+49 error      '/usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53',
+49 error      'Object.oncomplete (fs.js:107:15)' ] }
+50 error Please try running this command again as root/Administrator.
+51 error System Linux 3.13.0-43-generic
+52 error command "/usr/local/bin/node" "/usr/local/bin/npm" "install" "-g" "phantomjs"
+53 error cwd /media/guilhermevrs/Data/Fontes/trello-gantt
+54 error node -v v0.10.33
+55 error npm -v 1.4.28
+56 error path /usr/local/lib/node_modules/phantomjs
+57 error fstream_path /usr/local/lib/node_modules/phantomjs
+58 error fstream_type Directory
+59 error fstream_class DirWriter
+60 error code EACCES
+61 error errno 3
+62 error stack Error: EACCES, mkdir '/usr/local/lib/node_modules/phantomjs'
+63 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23
+63 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53
+63 error fstream_stack Object.oncomplete (fs.js:107:15)
+64 verbose exit [ 3, true ]
