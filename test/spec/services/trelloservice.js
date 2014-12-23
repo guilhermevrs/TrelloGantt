@@ -262,4 +262,93 @@ describe('Service: Trelloservice', function () {
 
   });
 
+  describe('in card functions', function(){
+      var card = {};
+      beforeEach(function(){
+          card.id = Math.random();
+          card.name = '' + Math.random();
+          card.due = new Date(new Date() * Math.random());
+      });
+
+      describe('in getCardData', function(){
+          it('should call correctly the Trello get', function(){
+              spyOn(Trello, 'get');
+              localStorage.setItem('trello_token', token);
+
+              Trelloservice.getCardData(card);
+              expect(Trello.get.calls.length).toEqual(1);
+
+              var args = Trello.get.calls[0].args;
+              expect(args[0]).toEqual('cards/'+card.id + '/actions');
+              expect(args[1]).toEqual({token: token});
+          });
+
+          it('should return promise value', function(){
+              var randomData = 'data:' + Math.random();
+              spyOn(Trello, 'get').andCallFake(function(url, params, successFunc){
+                  successFunc(randomData);
+              });
+              Trelloservice.getCardData(card).then(function(data){
+                  expect(data).toEqual(randomData);
+              });
+              rootScope.$digest();
+          });
+
+          it('should log error', function(){
+              var randomData = 'data:' + Math.random();
+              spyOn(console, 'error');
+              spyOn(Trello, 'get').andCallFake(function(url, params, successFunc, errorFunc){
+                  errorFunc(randomData);
+              });
+              Trelloservice.getCardData(card);
+              rootScope.$digest();
+
+              expect(console.error.calls.length).toEqual(1);
+              expect(console.error.calls[0].args[0]).toEqual(randomData);
+          });
+
+      });
+
+      describe('in updateCard', function(){
+          it('should call correctly the Trello get', function(){
+              spyOn(Trello, 'put');
+              localStorage.setItem('trello_token', token);
+
+              Trelloservice.updateCard(card);
+              expect(Trello.put.calls.length).toEqual(1);
+
+              var args = Trello.put.calls[0].args;
+              expect(args[0]).toEqual('cards/'+card.id);
+              expect(args[1]).toEqual({
+		  name: card.name,
+		  due: card.due,
+		  token: token
+	      });
+          });
+
+          it('should return promise value', function(){
+              var randomData = 'data:' + Math.random();
+              spyOn(Trello, 'put').andCallFake(function(url, params, successFunc){
+                  successFunc(randomData);
+              });
+              Trelloservice.updateCard(card).then(function(data){
+                  expect(data).toEqual(randomData);
+              });
+              rootScope.$digest();
+          });
+
+          it('should log error', function(){
+              var randomData = 'data:' + Math.random();
+              spyOn(console, 'error');
+              spyOn(Trello, 'put').andCallFake(function(url, params, successFunc, errorFunc){
+                  errorFunc(randomData);
+              });
+              Trelloservice.updateCard(card);
+              rootScope.$digest();
+
+              expect(console.error.calls.length).toEqual(1);
+              expect(console.error.calls[0].args[0]).toEqual(randomData);
+          });
+      });
+  });
 });
