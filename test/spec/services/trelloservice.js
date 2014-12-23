@@ -221,4 +221,45 @@ describe('Service: Trelloservice', function () {
 
   });
 
+  describe('in getBoardMembers', function(){
+      it('should call correctly the Trello get', function(){
+          spyOn(Trello, 'get');
+          localStorage.setItem('trello_token', token);
+
+          var boardID = Math.random();
+
+          Trelloservice.getBoardMembers(boardID);
+          expect(Trello.get.calls.length).toEqual(1);
+
+          var args = Trello.get.calls[0].args;
+          expect(args[0]).toEqual('boards/'+boardID+'/members/');
+          expect(args[1]).toEqual({token: token});
+      });
+
+      it('should return promise value', function(){
+          var randomData = 'data:' + Math.random();
+          spyOn(Trello, 'get').andCallFake(function(url, params, successFunc){
+              successFunc(randomData);
+          });
+          Trelloservice.getBoardMembers(0).then(function(data){
+              expect(data).toEqual(randomData);
+          });
+          rootScope.$digest();
+      });
+
+      it('should log error', function(){
+          var randomData = 'data:' + Math.random();
+          spyOn(console, 'error');
+          spyOn(Trello, 'get').andCallFake(function(url, params, successFunc, errorFunc){
+              errorFunc(randomData);
+          });
+          Trelloservice.getBoardMembers(1);
+          rootScope.$digest();
+
+          expect(console.error.calls.length).toEqual(1);
+          expect(console.error.calls[0].args[0]).toEqual(randomData);
+      });
+
+  });
+
 });
