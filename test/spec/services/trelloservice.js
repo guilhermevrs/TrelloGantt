@@ -28,12 +28,17 @@ describe('Service: Trelloservice', function () {
       expect(Trelloservice.isUserLogged()).toBe(true);
   });
 
-  it('should call the correct authorize function', function(){
+  it('should call correctly the authorize function', function(){
       spyOn(Trello, 'authorize');
 
       Trelloservice.authorize();
+      expect(Trello.authorize.calls.length).toEqual(1);
 
-      expect(Trello.authorize).toHaveBeenCalled();
+      var args = Trello.authorize.calls[0].args[0];
+      expect(args.type).toEqual('popup');
+      expect(args.name).toEqual('TrelloGantt');
+      expect(args.scope).toEqual({read:true, write:true, account:false});
+
   });
 
 });
