@@ -95,9 +95,9 @@ var obj = angular.module('trelloGanttApp.chart', ['gantt'])
 			$scope.gantt.toDate = ganttData.endChartt;
 
 			$scope.loadData(ganttData.data);
-			setTimeout(function(){
+			/*setTimeout(function(){
 				$scope.scrollToDate(new Date());
-			},500);
+			},500);*/
 		})
 	}
 
@@ -153,6 +153,14 @@ var obj = angular.module('trelloGanttApp.chart', ['gantt'])
 	$scope.rowEvent = function(event) {
 		$scope.scrollToDate(event.row.from);
 	};
+
+        $scope.clearData = function(){
+            $scope.data = undefined;
+        };
+
+        $scope.loadData = function(data){
+            $scope.data = data;
+        };
 
 	$scope.scrollEvent = function(event) {
 		if (angular.equals(event.direction, 'left')) {
