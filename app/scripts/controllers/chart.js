@@ -12,6 +12,11 @@ var obj = angular.module('trelloGanttApp.chart', [
 	/*Auxilary functions*/
 
         /*SCOPE functions*/
+        $scope.buildTasksData = function(lists){
+
+
+        };
+
 	$scope.buildGanttData = function (lists){
 		var ganttData = [],
 		minStart = null,
