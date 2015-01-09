@@ -1,6 +1,9 @@
 'use strict';
 
-var obj = angular.module('trelloGanttApp.chart', ['gantt'])
+var obj = angular.module('trelloGanttApp.chart', [
+    'gantt',
+    'gantt.tree'
+])
 .controller('ChartCtrl', function ($scope, Trelloservice, generalSettings, $location, $modal, $routeParams) {
 
         $scope.gantt = {};
