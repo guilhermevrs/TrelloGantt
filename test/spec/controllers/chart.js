@@ -1,5 +1,9 @@
 'use strict';
 
+function randomDate(start, end) {
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+}
+
 describe('Controller: ChartCtrl', function(){
 
     var createController,
@@ -71,9 +75,57 @@ describe('Controller: ChartCtrl', function(){
         expect($location.path()).toBe('/');
     });
 
-    describe('Build gantt data', function(){
+    describe('Build gantt task data', function(){
+        var random,
+        cardList = {name: '', cards: []},
+        taskDataExpected = [],
+        randomDateGenerator = function (start, end) {
+            return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+        },
+        controller;
 
+        beforeEach(function(){
+            random = Math.random();
+            $location.path('/chart/' + random);
+            controller = createController(random);
+        });
 
+        it('should generate an empty task list data from an empty trello list', function(){
+            var randomNumber = Math.random();
+            cardList.name = '' + randomNumber;
+
+            taskDataExpected = [{name: '' + randomNumber}];
+            var taskDataGenerated = scope.buildTasksData(cardList);
+            expect(taskDataGenerated).toEqual(taskDataExpected);
+        });
+
+        it('should generate task data from a trello list with one card without labels', function(){
+            var randomDate = randomDateGenerator(new Date(2012, 0, 1), new Date());
+            var randomNumber = Math.random();
+            var randomNumber2 = Math.random();
+
+            cardList.name = '' + randomNumber;
+            cardList.cards.push({
+                due: randomDate,
+                name: '' + randomNumber2,
+                labels: []
+            });
+
+            taskDataExpected = [
+                {name: '' + randomNumber},
+                {name: '' + randomNumber2, parent: '' + randomNumber, tasks:[
+                    {
+                        name: '' + randomNumber2,
+                        color: '#95a5a6',
+                        from: randomDate,
+                        to: randomDate + 1
+                    }
+                ]}
+            ];
+
+            var taskDataGenerated = scope.buildTasksData(cardList);
+            expect(taskDataGenerated).toEqual(taskDataExpected);
+        });
 
     });
 });

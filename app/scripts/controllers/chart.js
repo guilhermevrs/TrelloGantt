@@ -12,9 +12,32 @@ var obj = angular.module('trelloGanttApp.chart', [
 	/*Auxilary functions*/
 
         /*SCOPE functions*/
-        $scope.buildTasksData = function(lists){
+        $scope.buildTasksData = function(cardList){
+            var generatedData = [];
+            generatedData.push({name: cardList.name});
 
+            var cardsLength = cardList.cards.length;
+            for(var cardIndex = 0; cardIndex < cardsLength; cardIndex++){
+                var currentCard = cardList.cards[cardIndex];
+                var generatedTask = {};
+                generatedTask.name = currentCard.name;
+                generatedTask.parent = cardList.name;
+                var start = new Date();
+                if(currentCard.due){
+                    start = new Date(currentCard.due);
+                }
+                var end = start + 1;
+                generatedTask.tasks = [];
+                generatedTask.tasks.push({
+                    name: currentCard.name,
+                    color: '#95a5a6',
+                    from: start,
+                    to: end
+                });
+                generatedData.push(generatedTask);
+            }
 
+            return generatedData;
         };
 
 	$scope.buildGanttData = function (lists){
@@ -25,51 +48,7 @@ var obj = angular.module('trelloGanttApp.chart', [
 
 		for (var i = 0; i < len; i++) {
 			var l = lists[i];
-
-			var tempSeries = [];
-			for (var j = l.cards.length - 1; j >= 0; j--) {
-				var c = l.cards[j];
-				var start = new Date();
-				if(c.due !== null){
-					start = new Date(c.due);
-				}
-
-				var end = new Date(start);
-				var regObj = /\[[1-9](0-9)*d\]/;
-				if(regObj.test(c.name)){
-					var matches = regObj.exec(c.name);
-					var duration = matches[0].replace('[','').replace('d]','');
-					duration = parseInt(duration);
-					end.setDate(start.getDate() + duration);
-				}
-				else{
-					end.setDate(start.getDate() + 1);
-				}
-
-				c.from = new Date(start);
-				c.to = new Date(end);
-
-				if(minStart === null || minStart > start)
-					minStart = new Date(start);
-				if(maxEnd === null || maxEnd < end)
-					maxEnd = new Date(end);
-
-				var color = '#95a5a6';
-				if(c.labels.length > 0){
-					color = $scope.getLabelColor(c.labels[0].color);
-				}
-
-				tempSeries.push({
-					id: c.id,
-					subject: c.name,
-					from: c.from,
-					to: c.to,
-					color: color,
-					data: c
-				});
-			}
-
-			if(tempSeries.length > 0){
+			/*if(tempSeries.length > 0){
 				ganttData.push({
 					id: l.id,
 					description: l.name,
@@ -77,20 +56,8 @@ var obj = angular.module('trelloGanttApp.chart', [
 					tasks: tempSeries,
 					order: i
 				});
-			}
+			}*/
 		}
-
-		if(minStart === null)
-			minStart = new Date();
-		if(maxEnd === null)
-			maxEnd = new Date();
-		minStart.setDate(minStart.getDate()-10);
-		maxEnd.setDate(maxEnd.getDate()+10);
-		return {
-			data: ganttData,
-			startChartt: minStart,
-			endChartt: maxEnd
-		};
 	}
 
 	$scope.updateGantt = function (boardID){
