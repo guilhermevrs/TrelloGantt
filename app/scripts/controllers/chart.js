@@ -1,6 +1,6 @@
 'use strict';
 
-var obj = angular.module('trelloGanttApp.chart', [])
+var obj = angular.module('trelloGanttApp.chart', ['gantt'])
 .controller('ChartCtrl', function ($scope, Trelloservice, generalSettings, $location, $modal, $routeParams) {
 
         if(!Trelloservice.isUserLogged())
@@ -20,7 +20,9 @@ var obj = angular.module('trelloGanttApp.chart', [])
 	$scope.gantt.scale = 'day';
 
 	/*Auxilary functions*/
-	var buildGanttData = function (lists){
+
+        /*SCOPE functions*/
+	$scope.buildGanttData = function (lists){
 		var ganttData = [],
 		minStart = null,
 		maxEnd = null;
@@ -96,13 +98,11 @@ var obj = angular.module('trelloGanttApp.chart', [])
 		};
 	}
 
-	/*SCOPE functions*/
-
 	$scope.updateGantt = function (boardID){
 		Trelloservice.getCardsFromBoard(boardID).then(function(data){
 			$scope.clearData();
 
-			var ganttData = buildGanttData(data);
+			var ganttData = $scope.buildGanttData(data);
 
 			$scope.gantt.fromDate = ganttData.startChartt;
 			$scope.gantt.toDate = ganttData.endChartt;

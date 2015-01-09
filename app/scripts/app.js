@@ -5,6 +5,7 @@ angular.module('trelloGanttApp', [
   'trelloGanttApp.trello',
   'trelloGanttApp.board',
   'trelloGanttApp.card',
+  'trelloGanttApp.chart',
   'ngResource',
   'ngSanitize',
   'ngRoute',

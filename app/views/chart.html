@@ -1,4 +1,4 @@
-<gantt
+<div gantt
 load-data="loadData = fn"
 clear-data="clearData = fn"
 center-date="scrollToDate = fn"
@@ -11,13 +11,13 @@ column-sub-scale="gantt.scale === 'week' && 7 || 4"
 show-weekend="false"
 from-date="gantt.fromDate"
 to-date="gantt.toDate"
-template-url="template/trellogantt.tmpl.html"
+template-url="template/gantt.tmpl.html"
 
 on-gantt-ready="addSamples()"
 on-row-clicked="rowEvent(event)"
 on-task-updated="taskEvent(event)"
 on-tooltip-link-click="loadCardDetail(card)"
-></gantt>
+></div>
 
 <section id="board-info" class="row">
 	<header>

@@ -14,6 +14,7 @@ describe('Controller: ChartCtrl', function(){
     beforeEach(module('trelloGanttApp.chart'));
 
     beforeEach(inject(function (_$rootScope_, $controller, _$location_, $q) {
+        isUserLogged = true;
         mockTrelloService.isUserLogged = function(){
             return isUserLogged;
         };
@@ -22,7 +23,11 @@ describe('Controller: ChartCtrl', function(){
             defered.resolve(boardID);
             return defered.promise;
         };
-        isUserLogged = true;
+        mockTrelloService.getCardsFromBoard = function(boardID){
+            var defered = $q.defer();
+            defered.resolve(boardID);
+            return defered.promise;
+        };
 
         mockGeneralSettings.setMemberCache = function(boardID){
             //NOT YET IMPLEMENTED
@@ -64,5 +69,11 @@ describe('Controller: ChartCtrl', function(){
         $location.path('/chart/');
         var controller = createController(null);
         expect($location.path()).toBe('/');
+    });
+
+    describe('Build gantt data', function(){
+
+
+
     });
 });
