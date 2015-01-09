@@ -3,19 +3,6 @@
 var obj = angular.module('trelloGanttApp.chart', ['gantt'])
 .controller('ChartCtrl', function ($scope, Trelloservice, generalSettings, $location, $modal, $routeParams) {
 
-        if(!Trelloservice.isUserLogged())
-		$location.path('/');
-
-	var boardID = $routeParams.boardID;
-	if(boardID === null)
-		$location.path('/');
-	else{
-		Trelloservice.getBoardInfo(boardID).then(function(board){
-			$scope.board = board;
-			generalSettings.setMemberCache(board.members);
-		});
-	}
-
         $scope.gantt = {};
 	$scope.gantt.scale = 'day';
 
@@ -185,6 +172,20 @@ var obj = angular.module('trelloGanttApp.chart', ['gantt'])
 				}
 			}
 		});
+	}
+
+        if(!Trelloservice.isUserLogged())
+		$location.path('/');
+
+	var boardID = $routeParams.boardID;
+	if(boardID === null)
+		$location.path('/');
+	else{
+		Trelloservice.getBoardInfo(boardID).then(function(board){
+			$scope.board = board;
+			generalSettings.setMemberCache(board.members);
+		});
+                $scope.updateGantt(boardID);
 	}
 
 });
