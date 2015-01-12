@@ -41,23 +41,15 @@ var obj = angular.module('trelloGanttApp.chart', [
         };
 
 	$scope.buildGanttData = function (lists){
-		var ganttData = [],
-		minStart = null,
-		maxEnd = null;
+		var ganttData = [];
 		var len = lists.length;
-
+                var temp = 0;
 		for (var i = 0; i < len; i++) {
-			var l = lists[i];
-			/*if(tempSeries.length > 0){
-				ganttData.push({
-					id: l.id,
-					description: l.name,
-					name: l.name,
-					tasks: tempSeries,
-					order: i
-				});
-			}*/
+			var list = lists[i];
+                        var listData = $scope.buildTasksData(list);
+                        ganttData = ganttData.concat(listData);
 		}
+                return ganttData;
 	}
 
 	$scope.updateGantt = function (boardID){
@@ -66,10 +58,10 @@ var obj = angular.module('trelloGanttApp.chart', [
 
 			var ganttData = $scope.buildGanttData(data);
 
-			$scope.gantt.fromDate = ganttData.startChartt;
-			$scope.gantt.toDate = ganttData.endChartt;
+			//$scope.gantt.fromDate = ganttData.startChartt;
+			//$scope.gantt.toDate = ganttData.endChartt;
 
-			$scope.loadData(ganttData.data);
+			$scope.loadData(ganttData);
 			/*setTimeout(function(){
 				$scope.scrollToDate(new Date());
 			},500);*/
