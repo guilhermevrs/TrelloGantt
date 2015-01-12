@@ -20,6 +20,10 @@ on-tooltip-link-click="loadCardDetail(card)"
 -->
 <div gantt
      data=data
+     from-date="gantt.fromDate"
+     to-date="gantt.toDate"
+     headers="gantt.headers"
+     current-date="gantt.currentDate"
 >
   <gantt-tree></gantt-tree>
 </div>

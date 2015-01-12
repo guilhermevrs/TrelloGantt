@@ -96,7 +96,11 @@ describe('Controller: ChartCtrl', function(){
             var randomNumber = Math.random();
             cardList.name = '' + randomNumber;
 
-            taskDataExpected = [{name: '' + randomNumber}];
+            taskDataExpected = {
+                minStartDate: undefined,
+                maxEndDate: undefined,
+                data:[{name: '' + randomNumber}]
+            };
             var taskDataGenerated = scope.buildTasksData(cardList);
             expect(taskDataGenerated).toEqual(taskDataExpected);
         });
@@ -113,7 +117,10 @@ describe('Controller: ChartCtrl', function(){
                 labels: []
             });
 
-            taskDataExpected = [
+            taskDataExpected = {
+                minStartDate: randomDate,
+                maxEndDate: randomDate,
+                data: [
                 {name: '' + randomNumber},
                 {name: '' + randomNumber2, parent: '' + randomNumber, tasks:[
                     {
@@ -123,7 +130,7 @@ describe('Controller: ChartCtrl', function(){
                         to: randomDate
                     }
                 ]}
-            ];
+            ]};
 
             var taskDataGenerated = scope.buildTasksData(cardList);
             expect(taskDataGenerated).toEqual(taskDataExpected);
@@ -134,6 +141,9 @@ describe('Controller: ChartCtrl', function(){
 
             cardList.name = '' + randomNumber;
             taskDataExpected = [{name: '' + randomNumber}];
+
+            var minStart,
+                maxEnd;
             var randomCardLength = Math.floor(randomNumber * (10 - 1 + 1)) + 1;
             for(var i = 0; i<randomCardLength; i++){
                 var randomDate = randomDateGenerator(new Date(2012, 0, 1), new Date());
@@ -152,7 +162,17 @@ describe('Controller: ChartCtrl', function(){
                                                to: randomDate
                                            }
                                        ]});
+                if(!minStart || minStart > randomDate)
+                    minStart = randomDate;
+                if(!maxEnd || maxEnd < randomDate)
+                    maxEnd = randomDate;
             }
+
+            taskDataExpected = {
+                minStartDate: minStart,
+                maxEndDate: maxEnd,
+                data: taskDataExpected
+            };
 
             var taskDataGenerated = scope.buildTasksData(cardList);
             expect(taskDataGenerated.length).toEqual(taskDataExpected.length);
@@ -164,6 +184,8 @@ describe('Controller: ChartCtrl', function(){
 
             cardList.name = '' + randomNumber;
             taskDataExpected = [{name: '' + randomNumber}];
+            var minStartDate,
+                maxEndDate;
             var randomCardLength = Math.floor(randomNumber * (10 - 1 + 1)) + 1;
             for(var i = 0; i<randomCardLength; i++){
                 var randomDate = randomDateGenerator(new Date(2012, 0, 1), new Date());
@@ -182,10 +204,19 @@ describe('Controller: ChartCtrl', function(){
                                                to: randomDate
                                            }
                                        ]});
+                if(!minStartDate || minStartDate > randomDate)
+                    minStartDate = randomDate;
+                if(!maxEndDate || maxEndDate < randomDate)
+                    maxEndDate = randomDate;
             }
 
+            taskDataExpected = {
+                minStartDate: minStartDate,
+                maxEndDate: maxEndDate,
+                data: taskDataExpected
+            };
+
             var taskDataGenerated = scope.buildGanttData([cardList]);
-            expect(taskDataGenerated.length).toEqual(taskDataExpected.length);
             expect(taskDataGenerated).toEqual(taskDataExpected);
         });
 
@@ -193,6 +224,8 @@ describe('Controller: ChartCtrl', function(){
             var randomNumber = Math.random();
             var randomListLength = Math.floor(randomNumber * 10) + 1;
             var lists = [];
+            var minStartDate,
+                maxEndDate;
             taskDataExpected = [];
             for(var j = 0; j < randomListLength; j++){
                 randomNumber = Math.random();
@@ -208,8 +241,7 @@ describe('Controller: ChartCtrl', function(){
                         due: randomDate,
                         name: '' + randomNumber2,
                         labels: []
-                    });
-                    taskDataExpected.push({name: '' + randomNumber2, parent: '' + randomNumber,
+                    });                    taskDataExpected.push({name: '' + randomNumber2, parent: '' + randomNumber,
                                        tasks:[
                                            {
                                                name: '' + randomNumber2,
@@ -218,14 +250,22 @@ describe('Controller: ChartCtrl', function(){
                                                to: randomDate
                                            }
                                        ]});
+                    if(!minStartDate || minStartDate > randomDate)
+                        minStartDate = randomDate;
+                    if(!maxEndDate || maxEndDate < randomDate)
+                        maxEndDate = randomDate;
                 }
                 lists.push(tempCardList);
             }
 
-            var taskDataGenerated = scope.buildGanttData(lists);
-            expect(taskDataGenerated.length).toEqual(taskDataExpected.length);
+            taskDataExpected = {
+                minStartDate : minStartDate,
+                maxEndDate : maxEndDate,
+                data: taskDataExpected
+            }
 
-            //expect(taskDataGenerated).toEqual(taskDataExpected);
+            var taskDataGenerated = scope.buildGanttData(lists);
+            expect(taskDataGenerated).toEqual(taskDataExpected);
         });
 
     });
