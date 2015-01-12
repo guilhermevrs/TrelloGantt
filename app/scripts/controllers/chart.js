@@ -26,7 +26,7 @@ var obj = angular.module('trelloGanttApp.chart', [
                 if(currentCard.due){
                     start = new Date(currentCard.due);
                 }
-                var end = start + 1;
+                var end = start;
                 generatedTask.tasks = [];
                 generatedTask.tasks.push({
                     name: currentCard.name,

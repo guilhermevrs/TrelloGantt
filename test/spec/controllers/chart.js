@@ -77,14 +77,16 @@ describe('Controller: ChartCtrl', function(){
 
     describe('Build gantt task data', function(){
         var random,
-        cardList = {name: '', cards: []},
-        taskDataExpected = [],
+        cardList,
+        taskDataExpected,
         randomDateGenerator = function (start, end) {
             return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
         },
         controller;
 
         beforeEach(function(){
+            cardList = {name: '', cards: []};
+            taskDataExpected = [];
             random = Math.random();
             $location.path('/chart/' + random);
             controller = createController(random);
@@ -99,7 +101,7 @@ describe('Controller: ChartCtrl', function(){
             expect(taskDataGenerated).toEqual(taskDataExpected);
         });
 
-        it('should generate task data from a trello list with one card without labels', function(){
+        it('should generate task data from a trello list with one card without labels and no end date', function(){
             var randomDate = randomDateGenerator(new Date(2012, 0, 1), new Date());
             var randomNumber = Math.random();
             var randomNumber2 = Math.random();
@@ -118,12 +120,42 @@ describe('Controller: ChartCtrl', function(){
                         name: '' + randomNumber2,
                         color: '#95a5a6',
                         from: randomDate,
-                        to: randomDate + 1
+                        to: randomDate
                     }
                 ]}
             ];
 
             var taskDataGenerated = scope.buildTasksData(cardList);
+            expect(taskDataGenerated).toEqual(taskDataExpected);
+        });
+
+        it('should generate task data from a trello list with multiple cards without labels and no end date', function(){
+            var randomNumber = Math.random();
+
+            cardList.name = '' + randomNumber;
+            taskDataExpected = [{name: '' + randomNumber}];
+            var randomCardLength = randomNumber * 5;
+            for(var i = 0; i<1; i++){
+                var randomDate = randomDateGenerator(new Date(2012, 0, 1), new Date());
+                var randomNumber2 = Math.random();
+                cardList.cards.push({
+                    due: randomDate,
+                    name: '' + randomNumber2,
+                    labels: []
+                });
+                taskDataExpected.push({name: '' + randomNumber2, parent: '' + randomNumber,
+                                       tasks:[
+                                           {
+                                               name: '' + randomNumber2,
+                                               color: '#95a5a6',
+                                               from: randomDate,
+                                               to: randomDate
+                                           }
+                                       ]});
+            }
+
+            var taskDataGenerated = scope.buildTasksData(cardList);
+            expect(taskDataGenerated.length).toEqual(taskDataExpected.length);
             expect(taskDataGenerated).toEqual(taskDataExpected);
         });
 
