@@ -1,6 +1,6 @@
 'use strict';
 
-var obj = angular.module('trelloGanttApp')
+angular.module('trelloGanttApp')
 .controller('AboutCtrl', function () {
-	
+
 });

@@ -61,7 +61,6 @@ var obj = angular.module('trelloGanttApp.chart', [
 	$scope.buildGanttData = function (lists){
 		var ganttData = [];
 		var len = lists.length;
-                var temp = 0;
                 var minStartDate,
                     maxEndDate;
 		for (var i = 0; i < len; i++) {

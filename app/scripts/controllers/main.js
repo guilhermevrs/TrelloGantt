@@ -1,7 +1,7 @@
 'use strict';
 
 var obj = angular.module('trelloGanttApp')
-.controller('MainCtrl', function ($scope, Trelloservice, $rootScope, $location, generalSettings) {
+.controller('MainCtrl', function ($scope, Trelloservice, $rootScope, $location) {
 	/*SCOPE Functions*/
 	$scope.logme = function(){
 		Trelloservice.authorize().then(function(){
@@ -17,4 +17,4 @@ var obj = angular.module('trelloGanttApp')
 	}
 });
 
-obj[ '$inject' ] = ['$scope', 'Trelloservice', '$rootScope', '$location', 'generalSettings'];
+obj[ '$inject' ] = ['$scope', 'Trelloservice', '$rootScope', '$location'];
