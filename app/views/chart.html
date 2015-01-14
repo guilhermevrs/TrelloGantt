@@ -20,12 +20,15 @@ on-tooltip-link-click="loadCardDetail(card)"
 -->
 <div gantt
      data=data
+     auto-expand="both"
      from-date="gantt.fromDate"
      to-date="gantt.toDate"
      headers="gantt.headers"
-     current-date="gantt.currentDate"
+     current-date="column"
 >
   <gantt-tree></gantt-tree>
+  <gantt-tooltips></gantt-tooltips>
+  <gantt-groups></gantt-groups>
 </div>
 
 <section id="board-info" class="row">

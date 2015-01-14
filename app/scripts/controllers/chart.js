@@ -2,6 +2,8 @@
 
 var obj = angular.module('trelloGanttApp.chart', [
     'gantt',
+    'gantt.tooltips',
+    'gantt.groups',
     'gantt.tree'
 ])
 .controller('ChartCtrl', function ($scope, Trelloservice, generalSettings, $location, $modal, $routeParams) {
@@ -22,10 +24,15 @@ var obj = angular.module('trelloGanttApp.chart', [
                 generatedTask.name = currentCard.name;
                 generatedTask.parent = cardList.name;
                 var start = new Date();
-                if(currentCard.due){
+                if(currentCard.due)
                     start = new Date(currentCard.due);
+                else{
+                    start.setHours(0);
+                    start.setMinutes(0);
                 }
-                var end = start;
+                var end = new Date(start);
+                end.setHours(23);
+                end.setMinutes(59);
 
                 if(!minStartDate || minStartDate > start)
                     minStartDate = start;
@@ -41,9 +48,13 @@ var obj = angular.module('trelloGanttApp.chart', [
                 });
                 generatedData.push(generatedTask);
             }
+            if(minStartDate)
+                minStartDate = new Date(minStartDate);
+            if(maxEndDate)
+                maxEndDate = new Date(maxEndDate);
 
-            return {minStartDate: new Date(minStartDate),
-                    maxEndDate: new Date(maxEndDate),
+            return {minStartDate: minStartDate,
+                    maxEndDate: maxEndDate,
                     data: generatedData};
         };
 
@@ -81,6 +92,7 @@ var obj = angular.module('trelloGanttApp.chart', [
                         $scope.gantt.toDate = ganttData.maxEndDate;
 
                         $scope.loadData(ganttData.data);
+                        console.log(ganttData.data);
 
 			/*setTimeout(function(){
 				$scope.scrollToDate(new Date());

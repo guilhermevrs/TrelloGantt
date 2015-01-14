@@ -117,9 +117,13 @@ describe('Controller: ChartCtrl', function(){
                 labels: []
             });
 
+            var endDate = new Date(randomDate);
+            endDate.setHours(23);
+            endDate.setMinutes(59);
+
             taskDataExpected = {
                 minStartDate: randomDate,
-                maxEndDate: randomDate,
+                maxEndDate: endDate,
                 data: [
                 {name: '' + randomNumber},
                 {name: '' + randomNumber2, parent: '' + randomNumber, tasks:[
@@ -127,7 +131,7 @@ describe('Controller: ChartCtrl', function(){
                         name: '' + randomNumber2,
                         color: '#95a5a6',
                         from: randomDate,
-                        to: randomDate
+                        to: endDate
                     }
                 ]}
             ]};
@@ -153,19 +157,22 @@ describe('Controller: ChartCtrl', function(){
                     name: '' + randomNumber2,
                     labels: []
                 });
+                var endDate = new Date(randomDate);
+                endDate.setHours(23);
+                endDate.setMinutes(59);
                 taskDataExpected.push({name: '' + randomNumber2, parent: '' + randomNumber,
                                        tasks:[
                                            {
                                                name: '' + randomNumber2,
                                                color: '#95a5a6',
                                                from: randomDate,
-                                               to: randomDate
+                                               to: endDate
                                            }
                                        ]});
                 if(!minStart || minStart > randomDate)
                     minStart = randomDate;
-                if(!maxEnd || maxEnd < randomDate)
-                    maxEnd = randomDate;
+                if(!maxEnd || maxEnd < endDate)
+                    maxEnd = endDate;
             }
 
             taskDataExpected = {
@@ -195,19 +202,22 @@ describe('Controller: ChartCtrl', function(){
                     name: '' + randomNumber2,
                     labels: []
                 });
+                var endDate = new Date(randomDate);
+                endDate.setHours(23);
+                endDate.setMinutes(59);
                 taskDataExpected.push({name: '' + randomNumber2, parent: '' + randomNumber,
                                        tasks:[
                                            {
                                                name: '' + randomNumber2,
                                                color: '#95a5a6',
                                                from: randomDate,
-                                               to: randomDate
+                                               to: endDate
                                            }
                                        ]});
                 if(!minStartDate || minStartDate > randomDate)
                     minStartDate = randomDate;
-                if(!maxEndDate || maxEndDate < randomDate)
-                    maxEndDate = randomDate;
+                if(!maxEndDate || maxEndDate < endDate)
+                    maxEndDate = endDate;
             }
 
             taskDataExpected = {
@@ -241,19 +251,23 @@ describe('Controller: ChartCtrl', function(){
                         due: randomDate,
                         name: '' + randomNumber2,
                         labels: []
-                    });                    taskDataExpected.push({name: '' + randomNumber2, parent: '' + randomNumber,
+                    });
+                    var endDate = new Date(randomDate);
+                    endDate.setHours(23);
+                    endDate.setMinutes(59);
+                    taskDataExpected.push({name: '' + randomNumber2, parent: '' + randomNumber,
                                        tasks:[
                                            {
                                                name: '' + randomNumber2,
                                                color: '#95a5a6',
                                                from: randomDate,
-                                               to: randomDate
+                                               to: endDate
                                            }
                                        ]});
                     if(!minStartDate || minStartDate > randomDate)
                         minStartDate = randomDate;
-                    if(!maxEndDate || maxEndDate < randomDate)
-                        maxEndDate = randomDate;
+                    if(!maxEndDate || maxEndDate < endDate)
+                        maxEndDate = endDate;
                 }
                 lists.push(tempCardList);
             }
