@@ -4,7 +4,8 @@ var obj = angular.module('trelloGanttApp.chart', [
     'gantt',
     'gantt.tooltips',
     'gantt.groups',
-    'gantt.tree'
+    'gantt.tree',
+    'gantt.movable'
 ])
 .controller('ChartCtrl', function ($scope, Trelloservice, generalSettings, $location, $modal, $routeParams) {
 
