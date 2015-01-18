@@ -310,8 +310,8 @@ describe('Controller: ChartCtrl', function(){
 
         //Gantt generation tests end
 
-        //Gantt actions tests start
-        describe('Actions in gantt', function(){
+        //Card actions in gantt tests start
+        describe('Card actions in gantt', function(){
             it('should call TrelloService.updateCard', function(){
                 var randomDate = randomDateGenerator(new Date(2012, 0, 1), new Date());
                 var randomMomentDate = moment(randomDate);
@@ -325,7 +325,7 @@ describe('Controller: ChartCtrl', function(){
                     }
                 };
                 spyOn(mockTrelloService, 'updateCard').andCallThrough();
-                scope.moveTask(mockTask);
+                scope.updateCard(mockTask);
                 expect(mockTrelloService.updateCard).toHaveBeenCalledWith({
                     id: randomNumber,
                     due: randomDate
@@ -333,6 +333,6 @@ describe('Controller: ChartCtrl', function(){
                 expect(mockTrelloService.updateCard.calls.length).toEqual(1);
             });
         });
-        //Gantt actions tests end
+        //Card actions in Gantt tests end
      });
 });

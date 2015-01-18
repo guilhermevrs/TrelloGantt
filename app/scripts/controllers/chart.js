@@ -14,11 +14,14 @@ var obj = angular.module('trelloGanttApp.chart', [
         /*SCOPE functions*/
         $scope.registerApi = function(api){
             api.core.on.ready($scope, function(){
-               api.tasks.on.moveEnd($scope, function(task){$scope.moveTask(task)});
+               api.tasks.on.moveEnd($scope, function(task){$scope.updateCard(task)});
+
+                api.tasks.on.resizeEnd($scope, function(task){$scope.updateCard(task)});
+
             });
         };
 
-        $scope.moveTask = function(task){
+        $scope.updateCard = function(task){
             var card = task.model;
             Trelloservice.updateCard({
 		id: card.id,
