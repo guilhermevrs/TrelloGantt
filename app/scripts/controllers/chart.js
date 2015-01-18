@@ -12,6 +12,22 @@ var obj = angular.module('trelloGanttApp.chart', [
 	/*Auxilary functions*/
 
         /*SCOPE functions*/
+        $scope.registerApi = function(api){
+            api.core.on.ready($scope, function(){
+               api.tasks.on.moveEnd($scope, function(task){$scope.moveTask(task)});
+            });
+        };
+
+        $scope.moveTask = function(task){
+            var card = task.model;
+            Trelloservice.updateCard({
+		id: card.id,
+		due: card.from.toDate()
+	    }).then(function(data){
+		console.log(data);
+	    });
+        };
+
         $scope.buildTasksData = function(cardList){
             var generatedData = [];
             var minStartDate,
@@ -42,6 +58,7 @@ var obj = angular.module('trelloGanttApp.chart', [
 
                 generatedTask.tasks = [];
                 generatedTask.tasks.push({
+                    id: currentCard.id,
                     name: currentCard.name,
                     color: '#95a5a6',
                     from: start,
@@ -92,7 +109,6 @@ var obj = angular.module('trelloGanttApp.chart', [
                         $scope.gantt.toDate = ganttData.maxEndDate;
 
                         $scope.loadData(ganttData.data);
-                        console.log(ganttData.data);
 
 			/*setTimeout(function(){
 				$scope.scrollToDate(new Date());
@@ -113,11 +129,7 @@ var obj = angular.module('trelloGanttApp.chart', [
 		return color;
 	};
 
-	$scope.addSamples = function () {
-		$scope.updateGantt(boardID);
-	};
-
-	$scope.taskEvent = function(event) {
+	/*$scope.taskEvent = function(event) {
 		var dirty = false;
 		var current = event.task;
 		var previous = event.task.data;
@@ -147,11 +159,7 @@ var obj = angular.module('trelloGanttApp.chart', [
 				console.log(data);
 			})
 		}
-	};
-
-	$scope.rowEvent = function(event) {
-		$scope.scrollToDate(event.row.from);
-	};
+	};*/
 
         $scope.clearData = function(){
             $scope.data = undefined;
@@ -160,14 +168,6 @@ var obj = angular.module('trelloGanttApp.chart', [
         $scope.loadData = function(data){
             $scope.data = data;
         };
-
-	$scope.scrollEvent = function(event) {
-		if (angular.equals(event.direction, 'left')) {
-			console.log('Scroll event: Left');
-		} else if (angular.equals(event.direction, 'right')) {
-			console.log('Scroll event: Right');
-		}
-	};
 
 	$scope.loadCardDetail = function(card){
 		$modal.open({

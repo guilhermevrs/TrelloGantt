@@ -32,6 +32,11 @@ describe('Controller: ChartCtrl', function(){
             defered.resolve(boardID);
             return defered.promise;
         };
+        mockTrelloService.updateCard = function(cardId){
+            var defered = $q.defer();
+            defered.resolve(cardId);
+            return defered.promise;
+        };
 
         mockGeneralSettings.setMemberCache = function(boardID){
             //NOT YET IMPLEMENTED
@@ -54,6 +59,8 @@ describe('Controller: ChartCtrl', function(){
         };
     }));
 
+    //General tests start
+
     it('should redirect to / when user is not logged and boardID is defined', function(){
         isUserLogged = false;
         var random = Math.random();
@@ -75,179 +82,96 @@ describe('Controller: ChartCtrl', function(){
         expect($location.path()).toBe('/');
     });
 
-    describe('Build gantt data', function(){
+    //General tests end
+
+    describe('Specific tests', function(){
         var random,
-        cardList,
-        taskDataExpected,
         randomDateGenerator = function (start, end) {
-            return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-        },
+                return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+            },
         controller;
 
         beforeEach(function(){
-            cardList = {name: '', cards: []};
-            taskDataExpected = [];
             random = Math.random();
             $location.path('/chart/' + random);
             controller = createController(random);
         });
 
-        it('should generate an empty task list data from an empty trello list', function(){
-            var randomNumber = Math.random();
-            cardList.name = '' + randomNumber;
+        //Gantt generation tests start
 
-            taskDataExpected = {
-                minStartDate: undefined,
-                maxEndDate: undefined,
-                data:[{name: '' + randomNumber}]
-            };
-            var taskDataGenerated = scope.buildTasksData(cardList);
-            expect(taskDataGenerated).toEqual(taskDataExpected);
-        });
+        describe('Build gantt data', function(){
+            var cardList,
+            taskDataExpected;
 
-        it('should generate task data from a trello list with one card without labels and no end date', function(){
-            var randomDate = randomDateGenerator(new Date(2012, 0, 1), new Date());
-            var randomNumber = Math.random();
-            var randomNumber2 = Math.random();
-
-            cardList.name = '' + randomNumber;
-            cardList.cards.push({
-                due: randomDate,
-                name: '' + randomNumber2,
-                labels: []
+            beforeEach(function(){
+                cardList = {name: '', cards: []};
+                taskDataExpected = [];
             });
 
-            var endDate = new Date(randomDate);
-            endDate.setHours(23);
-            endDate.setMinutes(59);
+            it('should generate an empty task list data from an empty trello list', function(){
+                var randomNumber = Math.random();
+                cardList.name = '' + randomNumber;
 
-            taskDataExpected = {
-                minStartDate: randomDate,
-                maxEndDate: endDate,
-                data: [
-                {name: '' + randomNumber},
-                {name: '' + randomNumber2, parent: '' + randomNumber, tasks:[
-                    {
-                        name: '' + randomNumber2,
-                        color: '#95a5a6',
-                        from: randomDate,
-                        to: endDate
-                    }
-                ]}
-            ]};
+                taskDataExpected = {
+                    minStartDate: undefined,
+                    maxEndDate: undefined,
+                    data:[{name: '' + randomNumber}]
+                };
+                var taskDataGenerated = scope.buildTasksData(cardList);
+                expect(taskDataGenerated).toEqual(taskDataExpected);
+            });
 
-            var taskDataGenerated = scope.buildTasksData(cardList);
-            expect(taskDataGenerated).toEqual(taskDataExpected);
-        });
+            it('should generate task data from a trello list with one card without labels and no end date', function(){
+                var randomDate = randomDateGenerator(new Date(2012, 0, 1), new Date());
+                var randomNumber = Math.random();
+                var randomNumber2 = Math.random();
 
-        it('should generate task data from a trello list with multiple cards without labels and no end date', function(){
-            var randomNumber = Math.random();
+                cardList.name = '' + randomNumber;
+                cardList.cards.push({
+                    id: randomNumber,
+                    due: randomDate,
+                    name: '' + randomNumber2,
+                    labels: []
+                });
 
-            cardList.name = '' + randomNumber;
-            taskDataExpected = [{name: '' + randomNumber}];
+                var endDate = new Date(randomDate);
+                endDate.setHours(23);
+                endDate.setMinutes(59);
 
-            var minStart,
+                taskDataExpected = {
+                    minStartDate: randomDate,
+                    maxEndDate: endDate,
+                    data: [
+                        {name: '' + randomNumber},
+                        {name: '' + randomNumber2, parent: '' + randomNumber, tasks:[
+                            {
+                                id: randomNumber,
+                                name: '' + randomNumber2,
+                                color: '#95a5a6',
+                                from: randomDate,
+                                to: endDate
+                            }
+                        ]}
+                    ]};
+
+                var taskDataGenerated = scope.buildTasksData(cardList);
+                expect(taskDataGenerated).toEqual(taskDataExpected);
+            });
+
+            it('should generate task data from a trello list with multiple cards without labels and no end date', function(){
+                var randomNumber = Math.random();
+
+                cardList.name = '' + randomNumber;
+                taskDataExpected = [{name: '' + randomNumber}];
+
+                var minStart,
                 maxEnd;
-            var randomCardLength = Math.floor(randomNumber * (10 - 1 + 1)) + 1;
-            for(var i = 0; i<randomCardLength; i++){
-                var randomDate = randomDateGenerator(new Date(2012, 0, 1), new Date());
-                var randomNumber2 = Math.random();
-                cardList.cards.push({
-                    due: randomDate,
-                    name: '' + randomNumber2,
-                    labels: []
-                });
-                var endDate = new Date(randomDate);
-                endDate.setHours(23);
-                endDate.setMinutes(59);
-                taskDataExpected.push({name: '' + randomNumber2, parent: '' + randomNumber,
-                                       tasks:[
-                                           {
-                                               name: '' + randomNumber2,
-                                               color: '#95a5a6',
-                                               from: randomDate,
-                                               to: endDate
-                                           }
-                                       ]});
-                if(!minStart || minStart > randomDate)
-                    minStart = randomDate;
-                if(!maxEnd || maxEnd < endDate)
-                    maxEnd = endDate;
-            }
-
-            taskDataExpected = {
-                minStartDate: minStart,
-                maxEndDate: maxEnd,
-                data: taskDataExpected
-            };
-
-            var taskDataGenerated = scope.buildTasksData(cardList);
-            expect(taskDataGenerated.length).toEqual(taskDataExpected.length);
-            expect(taskDataGenerated).toEqual(taskDataExpected);
-        });
-
-        it('should generate gantt data when passing just one list with cards', function(){
-            var randomNumber = Math.random();
-
-            cardList.name = '' + randomNumber;
-            taskDataExpected = [{name: '' + randomNumber}];
-            var minStartDate,
-                maxEndDate;
-            var randomCardLength = Math.floor(randomNumber * (10 - 1 + 1)) + 1;
-            for(var i = 0; i<randomCardLength; i++){
-                var randomDate = randomDateGenerator(new Date(2012, 0, 1), new Date());
-                var randomNumber2 = Math.random();
-                cardList.cards.push({
-                    due: randomDate,
-                    name: '' + randomNumber2,
-                    labels: []
-                });
-                var endDate = new Date(randomDate);
-                endDate.setHours(23);
-                endDate.setMinutes(59);
-                taskDataExpected.push({name: '' + randomNumber2, parent: '' + randomNumber,
-                                       tasks:[
-                                           {
-                                               name: '' + randomNumber2,
-                                               color: '#95a5a6',
-                                               from: randomDate,
-                                               to: endDate
-                                           }
-                                       ]});
-                if(!minStartDate || minStartDate > randomDate)
-                    minStartDate = randomDate;
-                if(!maxEndDate || maxEndDate < endDate)
-                    maxEndDate = endDate;
-            }
-
-            taskDataExpected = {
-                minStartDate: minStartDate,
-                maxEndDate: maxEndDate,
-                data: taskDataExpected
-            };
-
-            var taskDataGenerated = scope.buildGanttData([cardList]);
-            expect(taskDataGenerated).toEqual(taskDataExpected);
-        });
-
-        it('should generate data for multiple Trello lists', function(){
-            var randomNumber = Math.random();
-            var randomListLength = Math.floor(randomNumber * 10) + 1;
-            var lists = [];
-            var minStartDate,
-                maxEndDate;
-            taskDataExpected = [];
-            for(var j = 0; j < randomListLength; j++){
-                randomNumber = Math.random();
-                var tempCardList = {};
-                tempCardList.name = '' + randomNumber;
-                taskDataExpected.push({name: '' + randomNumber});
-                var randomCardLength = Math.floor(randomNumber * 10) + 1;
-                tempCardList.cards = [];
+                var randomCardLength = Math.floor(randomNumber * (10 - 1 + 1)) + 1;
                 for(var i = 0; i<randomCardLength; i++){
                     var randomDate = randomDateGenerator(new Date(2012, 0, 1), new Date());
                     var randomNumber2 = Math.random();
-                    tempCardList.cards.push({
+                    cardList.cards.push({
+                        id: randomNumber,
                         due: randomDate,
                         name: '' + randomNumber2,
                         labels: []
@@ -256,31 +180,159 @@ describe('Controller: ChartCtrl', function(){
                     endDate.setHours(23);
                     endDate.setMinutes(59);
                     taskDataExpected.push({name: '' + randomNumber2, parent: '' + randomNumber,
-                                       tasks:[
-                                           {
-                                               name: '' + randomNumber2,
-                                               color: '#95a5a6',
-                                               from: randomDate,
-                                               to: endDate
-                                           }
-                                       ]});
+                                           tasks:[
+                                               {
+                                                   id: randomNumber,
+                                                   name: '' + randomNumber2,
+                                                   color: '#95a5a6',
+                                                   from: randomDate,
+                                                   to: endDate
+                                               }
+                                           ]});
+                    if(!minStart || minStart > randomDate)
+                        minStart = randomDate;
+                    if(!maxEnd || maxEnd < endDate)
+                        maxEnd = endDate;
+                }
+
+                taskDataExpected = {
+                    minStartDate: minStart,
+                    maxEndDate: maxEnd,
+                    data: taskDataExpected
+                };
+
+                var taskDataGenerated = scope.buildTasksData(cardList);
+                expect(taskDataGenerated.length).toEqual(taskDataExpected.length);
+                expect(taskDataGenerated).toEqual(taskDataExpected);
+            });
+
+            it('should generate gantt data when passing just one list with cards', function(){
+                var randomNumber = Math.random();
+
+                cardList.name = '' + randomNumber;
+                taskDataExpected = [{name: '' + randomNumber}];
+                var minStartDate,
+                maxEndDate;
+                var randomCardLength = Math.floor(randomNumber * (10 - 1 + 1)) + 1;
+                for(var i = 0; i<randomCardLength; i++){
+                    var randomDate = randomDateGenerator(new Date(2012, 0, 1), new Date());
+                    var randomNumber2 = Math.random();
+                    cardList.cards.push({
+                        id: randomNumber,
+                        due: randomDate,
+                        name: '' + randomNumber2,
+                        labels: []
+                    });
+                    var endDate = new Date(randomDate);
+                    endDate.setHours(23);
+                    endDate.setMinutes(59);
+                    taskDataExpected.push({name: '' + randomNumber2, parent: '' + randomNumber,
+                                           tasks:[
+                                               {
+                                                   id: randomNumber,
+                                                   name: '' + randomNumber2,
+                                                   color: '#95a5a6',
+                                                   from: randomDate,
+                                                   to: endDate
+                                               }
+                                           ]});
                     if(!minStartDate || minStartDate > randomDate)
                         minStartDate = randomDate;
                     if(!maxEndDate || maxEndDate < endDate)
                         maxEndDate = endDate;
                 }
-                lists.push(tempCardList);
-            }
 
-            taskDataExpected = {
-                minStartDate : minStartDate,
-                maxEndDate : maxEndDate,
-                data: taskDataExpected
-            }
+                taskDataExpected = {
+                    minStartDate: minStartDate,
+                    maxEndDate: maxEndDate,
+                    data: taskDataExpected
+                };
 
-            var taskDataGenerated = scope.buildGanttData(lists);
-            expect(taskDataGenerated).toEqual(taskDataExpected);
+                var taskDataGenerated = scope.buildGanttData([cardList]);
+                expect(taskDataGenerated).toEqual(taskDataExpected);
+            });
+
+            it('should generate data for multiple Trello lists', function(){
+                var randomNumber = Math.random();
+                var randomListLength = Math.floor(randomNumber * 10) + 1;
+                var lists = [];
+                var minStartDate,
+                maxEndDate;
+                taskDataExpected = [];
+                for(var j = 0; j < randomListLength; j++){
+                    randomNumber = Math.random();
+                    var tempCardList = {};
+                    tempCardList.name = '' + randomNumber;
+                    taskDataExpected.push({name: '' + randomNumber});
+                    var randomCardLength = Math.floor(randomNumber * 10) + 1;
+                    tempCardList.cards = [];
+                    for(var i = 0; i<randomCardLength; i++){
+                        var randomDate = randomDateGenerator(new Date(2012, 0, 1), new Date());
+                        var randomNumber2 = Math.random();
+                        tempCardList.cards.push({
+                            id: randomNumber,
+                            due: randomDate,
+                            name: '' + randomNumber2,
+                            labels: []
+                        });
+                        var endDate = new Date(randomDate);
+                        endDate.setHours(23);
+                        endDate.setMinutes(59);
+                        taskDataExpected.push({name: '' + randomNumber2, parent: '' + randomNumber,
+                                               tasks:[
+                                                   {
+                                                       id: randomNumber,
+                                                       name: '' + randomNumber2,
+                                                       color: '#95a5a6',
+                                                       from: randomDate,
+                                                       to: endDate
+                                                   }
+                                               ]});
+                        if(!minStartDate || minStartDate > randomDate)
+                            minStartDate = randomDate;
+                        if(!maxEndDate || maxEndDate < endDate)
+                            maxEndDate = endDate;
+                    }
+                    lists.push(tempCardList);
+                }
+
+                taskDataExpected = {
+                    minStartDate : minStartDate,
+                    maxEndDate : maxEndDate,
+                    data: taskDataExpected
+                }
+
+                var taskDataGenerated = scope.buildGanttData(lists);
+                expect(taskDataGenerated).toEqual(taskDataExpected);
+            });
+
         });
 
-    });
+        //Gantt generation tests end
+
+        //Gantt actions tests start
+        describe('Actions in gantt', function(){
+            it('should call TrelloService.updateCard', function(){
+                var randomDate = randomDateGenerator(new Date(2012, 0, 1), new Date());
+                var randomMomentDate = moment(randomDate);
+                var randomNumber = Math.random();
+
+                var mockTask = {
+                    model: {
+                        id: randomNumber,
+                        from: randomMomentDate,
+                        to: randomMomentDate
+                    }
+                };
+                spyOn(mockTrelloService, 'updateCard').andCallThrough();
+                scope.moveTask(mockTask);
+                expect(mockTrelloService.updateCard).toHaveBeenCalledWith({
+                    id: randomNumber,
+                    due: randomDate
+});
+                expect(mockTrelloService.updateCard.calls.length).toEqual(1);
+            });
+        });
+        //Gantt actions tests end
+     });
 });

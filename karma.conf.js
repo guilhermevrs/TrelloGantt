@@ -22,6 +22,7 @@ module.exports = function(config) {
       'app/bower_components/angular-gantt/dist/angular-gantt.js',
       'app/bower_components/angular-gantt/dist/angular-gantt-plugins.js',
       'app/bower_components/angular-ui-tree/dist/angular-ui-tree.js',
+      'app/bower_components/moment/moment.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
