@@ -17,7 +17,15 @@ describe('Controller: ChartCtrl', function(){
 
     beforeEach(module('trelloGanttApp.chart'));
 
+    var customDateEquality = function(first, second){
+        if (typeof first == "Date" && typeof second == "Date") {
+            return first.toString() == second.toString();
+        }
+    }
+
     beforeEach(inject(function (_$rootScope_, $controller, _$location_, $q) {
+        jasmine.addCustomEqualityTester(customDateEquality);
+
         isUserLogged = true;
         mockTrelloService.isUserLogged = function(){
             return isUserLogged;

@@ -1,219 +1,151 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/usr/local/bin/node',
-1 verbose cli   '/usr/local/bin/npm',
-1 verbose cli   'install',
-1 verbose cli   '-g',
-1 verbose cli   'phantomjs' ]
+1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'install' ]
 2 info using npm@1.4.28
 3 info using node@v0.10.33
-4 verbose cache add [ 'phantomjs', null ]
-5 verbose cache add name=undefined spec="phantomjs" args=["phantomjs",null]
-6 verbose parsed url { protocol: null,
-6 verbose parsed url   slashes: null,
-6 verbose parsed url   auth: null,
-6 verbose parsed url   host: null,
-6 verbose parsed url   port: null,
-6 verbose parsed url   hostname: null,
-6 verbose parsed url   hash: null,
-6 verbose parsed url   search: null,
-6 verbose parsed url   query: null,
-6 verbose parsed url   pathname: 'phantomjs',
-6 verbose parsed url   path: 'phantomjs',
-6 verbose parsed url   href: 'phantomjs' }
-7 silly lockFile 30d7cd7d-phantomjs phantomjs
-8 verbose lock phantomjs /home/guilhermevrs/.npm/30d7cd7d-phantomjs.lock
-9 silly lockFile 30d7cd7d-phantomjs phantomjs
-10 silly lockFile 30d7cd7d-phantomjs phantomjs
-11 verbose addNamed [ 'phantomjs', '' ]
-12 verbose addNamed [ null, '*' ]
-13 silly lockFile 29cf7fd6-phantomjs phantomjs@
-14 verbose lock phantomjs@ /home/guilhermevrs/.npm/29cf7fd6-phantomjs.lock
-15 silly addNameRange { name: 'phantomjs', range: '*', hasData: false }
-16 verbose request where is /phantomjs
-17 verbose request registry https://registry.npmjs.org/
-18 verbose request id 60c6720b6a2d7a0e
-19 verbose url raw /phantomjs
-20 verbose url resolving [ 'https://registry.npmjs.org/', './phantomjs' ]
-21 verbose url resolved https://registry.npmjs.org/phantomjs
-22 verbose request where is https://registry.npmjs.org/phantomjs
-23 info trying registry request attempt 1 at 20:22:48
-24 verbose etag "BP25I2XDD7HG8FO3MYS5P6JT2"
-25 http GET https://registry.npmjs.org/phantomjs
-26 http 304 https://registry.npmjs.org/phantomjs
-27 silly registry.get cb [ 304,
-27 silly registry.get   { date: 'Sat, 20 Dec 2014 19:21:22 GMT',
-27 silly registry.get     server: 'Apache',
-27 silly registry.get     via: '1.1 varnish',
-27 silly registry.get     'last-modified': 'Sat, 20 Dec 2014 19:21:22 GMT',
-27 silly registry.get     'cache-control': 'max-age=60',
-27 silly registry.get     etag: '"BP25I2XDD7HG8FO3MYS5P6JT2"',
-27 silly registry.get     age: '7',
-27 silly registry.get     'x-served-by': 'cache-fra1232-FRA',
-27 silly registry.get     'x-cache': 'HIT',
-27 silly registry.get     'x-cache-hits': '1',
-27 silly registry.get     'x-timer': 'S1419103282.217636,VS0,VE0',
-27 silly registry.get     vary: 'Accept',
-27 silly registry.get     'content-length': '0',
-27 silly registry.get     'keep-alive': 'timeout=10, max=50',
-27 silly registry.get     connection: 'Keep-Alive' } ]
-28 verbose etag https://registry.npmjs.org/phantomjs from cache
-29 silly addNameRange number 2 { name: 'phantomjs', range: '*', hasData: true }
-30 silly addNameRange versions [ 'phantomjs',
-30 silly addNameRange   [ '0.0.1',
-30 silly addNameRange     '0.0.2',
-30 silly addNameRange     '0.0.3',
-30 silly addNameRange     '0.0.4',
-30 silly addNameRange     '0.0.5',
-30 silly addNameRange     '0.0.6',
-30 silly addNameRange     '0.0.7',
-30 silly addNameRange     '0.0.8',
-30 silly addNameRange     '0.0.9',
-30 silly addNameRange     '0.1.0',
-30 silly addNameRange     '0.1.1',
-30 silly addNameRange     '0.2.0',
-30 silly addNameRange     '0.2.1',
-30 silly addNameRange     '0.2.2',
-30 silly addNameRange     '0.2.3',
-30 silly addNameRange     '0.2.4',
-30 silly addNameRange     '0.2.5',
-30 silly addNameRange     '0.2.6',
-30 silly addNameRange     '1.8.0-1',
-30 silly addNameRange     '1.8.1-1',
-30 silly addNameRange     '1.8.1-2',
-30 silly addNameRange     '1.8.1-3',
-30 silly addNameRange     '1.8.2-0',
-30 silly addNameRange     '1.8.2-1',
-30 silly addNameRange     '1.8.2-2',
-30 silly addNameRange     '1.9.0-0',
-30 silly addNameRange     '1.9.0-1',
-30 silly addNameRange     '1.9.0-2',
-30 silly addNameRange     '1.9.0-3',
-30 silly addNameRange     '1.9.0-4',
-30 silly addNameRange     '1.9.0-5',
-30 silly addNameRange     '1.9.0-6',
-30 silly addNameRange     '1.9.1-0',
-30 silly addNameRange     '1.9.1-2',
-30 silly addNameRange     '1.9.1-3',
-30 silly addNameRange     '1.9.1-4',
-30 silly addNameRange     '1.9.1-5',
-30 silly addNameRange     '1.9.1-6',
-30 silly addNameRange     '1.9.1-7',
-30 silly addNameRange     '1.9.1-8',
-30 silly addNameRange     '1.9.1-9',
-30 silly addNameRange     '1.9.2-0',
-30 silly addNameRange     '1.9.2-1',
-30 silly addNameRange     '1.9.2-2',
-30 silly addNameRange     '1.9.2-3',
-30 silly addNameRange     '1.9.2-4',
-30 silly addNameRange     '1.9.2-5',
-30 silly addNameRange     '1.9.2-6',
-30 silly addNameRange     '1.9.6-0',
-30 silly addNameRange     '1.9.7-1',
-30 silly addNameRange     '1.9.7-3',
-30 silly addNameRange     '1.9.7-4',
-30 silly addNameRange     '1.9.7-5',
-30 silly addNameRange     '1.9.7-6',
-30 silly addNameRange     '1.9.7-7',
-30 silly addNameRange     '1.9.7-8',
-30 silly addNameRange     '1.9.7-9',
-30 silly addNameRange     '1.9.7-10',
-30 silly addNameRange     '1.9.7-11',
-30 silly addNameRange     '1.9.7-12',
-30 silly addNameRange     '1.9.7-13',
-30 silly addNameRange     '1.9.7-14',
-30 silly addNameRange     '1.9.7-15',
-30 silly addNameRange     '1.8.2-3',
-30 silly addNameRange     '1.9.8',
-30 silly addNameRange     '1.9.9',
-30 silly addNameRange     '1.9.10',
-30 silly addNameRange     '1.9.11',
-30 silly addNameRange     '1.9.12',
-30 silly addNameRange     '1.9.13' ] ]
-31 verbose addNamed [ 'phantomjs', '1.9.13' ]
-32 verbose addNamed [ '1.9.13', '1.9.13' ]
-33 silly lockFile b0139109-phantomjs-1-9-13 phantomjs@1.9.13
-34 verbose lock phantomjs@1.9.13 /home/guilhermevrs/.npm/b0139109-phantomjs-1-9-13.lock
-35 silly lockFile b0139109-phantomjs-1-9-13 phantomjs@1.9.13
-36 silly lockFile b0139109-phantomjs-1-9-13 phantomjs@1.9.13
-37 silly lockFile 29cf7fd6-phantomjs phantomjs@
-38 silly lockFile 29cf7fd6-phantomjs phantomjs@
-39 silly resolved [ { name: 'phantomjs',
-39 silly resolved     version: '1.9.13',
-39 silly resolved     keywords: [ 'phantomjs', 'headless', 'webkit' ],
-39 silly resolved     description: 'Headless WebKit with JS API',
-39 silly resolved     homepage: 'https://github.com/Obvious/phantomjs',
-39 silly resolved     repository: { type: 'git', url: 'git://github.com/Obvious/phantomjs.git' },
-39 silly resolved     licenses: [ [Object] ],
-39 silly resolved     author:
-39 silly resolved      { name: 'Dan Pupius',
-39 silly resolved        email: 'dan@obvious.com',
-39 silly resolved        url: 'http://pupius.co.uk' },
-39 silly resolved     maintainers: [ [Object], [Object], [Object] ],
-39 silly resolved     main: 'lib/phantomjs',
-39 silly resolved     bin: { phantomjs: './bin/phantomjs' },
-39 silly resolved     scripts:
-39 silly resolved      { install: 'node install.js',
-39 silly resolved        test: 'nodeunit --reporter=minimal test/tests.js' },
-39 silly resolved     dependencies:
-39 silly resolved      { 'adm-zip': '0.4.4',
-39 silly resolved        kew: '0.4.0',
-39 silly resolved        ncp: '~1.0.1',
-39 silly resolved        npmconf: '2.0.9',
-39 silly resolved        mkdirp: '0.5.0',
-39 silly resolved        progress: '1.1.8',
-39 silly resolved        request: '2.42.0',
-39 silly resolved        'request-progress': '0.3.1',
-39 silly resolved        rimraf: '~2.2.8',
-39 silly resolved        which: '~1.0.5' },
-39 silly resolved     devDependencies: { nodeunit: '0.9.0' },
-39 silly resolved     gitHead: 'e4bb0d659dfe7e91a9658d5d28e4d5350099629d',
-39 silly resolved     bugs: { url: 'https://github.com/Obvious/phantomjs/issues' },
-39 silly resolved     _id: 'phantomjs@1.9.13',
-39 silly resolved     _shasum: '2f9afca241eaf17cad5a137bf9eade948a4d7ef5',
-39 silly resolved     _from: 'phantomjs@',
-39 silly resolved     _npmVersion: '1.4.28',
-39 silly resolved     _npmUser: { name: 'nicks', email: 'nicholas.j.santos@gmail.com' },
-39 silly resolved     dist:
-39 silly resolved      { shasum: '2f9afca241eaf17cad5a137bf9eade948a4d7ef5',
-39 silly resolved        tarball: 'http://registry.npmjs.org/phantomjs/-/phantomjs-1.9.13.tgz' },
-39 silly resolved     directories: {},
-39 silly resolved     _resolved: 'https://registry.npmjs.org/phantomjs/-/phantomjs-1.9.13.tgz',
-39 silly resolved     readme: 'ERROR: No README data found!' } ]
-40 info install phantomjs@1.9.13 into /usr/local/lib
-41 info installOne phantomjs@1.9.13
-42 verbose lib/node_modules/phantomjs unbuild
-43 verbose tar unpack /home/guilhermevrs/.npm/phantomjs/1.9.13/package.tgz
-44 silly lockFile 4d5acaea-local-lib-node-modules-phantomjs tar:///usr/local/lib/node_modules/phantomjs
-45 verbose lock tar:///usr/local/lib/node_modules/phantomjs /home/guilhermevrs/.npm/4d5acaea-local-lib-node-modules-phantomjs.lock
-46 silly lockFile 0fa03554-npm-phantomjs-1-9-13-package-tgz tar:///home/guilhermevrs/.npm/phantomjs/1.9.13/package.tgz
-47 verbose lock tar:///home/guilhermevrs/.npm/phantomjs/1.9.13/package.tgz /home/guilhermevrs/.npm/0fa03554-npm-phantomjs-1-9-13-package-tgz.lock
-48 silly gunzTarPerm modes [ '775', '664' ]
-49 error Error: EACCES, mkdir '/usr/local/lib/node_modules/phantomjs'
-49 error  { [Error: EACCES, mkdir '/usr/local/lib/node_modules/phantomjs']
-49 error   errno: 3,
-49 error   code: 'EACCES',
-49 error   path: '/usr/local/lib/node_modules/phantomjs',
-49 error   fstream_type: 'Directory',
-49 error   fstream_path: '/usr/local/lib/node_modules/phantomjs',
-49 error   fstream_class: 'DirWriter',
-49 error   fstream_stack:
-49 error    [ '/usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23',
-49 error      '/usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53',
-49 error      'Object.oncomplete (fs.js:107:15)' ] }
-50 error Please try running this command again as root/Administrator.
-51 error System Linux 3.13.0-43-generic
-52 error command "/usr/local/bin/node" "/usr/local/bin/npm" "install" "-g" "phantomjs"
-53 error cwd /media/guilhermevrs/Data/Fontes/trello-gantt
-54 error node -v v0.10.33
-55 error npm -v 1.4.28
-56 error path /usr/local/lib/node_modules/phantomjs
-57 error fstream_path /usr/local/lib/node_modules/phantomjs
-58 error fstream_type Directory
-59 error fstream_class DirWriter
-60 error code EACCES
-61 error errno 3
-62 error stack Error: EACCES, mkdir '/usr/local/lib/node_modules/phantomjs'
-63 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23
-63 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53
-63 error fstream_stack Object.oncomplete (fs.js:107:15)
-64 verbose exit [ 3, true ]
+4 warn package.json trellogantt@0.0.0 No repository field.
+5 verbose readDependencies using package.json deps
+6 verbose install where, deps [ '/media/guilhermevrs/Data/Fontes/trello-gantt',
+6 verbose install   [ 'grunt',
+6 verbose install     'grunt-autoprefixer',
+6 verbose install     'grunt-bower-install',
+6 verbose install     'grunt-concurrent',
+6 verbose install     'grunt-contrib-clean',
+6 verbose install     'grunt-contrib-coffee',
+6 verbose install     'grunt-contrib-compass',
+6 verbose install     'grunt-contrib-concat',
+6 verbose install     'grunt-contrib-connect',
+6 verbose install     'grunt-contrib-copy',
+6 verbose install     'grunt-contrib-cssmin',
+6 verbose install     'grunt-contrib-htmlmin',
+6 verbose install     'grunt-contrib-imagemin',
+6 verbose install     'grunt-contrib-jshint',
+6 verbose install     'grunt-contrib-uglify',
+6 verbose install     'grunt-contrib-watch',
+6 verbose install     'grunt-google-cdn',
+6 verbose install     'grunt-karma',
+6 verbose install     'grunt-newer',
+6 verbose install     'grunt-ngmin',
+6 verbose install     'grunt-rev',
+6 verbose install     'grunt-svgmin',
+6 verbose install     'grunt-usemin',
+6 verbose install     'jshint-stylish',
+6 verbose install     'karma',
+6 verbose install     'karma-firefox-launcher',
+6 verbose install     'karma-jasmine',
+6 verbose install     'load-grunt-tasks',
+6 verbose install     'requirejs',
+6 verbose install     'time-grunt' ] ]
+7 info preinstall trellogantt@0.0.0
+8 warn package.json grunt-contrib-htmlmin@0.1.3 No README data
+9 verbose readDependencies using package.json deps
+10 verbose already installed skipping grunt-bower-install@~0.7.0 /media/guilhermevrs/Data/Fontes/trello-gantt
+11 verbose already installed skipping grunt-concurrent@~0.4.1 /media/guilhermevrs/Data/Fontes/trello-gantt
+12 verbose already installed skipping grunt-contrib-clean@~0.5.0 /media/guilhermevrs/Data/Fontes/trello-gantt
+13 verbose already installed skipping grunt-contrib-coffee@~0.7.0 /media/guilhermevrs/Data/Fontes/trello-gantt
+14 verbose already installed skipping grunt-contrib-compass@~0.6.0 /media/guilhermevrs/Data/Fontes/trello-gantt
+15 verbose already installed skipping grunt-contrib-concat@~0.3.0 /media/guilhermevrs/Data/Fontes/trello-gantt
+16 verbose already installed skipping grunt-contrib-connect@~0.5.0 /media/guilhermevrs/Data/Fontes/trello-gantt
+17 verbose already installed skipping grunt-contrib-copy@~0.4.1 /media/guilhermevrs/Data/Fontes/trello-gantt
+18 verbose already installed skipping grunt-contrib-cssmin@~0.7.0 /media/guilhermevrs/Data/Fontes/trello-gantt
+19 verbose already installed skipping grunt-contrib-htmlmin@~0.1.3 /media/guilhermevrs/Data/Fontes/trello-gantt
+20 verbose already installed skipping grunt-contrib-imagemin@~0.3.0 /media/guilhermevrs/Data/Fontes/trello-gantt
+21 verbose already installed skipping grunt-contrib-jshint@~0.7.1 /media/guilhermevrs/Data/Fontes/trello-gantt
+22 verbose already installed skipping grunt-contrib-uglify@~0.2.0 /media/guilhermevrs/Data/Fontes/trello-gantt
+23 verbose already installed skipping grunt-contrib-watch@~0.5.2 /media/guilhermevrs/Data/Fontes/trello-gantt
+24 verbose already installed skipping grunt-google-cdn@~0.2.0 /media/guilhermevrs/Data/Fontes/trello-gantt
+25 verbose already installed skipping grunt-karma@~0.6.2 /media/guilhermevrs/Data/Fontes/trello-gantt
+26 verbose already installed skipping grunt-newer@~0.5.4 /media/guilhermevrs/Data/Fontes/trello-gantt
+27 verbose already installed skipping grunt-ngmin@~0.0.2 /media/guilhermevrs/Data/Fontes/trello-gantt
+28 verbose already installed skipping grunt-rev@~0.1.0 /media/guilhermevrs/Data/Fontes/trello-gantt
+29 verbose already installed skipping grunt-svgmin@~0.2.0 /media/guilhermevrs/Data/Fontes/trello-gantt
+30 verbose already installed skipping grunt-usemin@~2.0.0 /media/guilhermevrs/Data/Fontes/trello-gantt
+31 verbose already installed skipping jshint-stylish@~0.1.3 /media/guilhermevrs/Data/Fontes/trello-gantt
+32 verbose already installed skipping karma@~0.12.0 /media/guilhermevrs/Data/Fontes/trello-gantt
+33 verbose already installed skipping karma-firefox-launcher@~0.1.3 /media/guilhermevrs/Data/Fontes/trello-gantt
+34 verbose already installed skipping karma-jasmine@~0.2.0 /media/guilhermevrs/Data/Fontes/trello-gantt
+35 verbose already installed skipping load-grunt-tasks@~0.2.0 /media/guilhermevrs/Data/Fontes/trello-gantt
+36 verbose already installed skipping requirejs@~2.1.10 /media/guilhermevrs/Data/Fontes/trello-gantt
+37 verbose already installed skipping time-grunt@~0.2.1 /media/guilhermevrs/Data/Fontes/trello-gantt
+38 verbose already installed skipping grunt@~0.4.1 /media/guilhermevrs/Data/Fontes/trello-gantt
+39 verbose already installed skipping grunt-autoprefixer@~0.4.0 /media/guilhermevrs/Data/Fontes/trello-gantt
+40 silly resolved []
+41 info build /media/guilhermevrs/Data/Fontes/trello-gantt
+42 verbose linkStuff [ false, false, false, '/media/guilhermevrs/Data/Fontes' ]
+43 info linkStuff trellogantt@0.0.0
+44 verbose linkBins trellogantt@0.0.0
+45 verbose linkMans trellogantt@0.0.0
+46 verbose rebuildBundles trellogantt@0.0.0
+47 verbose rebuildBundles [ '.bin',
+47 verbose rebuildBundles   'grunt',
+47 verbose rebuildBundles   'grunt-autoprefixer',
+47 verbose rebuildBundles   'grunt-bower-install',
+47 verbose rebuildBundles   'grunt-concurrent',
+47 verbose rebuildBundles   'grunt-contrib-clean',
+47 verbose rebuildBundles   'grunt-contrib-coffee',
+47 verbose rebuildBundles   'grunt-contrib-compass',
+47 verbose rebuildBundles   'grunt-contrib-concat',
+47 verbose rebuildBundles   'grunt-contrib-connect',
+47 verbose rebuildBundles   'grunt-contrib-copy',
+47 verbose rebuildBundles   'grunt-contrib-cssmin',
+47 verbose rebuildBundles   'grunt-contrib-htmlmin',
+47 verbose rebuildBundles   'grunt-contrib-imagemin',
+47 verbose rebuildBundles   'grunt-contrib-jshint',
+47 verbose rebuildBundles   'grunt-contrib-uglify',
+47 verbose rebuildBundles   'grunt-contrib-watch',
+47 verbose rebuildBundles   'grunt-google-cdn',
+47 verbose rebuildBundles   'grunt-karma',
+47 verbose rebuildBundles   'grunt-newer',
+47 verbose rebuildBundles   'grunt-ngmin',
+47 verbose rebuildBundles   'grunt-rev',
+47 verbose rebuildBundles   'grunt-svgmin',
+47 verbose rebuildBundles   'grunt-usemin',
+47 verbose rebuildBundles   'jshint-stylish',
+47 verbose rebuildBundles   'karma',
+47 verbose rebuildBundles   'karma-firefox-launcher',
+47 verbose rebuildBundles   'karma-jasmine',
+47 verbose rebuildBundles   'load-grunt-tasks',
+47 verbose rebuildBundles   'phantomjs',
+47 verbose rebuildBundles   'requirejs',
+47 verbose rebuildBundles   'time-grunt' ]
+48 verbose rebuild bundle /media/guilhermevrs/Data/Fontes/trello-gantt/node_modules/phantomjs
+49 info build /media/guilhermevrs/Data/Fontes/trello-gantt/node_modules/phantomjs
+50 info preinstall phantomjs@1.9.13
+51 verbose linkStuff [ false,
+51 verbose linkStuff   false,
+51 verbose linkStuff   false,
+51 verbose linkStuff   '/media/guilhermevrs/Data/Fontes/trello-gantt/node_modules' ]
+52 info linkStuff phantomjs@1.9.13
+53 verbose linkBins phantomjs@1.9.13
+54 verbose link bins [ { phantomjs: './bin/phantomjs' },
+54 verbose link bins   '/media/guilhermevrs/Data/Fontes/trello-gantt/node_modules/.bin',
+54 verbose link bins   false ]
+55 verbose linkMans phantomjs@1.9.13
+56 verbose rebuildBundles phantomjs@1.9.13
+57 verbose rebuildBundles [ '.bin',
+57 verbose rebuildBundles   'adm-zip',
+57 verbose rebuildBundles   'kew',
+57 verbose rebuildBundles   'mkdirp',
+57 verbose rebuildBundles   'ncp',
+57 verbose rebuildBundles   'npmconf',
+57 verbose rebuildBundles   'progress',
+57 verbose rebuildBundles   'request',
+57 verbose rebuildBundles   'request-progress',
+57 verbose rebuildBundles   'rimraf',
+57 verbose rebuildBundles   'which' ]
+58 info install phantomjs@1.9.13
+59 verbose unsafe-perm in lifecycle false
+60 info postinstall phantomjs@1.9.13
+61 info install trellogantt@0.0.0
+62 info postinstall trellogantt@0.0.0
+63 info prepublish trellogantt@0.0.0
+64 error peerinvalid The package karma does not satisfy its siblings' peerDependencies requirements!
+64 error peerinvalid Peer grunt-karma@0.6.2 wants karma@~0.10.0
+64 error peerinvalid Peer karma-firefox-launcher@0.1.3 wants karma@>=0.9
+64 error peerinvalid Peer karma-jasmine@0.2.3 wants karma@>=0.9
+65 error System Linux 3.13.0-44-generic
+66 error command "/usr/local/bin/node" "/usr/local/bin/npm" "install"
+67 error cwd /media/guilhermevrs/Data/Fontes/trello-gantt
+68 error node -v v0.10.33
+69 error npm -v 1.4.28
+70 error code EPEERINVALID
+71 verbose exit [ 1, true ]

@@ -72,7 +72,7 @@ describe('Service: Trelloservice', function () {
 
       it('should return promise value', function(){
           var randomData = 'data:' + Math.random();
-          spyOn(Trello, 'get').andCallFake(function(url, params, successFunc){
+          spyOn(Trello, 'get').and.callFake(function(url, params, successFunc){
               successFunc(randomData);
           });
           Trelloservice.getBoards().then(function(data){
@@ -84,7 +84,7 @@ describe('Service: Trelloservice', function () {
       it('should log error', function(){
           var randomData = 'data:' + Math.random();
           spyOn(console, 'error');
-          spyOn(Trello, 'get').andCallFake(function(url, params, successFunc, errorFunc){
+          spyOn(Trello, 'get').and.callFake(function(url, params, successFunc, errorFunc){
               errorFunc(randomData);
           });
           Trelloservice.getBoards();
@@ -110,7 +110,7 @@ describe('Service: Trelloservice', function () {
 
       it('should return promise value', function(){
           var randomData = 'data:' + Math.random();
-          spyOn(Trello, 'get').andCallFake(function(url, params, successFunc){
+          spyOn(Trello, 'get').and.callFake(function(url, params, successFunc){
               successFunc(randomData);
           });
           Trelloservice.getOrganizations().then(function(data){
@@ -122,7 +122,7 @@ describe('Service: Trelloservice', function () {
       it('should log error', function(){
           var randomData = 'data:' + Math.random();
           spyOn(console, 'error');
-          spyOn(Trello, 'get').andCallFake(function(url, params, successFunc, errorFunc){
+          spyOn(Trello, 'get').and.callFake(function(url, params, successFunc, errorFunc){
               errorFunc(randomData);
           });
           Trelloservice.getOrganizations();
@@ -151,7 +151,7 @@ describe('Service: Trelloservice', function () {
 
       it('should return promise value', function(){
           var randomData = 'data:' + Math.random();
-          spyOn(Trello, 'get').andCallFake(function(url, params, successFunc){
+          spyOn(Trello, 'get').and.callFake(function(url, params, successFunc){
               successFunc(randomData);
           });
           Trelloservice.getBoardInfo(0).then(function(data){
@@ -163,7 +163,7 @@ describe('Service: Trelloservice', function () {
       it('should log error', function(){
           var randomData = 'data:' + Math.random();
           spyOn(console, 'error');
-          spyOn(Trello, 'get').andCallFake(function(url, params, successFunc, errorFunc){
+          spyOn(Trello, 'get').and.callFake(function(url, params, successFunc, errorFunc){
               errorFunc(randomData);
           });
           Trelloservice.getBoardInfo(1);
@@ -197,7 +197,7 @@ describe('Service: Trelloservice', function () {
 
       it('should return promise value', function(){
           var randomData = 'data:' + Math.random();
-          spyOn(Trello, 'get').andCallFake(function(url, params, successFunc){
+          spyOn(Trello, 'get').and.callFake(function(url, params, successFunc){
               successFunc(randomData);
           });
           Trelloservice.getCardsFromBoard(0).then(function(data){
@@ -209,7 +209,7 @@ describe('Service: Trelloservice', function () {
       it('should log error', function(){
           var randomData = 'data:' + Math.random();
           spyOn(console, 'error');
-          spyOn(Trello, 'get').andCallFake(function(url, params, successFunc, errorFunc){
+          spyOn(Trello, 'get').and.callFake(function(url, params, successFunc, errorFunc){
               errorFunc(randomData);
           });
           Trelloservice.getCardsFromBoard(1);
@@ -238,7 +238,7 @@ describe('Service: Trelloservice', function () {
 
       it('should return promise value', function(){
           var randomData = 'data:' + Math.random();
-          spyOn(Trello, 'get').andCallFake(function(url, params, successFunc){
+          spyOn(Trello, 'get').and.callFake(function(url, params, successFunc){
               successFunc(randomData);
           });
           Trelloservice.getBoardMembers(0).then(function(data){
@@ -250,7 +250,7 @@ describe('Service: Trelloservice', function () {
       it('should log error', function(){
           var randomData = 'data:' + Math.random();
           spyOn(console, 'error');
-          spyOn(Trello, 'get').andCallFake(function(url, params, successFunc, errorFunc){
+          spyOn(Trello, 'get').and.callFake(function(url, params, successFunc, errorFunc){
               errorFunc(randomData);
           });
           Trelloservice.getBoardMembers(1);
@@ -285,7 +285,7 @@ describe('Service: Trelloservice', function () {
 
           it('should return promise value', function(){
               var randomData = 'data:' + Math.random();
-              spyOn(Trello, 'get').andCallFake(function(url, params, successFunc){
+              spyOn(Trello, 'get').and.callFake(function(url, params, successFunc){
                   successFunc(randomData);
               });
               Trelloservice.getCardData(card).then(function(data){
@@ -297,7 +297,7 @@ describe('Service: Trelloservice', function () {
           it('should log error', function(){
               var randomData = 'data:' + Math.random();
               spyOn(console, 'error');
-              spyOn(Trello, 'get').andCallFake(function(url, params, successFunc, errorFunc){
+              spyOn(Trello, 'get').and.callFake(function(url, params, successFunc, errorFunc){
                   errorFunc(randomData);
               });
               Trelloservice.getCardData(card);
@@ -328,7 +328,7 @@ describe('Service: Trelloservice', function () {
 
           it('should return promise value', function(){
               var randomData = 'data:' + Math.random();
-              spyOn(Trello, 'put').andCallFake(function(url, params, successFunc){
+              spyOn(Trello, 'put').and.callFake(function(url, params, successFunc){
                   successFunc(randomData);
               });
               Trelloservice.updateCard(card).then(function(data){
@@ -340,8 +340,8 @@ describe('Service: Trelloservice', function () {
           it('should log error', function(){
               var randomData = 'data:' + Math.random();
               spyOn(console, 'error');
-              spyOn(Trello, 'put').andCallFake(function(url, params, successFunc, errorFunc){
-                  errorFunc(randomData);
+              spyOn(Trello, 'put').and.callFake(function(url, params, successFunc, errorFunc){
+                  return errorFunc(randomData);
               });
               Trelloservice.updateCard(card);
               rootScope.$digest();
