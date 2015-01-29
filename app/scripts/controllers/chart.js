@@ -58,11 +58,15 @@ var obj = angular.module('trelloGanttApp.chart', [
                 if(!maxEndDate || maxEndDate < end)
                     maxEndDate = end;
 
+                var color = $scope.getLabelColor(null);
+                if(currentCard.labels && currentCard.labels.length > 0)
+                    color = $scope.getLabelColor(currentCard.labels[0].color);
+
                 generatedTask.tasks = [];
                 generatedTask.tasks.push({
                     id: currentCard.id,
                     name: currentCard.name,
-                    color: '#95a5a6',
+                    color: color,
                     from: start,
                     to: end
                 });
@@ -119,15 +123,15 @@ var obj = angular.module('trelloGanttApp.chart', [
 	}
 
 	$scope.getLabelColor = function(label){
-		var color;
+		var color = '#8C8C8C';
 		switch(label){
-		case 'red': color='#e74c3c'; break;
-		case 'orange': color='#e67e22'; break;
-		case 'yellow': color='#f1c40f'; break;
-		case 'green': color='#1abc9c'; break;
-		case 'blue': color='#3498db'; break;
-		case 'purple': color='#9b59b6'; break;
-                    default: color='#8c8c8c';break;
+		case 'red': color='#E74C3C'; break;
+		case 'orange': color='#E67E22'; break;
+		case 'yellow': color='#F1C40F'; break;
+		case 'green': color='#1ABC9C'; break;
+		case 'blue': color='#3498DB'; break;
+		case 'purple': color='#9B59B6'; break;
+                default: break;
 		}
 		return color;
 	};

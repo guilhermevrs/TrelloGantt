@@ -19,7 +19,15 @@ describe('Controller: ChartCtrl', function(){
     mockTrelloService  = {},
     mockGeneralSettings = {},
     mockModalProvider = {},
-    isUserLogged = true;
+    isUserLogged = true,
+    labels = {
+            'red': '#E74C3C',
+            'orange': '#E67E22',
+            'yellow': '#F1C40F',
+            'green': '#1ABC9C',
+            'blue': '#3498DB',
+            'purple': '#9B59B6'
+        };
 
     beforeEach(module('trelloGanttApp.chart'));
 
@@ -90,6 +98,22 @@ describe('Controller: ChartCtrl', function(){
         expect($location.path()).toBe('/');
     });
 
+    it('should get the right color for each label', function(){
+        var controller = createController(null);
+        for(var color in labels){
+            expect(scope.getLabelColor(color)).toEqual(labels[color]);
+        }
+    });
+
+    it('should get a default color for each color that was not predicted', function(){
+        var expected = '#8C8C8C';
+        var random = Math.random();
+        createController(null);
+        expect(scope.getLabelColor(null)).toEqual(expected);
+        expect(scope.getLabelColor(' ' + random)).toEqual(expected);
+        expect(scope.getLabelColor(random)).toEqual(expected);
+    });
+
     //General tests end
 
     describe('Specific tests', function(){
@@ -109,7 +133,15 @@ describe('Controller: ChartCtrl', function(){
 
         describe('Build gantt data', function(){
             var cardList,
-            taskDataExpected;
+            taskDataExpected,
+            getRandomLabel = function(){
+                var min = 0;
+                var max = labels.length;
+                var index = Math.floor(Math.random() * (max-min)) + min;
+                var foundKey;
+                for(var label in labels){ index--; if(index < 0) foundKey = label;}
+                return label;
+            };
 
             beforeEach(function(){
                 cardList = {name: '', cards: []};
@@ -159,7 +191,102 @@ describe('Controller: ChartCtrl', function(){
                             {
                                 id: randomNumber,
                                 name: '' + randomNumber2,
-                                color: '#95a5a6',
+                                color: '#8C8C8C',
+                                from: newStartDate,
+                                to: endDate
+                            }
+                        ]}
+                    ]};
+
+                var taskDataGenerated = scope.buildTasksData(cardList);
+                expect(taskDataGenerated).toEqual(taskDataExpected);
+            });
+
+            it('should generate task data from trello list with one card with one label and no end date', function(){
+                var randomDate = randomDateGenerator(new Date(2012, 0, 1), new Date());
+                var randomNumber = Math.random();
+                var randomNumber2 = Math.random();
+
+                var randomLabel = getRandomLabel();
+
+                cardList.name = '' + randomNumber;
+                cardList.cards.push({
+                    id: randomNumber,
+                    due: randomDate,
+                    name: '' + randomNumber2,
+                    labels: [
+                        {color: randomLabel}
+                    ]
+                });
+
+                var endDate = new Date(randomDate);
+                endDate.setHours(23);
+                endDate.setMinutes(59);
+
+                var newStartDate = new Date(randomDate);
+                newStartDate.setHours(0);
+                newStartDate.setMinutes(0);
+
+                taskDataExpected = {
+                    minStartDate: newStartDate,
+                    maxEndDate: endDate,
+                    data: [
+                        {name: '' + randomNumber},
+                        {name: '' + randomNumber2, parent: '' + randomNumber,  tasks:[
+                            {
+                                id: randomNumber,
+                                name: '' + randomNumber2,
+                                color: labels[randomLabel],
+                                from: newStartDate,
+                                to: endDate
+                            }
+                        ]}
+                    ]};
+
+                var taskDataGenerated = scope.buildTasksData(cardList);
+                expect(taskDataGenerated).toEqual(taskDataExpected);
+            });
+
+            it('should generate the right data for a list with one card with multiple labels and no end date', function(){
+                var randomDate = randomDateGenerator(new Date(2012, 0, 1), new Date());
+                var randomNumber = Math.random();
+                var randomNumber2 = Math.random();
+
+                var randomLabel = getRandomLabel();
+                var randomLabels = [{color: randomLabel}];
+
+                var randomLength = Math.floor(randomNumber * 10);
+
+                for(var i = 0; i< (10* randomLength); i++){
+                    randomLabels.push({color: getRandomLabel()});
+                }
+
+                cardList.name = '' + randomNumber;
+                cardList.cards.push({
+                    id: randomNumber,
+                    due: randomDate,
+                    name: '' + randomNumber2,
+                    labels: randomLabels
+                });
+
+                var endDate = new Date(randomDate);
+                endDate.setHours(23);
+                endDate.setMinutes(59);
+
+                var newStartDate = new Date(randomDate);
+                newStartDate.setHours(0);
+                newStartDate.setMinutes(0);
+
+                taskDataExpected = {
+                    minStartDate: newStartDate,
+                    maxEndDate: endDate,
+                    data: [
+                        {name: '' + randomNumber},
+                        {name: '' + randomNumber2, parent: '' + randomNumber,  tasks:[
+                            {
+                                id: randomNumber,
+                                name: '' + randomNumber2,
+                                color: labels[randomLabel],
                                 from: newStartDate,
                                 to: endDate
                             }
@@ -200,7 +327,7 @@ describe('Controller: ChartCtrl', function(){
                                                {
                                                    id: randomNumber,
                                                    name: '' + randomNumber2,
-                                                   color: '#95a5a6',
+                                                   color: '#8C8C8C',
                                                    from: newStartDate,
                                                    to: endDate
                                                }
@@ -251,7 +378,7 @@ describe('Controller: ChartCtrl', function(){
                                                {
                                                    id: randomNumber,
                                                    name: '' + randomNumber2,
-                                                   color: '#95a5a6',
+                                                   color: '#8C8C8C',
                                                    from: newStartDate,
                                                    to: endDate
                                                }
@@ -307,7 +434,7 @@ describe('Controller: ChartCtrl', function(){
                                                    {
                                                        id: randomNumber,
                                                        name: '' + randomNumber2,
-                                                       color: '#95a5a6',
+                                                       color: '#8C8C8C',
                                                        from: newStartDate,
                                                        to: endDate
                                                    }
