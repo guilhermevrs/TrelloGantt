@@ -11,7 +11,14 @@ describe('Service: Trelloservice', function () {
     q,
     rootScope;
 
+  var customDateEquality = function(first, second){
+        if (typeof first == "Date" && typeof second == "Date") {
+            return first.toString() == second.toString();
+        }
+    }
+
   beforeEach(inject(function (_Trelloservice_, $q, $rootScope) {
+    jasmine.addCustomEqualityTester(customDateEquality);
     q = $q;
     rootScope = $rootScope;
     Trelloservice = _Trelloservice_;
@@ -40,9 +47,9 @@ describe('Service: Trelloservice', function () {
           spyOn(Trello, 'authorize');
 
           Trelloservice.authorize();
-          expect(Trello.authorize.calls.length).toEqual(1);
+          expect(Trello.authorize.calls.count()).toEqual(1);
 
-          var args = Trello.authorize.calls[0].args[0];
+          var args = Trello.authorize.calls.argsFor(0)[0];
           expect(args.type).toEqual('popup');
           expect(args.name).toEqual('TrelloGantt');
           expect(args.scope).toEqual({read:true, write:true, account:false});
@@ -63,9 +70,9 @@ describe('Service: Trelloservice', function () {
           localStorage.setItem('trello_token', token);
 
           Trelloservice.getBoards();
-          expect(Trello.get.calls.length).toEqual(1);
+          expect(Trello.get.calls.count()).toEqual(1);
 
-          var args = Trello.get.calls[0].args;
+          var args = Trello.get.calls.argsFor(0);
           expect(args[0]).toEqual('members/me/boards');
           expect(args[1]).toEqual({filter:'open', token: token});
       });
@@ -90,8 +97,8 @@ describe('Service: Trelloservice', function () {
           Trelloservice.getBoards();
           rootScope.$digest();
 
-          expect(console.error.calls.length).toEqual(1);
-          expect(console.error.calls[0].args[0]).toEqual(randomData);
+          expect(console.error.calls.count()).toEqual(1);
+          expect(console.error).toHaveBeenCalledWith(randomData);
       });
   });
 
@@ -101,9 +108,9 @@ describe('Service: Trelloservice', function () {
           localStorage.setItem('trello_token', token);
 
           Trelloservice.getOrganizations();
-          expect(Trello.get.calls.length).toEqual(1);
+          expect(Trello.get.calls.count()).toEqual(1);
 
-          var args = Trello.get.calls[0].args;
+          var args = Trello.get.calls.argsFor(0);
           expect(args[0]).toEqual('members/me/organizations');
           expect(args[1]).toEqual({token: token});
       });
@@ -128,8 +135,8 @@ describe('Service: Trelloservice', function () {
           Trelloservice.getOrganizations();
           rootScope.$digest();
 
-          expect(console.error.calls.length).toEqual(1);
-          expect(console.error.calls[0].args[0]).toEqual(randomData);
+          expect(console.error.calls.count()).toEqual(1);
+          expect(console.error).toHaveBeenCalledWith(randomData);
       });
 
   });
@@ -142,9 +149,9 @@ describe('Service: Trelloservice', function () {
           var boardID = Math.random();
 
           Trelloservice.getBoardInfo(boardID);
-          expect(Trello.get.calls.length).toEqual(1);
+          expect(Trello.get.calls.count()).toEqual(1);
 
-          var args = Trello.get.calls[0].args;
+          var args = Trello.get.calls.argsFor(0);
           expect(args[0]).toEqual('boards/'+boardID);
           expect(args[1]).toEqual({token: token, members: 'all'});
       });
@@ -169,8 +176,8 @@ describe('Service: Trelloservice', function () {
           Trelloservice.getBoardInfo(1);
           rootScope.$digest();
 
-          expect(console.error.calls.length).toEqual(1);
-          expect(console.error.calls[0].args[0]).toEqual(randomData);
+          expect(console.error.calls.count()).toEqual(1);
+          expect(console.error).toHaveBeenCalledWith(randomData);
       });
 
   });
@@ -183,9 +190,9 @@ describe('Service: Trelloservice', function () {
           var boardID = Math.random();
 
           Trelloservice.getCardsFromBoard(boardID);
-          expect(Trello.get.calls.length).toEqual(1);
+          expect(Trello.get.calls.count()).toEqual(1);
 
-          var args = Trello.get.calls[0].args;
+          var args = Trello.get.calls.argsFor(0);
           expect(args[0]).toEqual('boards/'+boardID+'/lists/');
           expect(args[1]).toEqual({
 					cards:'open',
@@ -215,8 +222,8 @@ describe('Service: Trelloservice', function () {
           Trelloservice.getCardsFromBoard(1);
           rootScope.$digest();
 
-          expect(console.error.calls.length).toEqual(1);
-          expect(console.error.calls[0].args[0]).toEqual(randomData);
+          expect(console.error.calls.count()).toEqual(1);
+          expect(console.error).toHaveBeenCalledWith(randomData);
       });
 
   });
@@ -229,9 +236,9 @@ describe('Service: Trelloservice', function () {
           var boardID = Math.random();
 
           Trelloservice.getBoardMembers(boardID);
-          expect(Trello.get.calls.length).toEqual(1);
+          expect(Trello.get.calls.count()).toEqual(1);
 
-          var args = Trello.get.calls[0].args;
+          var args = Trello.get.calls.argsFor(0);
           expect(args[0]).toEqual('boards/'+boardID+'/members/');
           expect(args[1]).toEqual({token: token});
       });
@@ -256,8 +263,8 @@ describe('Service: Trelloservice', function () {
           Trelloservice.getBoardMembers(1);
           rootScope.$digest();
 
-          expect(console.error.calls.length).toEqual(1);
-          expect(console.error.calls[0].args[0]).toEqual(randomData);
+          expect(console.error.calls.count()).toEqual(1);
+          expect(console.error).toHaveBeenCalledWith(randomData);
       });
 
   });
@@ -276,11 +283,10 @@ describe('Service: Trelloservice', function () {
               localStorage.setItem('trello_token', token);
 
               Trelloservice.getCardData(card);
-              expect(Trello.get.calls.length).toEqual(1);
+              expect(Trello.get.calls.count()).toEqual(1);
 
-              var args = Trello.get.calls[0].args;
-              expect(args[0]).toEqual('cards/'+card.id + '/actions');
-              expect(args[1]).toEqual({token: token});
+              expect(Trello.get.calls.argsFor(0)[0]).toEqual('cards/'+card.id + '/actions');
+              expect(Trello.get.calls.argsFor(0)[1]).toEqual({token: token});
           });
 
           it('should return promise value', function(){
@@ -298,13 +304,13 @@ describe('Service: Trelloservice', function () {
               var randomData = 'data:' + Math.random();
               spyOn(console, 'error');
               spyOn(Trello, 'get').and.callFake(function(url, params, successFunc, errorFunc){
-                  errorFunc(randomData);
+                  return errorFunc(randomData);
               });
               Trelloservice.getCardData(card);
               rootScope.$digest();
 
-              expect(console.error.calls.length).toEqual(1);
-              expect(console.error.calls[0].args[0]).toEqual(randomData);
+              expect(console.error.calls.count()).toEqual(1);
+              expect(console.error).toHaveBeenCalledWith(randomData);
           });
 
       });
@@ -315,11 +321,10 @@ describe('Service: Trelloservice', function () {
               localStorage.setItem('trello_token', token);
 
               Trelloservice.updateCard(card);
-              expect(Trello.put.calls.length).toEqual(1);
+              expect(Trello.put.calls.count()).toEqual(1);
 
-              var args = Trello.put.calls[0].args;
-              expect(args[0]).toEqual('cards/'+card.id);
-              expect(args[1]).toEqual({
+              expect(Trello.put.calls.argsFor(0)[0]).toEqual('cards/'+card.id);
+              expect(Trello.put.calls.argsFor(0)[1]).toEqual({
 		  name: card.name,
 		  due: card.due,
 		  token: token
@@ -346,8 +351,8 @@ describe('Service: Trelloservice', function () {
               Trelloservice.updateCard(card);
               rootScope.$digest();
 
-              expect(console.error.calls.length).toEqual(1);
-              expect(console.error.calls[0].args[0]).toEqual(randomData);
+              expect(console.error.calls.count()).toEqual(1);
+              expect(console.error).toHaveBeenCalledWith(randomData);
           });
       });
   });

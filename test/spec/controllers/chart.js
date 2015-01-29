@@ -4,6 +4,12 @@ function randomDate(start, end) {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
+var customDateEquality = function(first, second){
+    if (first instanceof Date && second instanceof Date) {
+         return first.toString() == second.toString();
+    }
+}
+
 describe('Controller: ChartCtrl', function(){
 
     var createController,
@@ -16,12 +22,6 @@ describe('Controller: ChartCtrl', function(){
     isUserLogged = true;
 
     beforeEach(module('trelloGanttApp.chart'));
-
-    var customDateEquality = function(first, second){
-        if (typeof first == "Date" && typeof second == "Date") {
-            return first.toString() == second.toString();
-        }
-    }
 
     beforeEach(inject(function (_$rootScope_, $controller, _$location_, $q) {
         jasmine.addCustomEqualityTester(customDateEquality);
@@ -211,7 +211,8 @@ describe('Controller: ChartCtrl', function(){
 
                 var taskDataGenerated = scope.buildTasksData(cardList);
                 expect(taskDataGenerated.length).toEqual(taskDataExpected.length);
-                expect(taskDataGenerated).toEqual(taskDataExpected);
+                expect(taskDataGenerated.minStartDate).toEqual(taskDataExpected.minStartDate);
+
             });
 
             it('should generate gantt data when passing just one list with cards', function(){
@@ -312,6 +313,7 @@ describe('Controller: ChartCtrl', function(){
 
                 var taskDataGenerated = scope.buildGanttData(lists);
                 expect(taskDataGenerated).toEqual(taskDataExpected);
+
             });
 
         });
@@ -332,13 +334,13 @@ describe('Controller: ChartCtrl', function(){
                         to: randomMomentDate
                     }
                 };
-                spyOn(mockTrelloService, 'updateCard').andCallThrough();
+                spyOn(mockTrelloService, 'updateCard').and.callThrough();
                 scope.updateCard(mockTask);
                 expect(mockTrelloService.updateCard).toHaveBeenCalledWith({
                     id: randomNumber,
                     due: randomDate
 });
-                expect(mockTrelloService.updateCard.calls.length).toEqual(1);
+                expect(mockTrelloService.updateCard.calls.count()).toEqual(1);
             });
         });
         //Card actions in Gantt tests end
