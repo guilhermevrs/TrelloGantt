@@ -46,10 +46,9 @@ var obj = angular.module('trelloGanttApp.chart', [
                 var start = new Date();
                 if(currentCard.due)
                     start = new Date(currentCard.due);
-                else{
-                    start.setHours(0);
-                    start.setMinutes(0);
-                }
+
+                start.setHours(0);
+                start.setMinutes(0);
                 var end = new Date(start);
                 end.setHours(23);
                 end.setMinutes(59);
@@ -122,12 +121,13 @@ var obj = angular.module('trelloGanttApp.chart', [
 	$scope.getLabelColor = function(label){
 		var color;
 		switch(label){
-			case 'red': color='#e74c3c'; break;
-			case 'orange': color='#e67e22'; break;
-			case 'yellow': color='#f1c40f'; break;
-			case 'green': color='#1abc9c'; break;
-			case 'blue': color='#3498db'; break;
-			case 'purple': color='#9b59b6'; break;
+		case 'red': color='#e74c3c'; break;
+		case 'orange': color='#e67e22'; break;
+		case 'yellow': color='#f1c40f'; break;
+		case 'green': color='#1abc9c'; break;
+		case 'blue': color='#3498db'; break;
+		case 'purple': color='#9b59b6'; break;
+                    default: color='#8c8c8c';break;
 		}
 		return color;
 	};

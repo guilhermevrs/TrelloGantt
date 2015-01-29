@@ -146,8 +146,12 @@ describe('Controller: ChartCtrl', function(){
                 endDate.setHours(23);
                 endDate.setMinutes(59);
 
+                var newStartDate = new Date(randomDate);
+                newStartDate.setHours(0);
+                newStartDate.setMinutes(0);
+
                 taskDataExpected = {
-                    minStartDate: randomDate,
+                    minStartDate: newStartDate,
                     maxEndDate: endDate,
                     data: [
                         {name: '' + randomNumber},
@@ -156,7 +160,7 @@ describe('Controller: ChartCtrl', function(){
                                 id: randomNumber,
                                 name: '' + randomNumber2,
                                 color: '#95a5a6',
-                                from: randomDate,
+                                from: newStartDate,
                                 to: endDate
                             }
                         ]}
@@ -187,18 +191,22 @@ describe('Controller: ChartCtrl', function(){
                     var endDate = new Date(randomDate);
                     endDate.setHours(23);
                     endDate.setMinutes(59);
+
+                    var newStartDate = new Date(randomDate);
+                    newStartDate.setHours(0);
+                    newStartDate.setMinutes(0);
                     taskDataExpected.push({name: '' + randomNumber2, parent: '' + randomNumber,
                                            tasks:[
                                                {
                                                    id: randomNumber,
                                                    name: '' + randomNumber2,
                                                    color: '#95a5a6',
-                                                   from: randomDate,
+                                                   from: newStartDate,
                                                    to: endDate
                                                }
                                            ]});
-                    if(!minStart || minStart > randomDate)
-                        minStart = randomDate;
+                    if(!minStart || minStart > newStartDate)
+                        minStart = newStartDate;
                     if(!maxEnd || maxEnd < endDate)
                         maxEnd = endDate;
                 }
@@ -235,18 +243,21 @@ describe('Controller: ChartCtrl', function(){
                     var endDate = new Date(randomDate);
                     endDate.setHours(23);
                     endDate.setMinutes(59);
+                    var newStartDate = new Date(randomDate);
+                    newStartDate.setHours(0);
+                    newStartDate.setMinutes(0);
                     taskDataExpected.push({name: '' + randomNumber2, parent: '' + randomNumber,
                                            tasks:[
                                                {
                                                    id: randomNumber,
                                                    name: '' + randomNumber2,
                                                    color: '#95a5a6',
-                                                   from: randomDate,
+                                                   from: newStartDate,
                                                    to: endDate
                                                }
                                            ]});
-                    if(!minStartDate || minStartDate > randomDate)
-                        minStartDate = randomDate;
+                    if(!minStartDate || minStartDate > newStartDate)
+                        minStartDate = newStartDate;
                     if(!maxEndDate || maxEndDate < endDate)
                         maxEndDate = endDate;
                 }
@@ -287,18 +298,22 @@ describe('Controller: ChartCtrl', function(){
                         var endDate = new Date(randomDate);
                         endDate.setHours(23);
                         endDate.setMinutes(59);
+
+                        var newStartDate = new Date(randomDate);
+                        newStartDate.setHours(0);
+                        newStartDate.setMinutes(0);
                         taskDataExpected.push({name: '' + randomNumber2, parent: '' + randomNumber,
                                                tasks:[
                                                    {
                                                        id: randomNumber,
                                                        name: '' + randomNumber2,
                                                        color: '#95a5a6',
-                                                       from: randomDate,
+                                                       from: newStartDate,
                                                        to: endDate
                                                    }
                                                ]});
-                        if(!minStartDate || minStartDate > randomDate)
-                            minStartDate = randomDate;
+                        if(!minStartDate || minStartDate > newStartDate)
+                            minStartDate = newStartDate;
                         if(!maxEndDate || maxEndDate < endDate)
                             maxEndDate = endDate;
                     }
