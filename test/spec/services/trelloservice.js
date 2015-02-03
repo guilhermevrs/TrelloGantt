@@ -12,10 +12,11 @@ describe('Service: Trelloservice', function () {
     rootScope;
 
   var customDateEquality = function(first, second){
-        if (typeof first == "Date" && typeof second == "Date") {
-            return first.toString() == second.toString();
+        var typeOfDate = typeof new Date();
+        if (typeof first === typeOfDate && typeof second === typeOfDate) {
+            return first.toString() === second.toString();
         }
-    }
+  };
 
   beforeEach(inject(function (_Trelloservice_, $q, $rootScope) {
     jasmine.addCustomEqualityTester(customDateEquality);
@@ -28,9 +29,9 @@ describe('Service: Trelloservice', function () {
   describe('In security functions', function(){
 
       it('should get auth token from correct local storage key', function(){
-          var test_value = 'test_value';
-          localStorage.setItem('trello_token', test_value);
-          expect(Trelloservice.getLocalToken()).toEqual(test_value);
+          var testValue = 'test_value';
+          localStorage.setItem('trello_token', testValue);
+          expect(Trelloservice.getLocalToken()).toEqual(testValue);
       });
 
       it('should say user is not logged when there is no trello token', function(){

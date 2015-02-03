@@ -46,13 +46,13 @@ describe('Controller: BoardsCtrl', function(){
     it('should redirect to / when user is not logged', function(){
         isUserLogged = false;
         $location.path('/boards');
-        var controller = createController();
+        createController();
         expect($location.path()).toBe('/');
     });
 
     it('should not redirect when user is logged', function(){
         $location.path('/boards');
-        var controller = createController();
+        createController();
         expect($location.path()).toBe('/boards');
     });
 

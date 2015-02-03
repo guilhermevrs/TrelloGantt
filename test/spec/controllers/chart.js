@@ -1,14 +1,10 @@
 'use strict';
 
-function randomDate(start, end) {
-    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
-}
-
 var customDateEquality = function(first, second){
     if (first instanceof Date && second instanceof Date) {
-         return first.toString() == second.toString();
+         return first.toString() === second.toString();
     }
-}
+};
 
 describe('Controller: ChartCtrl', function(){
 
@@ -54,7 +50,7 @@ describe('Controller: ChartCtrl', function(){
             return defered.promise;
         };
 
-        mockGeneralSettings.setMemberCache = function(boardID){
+        mockGeneralSettings.setMemberCache = function(){
             //NOT YET IMPLEMENTED
         };
 
@@ -81,25 +77,25 @@ describe('Controller: ChartCtrl', function(){
         isUserLogged = false;
         var random = Math.random();
         $location.path('/chart/' + random);
-        var controller = createController(random);
+        createController(random);
         expect($location.path()).toBe('/');
     });
 
     it('should not redirect when user is logged and boardID is defined', function(){
         var random = Math.random();
         $location.path('/chart/' + random);
-        var controller = createController(random);
+        createController(random);
         expect($location.path()).toBe('/chart/' + random);
     });
 
     it('should redirect to / when boardID not defined', function(){
         $location.path('/chart/');
-        var controller = createController(null);
+        createController(null);
         expect($location.path()).toBe('/');
     });
 
     it('should get the right color for each label', function(){
-        var controller = createController(null);
+        createController(null);
         for(var color in labels){
             expect(scope.getLabelColor(color)).toEqual(labels[color]);
         }
@@ -139,7 +135,12 @@ describe('Controller: ChartCtrl', function(){
                 var max = labels.length;
                 var index = Math.floor(Math.random() * (max-min)) + min;
                 var foundKey;
-                for(var label in labels){ index--; if(index < 0) foundKey = label;}
+                for(var label in labels){
+                    index--;
+                    if(index < 0){
+                        foundKey = label;
+                    }
+                }
                 return label;
             };
 
@@ -332,10 +333,12 @@ describe('Controller: ChartCtrl', function(){
                                                    to: endDate
                                                }
                                            ]});
-                    if(!minStart || minStart > newStartDate)
+                    if(!minStart || minStart > newStartDate){
                         minStart = newStartDate;
-                    if(!maxEnd || maxEnd < endDate)
+                    }
+                    if(!maxEnd || maxEnd < endDate){
                         maxEnd = endDate;
+                    }
                 }
 
                 taskDataExpected = {
@@ -383,10 +386,12 @@ describe('Controller: ChartCtrl', function(){
                                                    to: endDate
                                                }
                                            ]});
-                    if(!minStartDate || minStartDate > newStartDate)
+                    if(!minStartDate || minStartDate > newStartDate){
                         minStartDate = newStartDate;
-                    if(!maxEndDate || maxEndDate < endDate)
+                    }
+                    if(!maxEndDate || maxEndDate < endDate) {
                         maxEndDate = endDate;
+                    }
                 }
 
                 taskDataExpected = {
@@ -439,10 +444,12 @@ describe('Controller: ChartCtrl', function(){
                                                        to: endDate
                                                    }
                                                ]});
-                        if(!minStartDate || minStartDate > newStartDate)
+                        if(!minStartDate || minStartDate > newStartDate){
                             minStartDate = newStartDate;
-                        if(!maxEndDate || maxEndDate < endDate)
+                        }
+                        if(!maxEndDate || maxEndDate < endDate){
                             maxEndDate = endDate;
+                        }
                     }
                     lists.push(tempCardList);
                 }
@@ -451,7 +458,7 @@ describe('Controller: ChartCtrl', function(){
                     minStartDate : minStartDate,
                     maxEndDate : maxEndDate,
                     data: taskDataExpected
-                }
+                };
 
                 var taskDataGenerated = scope.buildGanttData(lists);
                 expect(taskDataGenerated).toEqual(taskDataExpected);
