@@ -110,6 +110,14 @@ describe('Controller: ChartCtrl', function(){
         expect(scope.getLabelColor(random)).toEqual(expected);
     });
 
+    it('should have the right gantt configurations', function(){
+        createController(Math.random());
+        expect(scope.gantt).toEqual({
+            headers: ['month', 'day'],
+            currentDate: 'column'
+        });
+    });
+
     //General tests end
 
     describe('Specific tests', function(){

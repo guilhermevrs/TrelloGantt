@@ -136,38 +136,6 @@ var obj = angular.module('trelloGanttApp.chart', [
 		return color;
 	};
 
-	/*$scope.taskEvent = function(event) {
-		var dirty = false;
-		var current = event.task;
-		var previous = event.task.data;
-		if(current.from !== previous.from){
-			dirty = true;
-		}
-		else if(current.to !== current.to){
-			dirty = true;
-		}
-
-		if(dirty){
-			var second=1000, minute=second*60, hour=minute*60, day=hour*24;
-			var difference = (current.to-current.from)/day;
-			difference = Math.ceil(difference);
-			var regObj = /\[[1-9](0-9)*d\]/;
-			if(regObj.test(current.subject)){
-				current.subject = current.subject.replace(regObj, '['+difference+'d]');
-			}
-			else{
-				current.subject = current.subject + ' ['+difference+'d]';
-			}
-			Trelloservice.updateCard({
-				id: current.id,
-				name: current.subject,
-				due: current.from
-			}).then(function(data){
-				console.log(data);
-			})
-		}
-	};*/
-
         $scope.clearData = function(){
             $scope.data = undefined;
         };
